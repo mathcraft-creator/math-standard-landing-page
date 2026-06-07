@@ -600,6 +600,127 @@
         color: #111;
       }
     }
+  
+    .exit-offer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    .exit-offer-backdrop.is-visible {
+      display: flex;
+    }
+
+    .exit-offer-modal {
+      position: relative;
+      width: min(92vw, 430px);
+      padding: 26px 24px 22px;
+      border-radius: 18px;
+      background: #ffffff;
+      color: #111827;
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
+    }
+
+    .exit-offer-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: #f3f4f6;
+      color: #4b5563;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .exit-offer-eyebrow {
+      margin: 0 0 8px;
+      color: #f97316;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .exit-offer-title {
+      margin: 0 34px 12px 0;
+      font-size: clamp(22px, 4.8vw, 30px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .exit-offer-copy {
+      margin: 0 0 18px;
+      color: #4b5563;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .exit-offer-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .exit-offer-actions a,
+    .exit-offer-later {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .exit-offer-primary {
+      grid-column: 1 / -1;
+      background: #f97316;
+      color: #ffffff;
+    }
+
+    .exit-offer-phone {
+      background: #111827;
+      color: #ffffff;
+    }
+
+    .exit-offer-later {
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      color: #4b5563;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .exit-offer-backdrop {
+        align-items: flex-end;
+        padding: 16px 14px calc(88px + env(safe-area-inset-bottom));
+      }
+
+      .exit-offer-modal {
+        width: 100%;
+        padding: 24px 18px 18px;
+        border-radius: 16px;
+      }
+
+      .exit-offer-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .exit-offer-actions a,
+      .exit-offer-later {
+        min-height: 44px;
+        font-size: 14px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -819,5 +940,81 @@
     <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오상담</a>
     <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">체험신청</a>
   </nav>
+
+  <div class="exit-offer-backdrop" id="exitOfferBackdrop" role="dialog" aria-modal="true" aria-labelledby="exitOfferTitle" hidden>
+    <div class="exit-offer-modal">
+      <button class="exit-offer-close" type="button" aria-label="닫기" data-exit-offer-close>&times;</button>
+      <p class="exit-offer-eyebrow">나가기 전 10초 체크</p>
+      <h2 class="exit-offer-title" id="exitOfferTitle">잠깐만요, 우리 아이 수학 상태 먼저 확인해보세요</h2>
+      <p class="exit-offer-copy">등록을 바로 결정하지 않아도 괜찮습니다. 2주 무료 체험수업으로 현재 진도, 오답 습관, 개념 이해도를 먼저 확인해드립니다.</p>
+      <div class="exit-offer-actions">
+        <a class="exit-offer-primary" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer" data-exit-offer-action>2주 무료 체험 문의하기</a>
+        <a class="exit-offer-phone" href="tel:031-522-5431" data-exit-offer-action>전화상담</a>
+        <button class="exit-offer-later" type="button" data-exit-offer-close>괜찮아요, 나중에 볼게요</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function () {
+      var backdrop = document.getElementById("exitOfferBackdrop");
+      if (!backdrop) return;
+
+      var storageKey = "mathStandardExitOfferSeenAt";
+      var oneDay = 24 * 60 * 60 * 1000;
+      var shown = false;
+
+      function wasSeenRecently() {
+        var seenAt = Number(localStorage.getItem(storageKey) || 0);
+        return Date.now() - seenAt < oneDay;
+      }
+
+      function markSeen() {
+        localStorage.setItem(storageKey, String(Date.now()));
+      }
+
+      function showOffer() {
+        if (shown || wasSeenRecently()) return;
+        shown = true;
+        markSeen();
+        backdrop.hidden = false;
+        backdrop.classList.add("is-visible");
+      }
+
+      function closeOffer() {
+        backdrop.classList.remove("is-visible");
+        backdrop.hidden = true;
+      }
+
+      document.addEventListener("mouseout", function (event) {
+        if (event.relatedTarget === null && event.clientY <= 8) {
+          showOffer();
+        }
+      });
+
+      window.addEventListener("scroll", function () {
+        var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        if (window.innerWidth <= 768 && scrollable > 0 && window.scrollY / scrollable > 0.35) {
+          showOffer();
+        }
+      }, { passive: true });
+
+      window.setTimeout(function () {
+        if (window.innerWidth <= 768) showOffer();
+      }, 24000);
+
+      backdrop.addEventListener("click", function (event) {
+        if (event.target === backdrop || event.target.hasAttribute("data-exit-offer-close") || event.target.hasAttribute("data-exit-offer-action")) {
+          closeOffer();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeOffer();
+      });
+    })();
+  </script>
+
 </body>
 </html>
