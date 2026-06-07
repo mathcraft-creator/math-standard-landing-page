@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>수학의 기준 · 딱풀리는 수학 진접점</title>
+  <meta name="description" content="초등은 수학 자신감부터, 중·고등은 내신 관리부터. 수학의 기준 · 딱풀리는 수학 진접점 랜딩페이지">
+  <style>
+    :root {
+      --ink: #17191d;
+      --muted: #666c76;
+      --line: #e8ebf0;
+      --navy: #10172a;
+      --blue: #1230a3;
+      --blue-2: #2458e6;
+      --yellow: #ffd119;
+      --teal: #159d93;
+      --paper: #f7f9fc;
+      --white: #ffffff;
+      --shadow: 0 22px 60px rgba(16, 23, 42, .14);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--white);
+      line-height: 1.55;
+      letter-spacing: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+
+    header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 10;
+      border-bottom: 1px solid rgba(255,255,255,.16);
+      background: rgba(13, 20, 36, .68);
+      backdrop-filter: blur(16px);
+      color: var(--white);
+    }
+    .topbar {
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .nav {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 260px;
+      font-weight: 800;
+    }
+    .brand img {
+      width: 132px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 4px;
+      background: rgba(255,255,255,.95);
+      padding: 4px 8px;
+    }
+    .brand small {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,.68);
+    }
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 34px;
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,.86);
+    }
+    .menu a:last-child {
+      padding: 11px 18px;
+      border-radius: 4px;
+      background: var(--yellow);
+      color: #141414;
+    }
+
+    .hero {
+      min-height: 86vh;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(7,11,20,.94) 0%, rgba(12,19,34,.83) 43%, rgba(14,20,32,.58) 100%),
+        radial-gradient(circle at 78% 26%, rgba(255, 209, 25, .34), transparent 18%),
+        radial-gradient(circle at 72% 72%, rgba(36, 88, 230, .48), transparent 26%),
+        #101522;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: linear-gradient(90deg, rgba(0,0,0,.65), transparent 76%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      bottom: -180px;
+      width: 680px;
+      height: 680px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      min-height: 86vh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 64px;
+      padding-top: 110px;
+      padding-bottom: 36px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 84px;
+      height: 4px;
+      background: var(--yellow);
+    }
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(46px, 6vw, 76px);
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+    .hero p {
+      margin: 26px 0 34px;
+      max-width: 640px;
+      color: rgba(255,255,255,.78);
+      font-size: 19px;
+      word-break: keep-all;
+    }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 4px;
+      font-weight: 900;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--yellow); color: #111; }
+    .btn.ghost { border-color: rgba(255,255,255,.28); color: var(--white); background: rgba(255,255,255,.06); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+    }
+    .hero-card {
+      width: min(460px, 100%);
+      padding: 28px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.92);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      transform: translateY(12px);
+    }
+    .logo-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .logo-box {
+      min-height: 170px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+    }
+    .logo-box img { width: 100%; max-height: 132px; object-fit: contain; }
+    .status {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .status div {
+      border-radius: 6px;
+      background: var(--paper);
+      padding: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .status strong { display: block; color: var(--ink); font-size: 18px; }
+
+    .notice {
+      background: linear-gradient(90deg, #0d2488, #102b9f 55%, #0f2382);
+      color: var(--white);
+      padding: 54px 0 72px;
+    }
+    .notice-grid {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 38px;
+      align-items: stretch;
+    }
+    .section-title {
+      margin: 0 0 24px;
+      font-size: 32px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .notice-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+    .notice-card, .popup-card {
+      border-radius: 8px;
+      background: var(--white);
+      color: var(--ink);
+      padding: 28px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.14);
+    }
+    .notice-card small, .popup-card small {
+      color: var(--blue-2);
+      font-weight: 900;
+    }
+    .notice-card h3, .popup-card h3 { margin: 12px 0 10px; font-size: 20px; }
+    .notice-card p, .popup-card p { margin: 0; color: var(--muted); word-break: keep-all; }
+    .popup-card {
+      background: #2350db;
+      color: #fff;
+      min-height: 100%;
+    }
+    .popup-card small, .popup-card p { color: rgba(255,255,255,.76); }
+
+    .programs {
+      position: relative;
+      background: var(--white);
+      padding: 86px 0 96px;
+      overflow: hidden;
+    }
+    .programs::before {
+      content: "";
+      position: absolute;
+      right: -140px;
+      top: -115px;
+      width: 720px;
+      height: 310px;
+      border-radius: 0 0 0 260px;
+      background: var(--white);
+    }
+    .program-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: .75fr 1.25fr;
+      gap: 58px;
+      align-items: start;
+    }
+    .lead-line {
+      width: 4px;
+      height: 54px;
+      background: var(--ink);
+      margin: 22px 0;
+    }
+    .program-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .program-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 28px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(16,23,42,.06);
+      min-height: 245px;
+    }
+    .program-card.featured {
+      border-color: rgba(255,209,25,.75);
+      background: linear-gradient(180deg, #fffdf0, #fff);
+    }
+    .program-card img {
+      width: 100%;
+      max-width: 230px;
+      height: 64px;
+      object-fit: contain;
+      object-position: left center;
+      border-radius: 4px;
+      background: #fff;
+      margin-bottom: 16px;
+    }
+    .program-card h3 { margin: 0 0 10px; font-size: 24px; }
+    .program-card p { margin: 0 0 18px; color: var(--muted); word-break: keep-all; }
+    .pill-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #2440a8;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .featured .pill { background: #fff1a6; color: #453400; }
+
+    .system {
+      background: var(--paper);
+      padding: 76px 0;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .step {
+      min-height: 210px;
+      background: #fff;
+      padding: 28px;
+    }
+    .step b {
+      display: inline-grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 22px;
+      border-radius: 50%;
+      background: var(--blue-2);
+      color: #fff;
+    }
+    .step h3 { margin: 0 0 10px; }
+    .step p { margin: 0; color: var(--muted); word-break: keep-all; }
+
+    .proof {
+      padding: 82px 0;
+      background: #fff;
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      align-items: center;
+    }
+    .quote-panel {
+      min-height: 340px;
+      border-radius: 8px;
+      background: #eef8f7;
+      padding: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .quote-mark {
+      color: var(--teal);
+      font-size: 74px;
+      line-height: .8;
+      font-weight: 900;
+    }
+    .quote-panel p {
+      margin: 10px 0 24px;
+      font-size: 22px;
+      font-weight: 800;
+      word-break: keep-all;
+    }
+    .price-card {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 8px;
+      padding: 34px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .price-row:last-child { border-bottom: 0; }
+    .price-row span { color: rgba(255,255,255,.68); }
+    .price-row strong { font-size: 22px; color: var(--yellow); }
+
+    .apply {
+      background: linear-gradient(135deg, #13215e 0%, #102da3 55%, #159d93 100%);
+      color: #fff;
+      padding: 86px 0;
+    }
+    .apply-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 56px;
+      align-items: start;
+    }
+    form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      padding: 28px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.96);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+    label {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      color: #4d5562;
+      font-weight: 800;
+    }
+    input, select, textarea {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0 13px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+    textarea {
+      grid-column: 1 / -1;
+      min-height: 104px;
+      padding-top: 12px;
+      resize: vertical;
+    }
+    .wide { grid-column: 1 / -1; }
+    .submit {
+      grid-column: 1 / -1;
+      min-height: 54px;
+      border: 0;
+      border-radius: 4px;
+      background: var(--yellow);
+      color: #111;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .contact-list a, .contact-list div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 58px;
+      padding: 0 18px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.88);
+      font-weight: 800;
+    }
+
+    footer {
+      background: #22283a;
+      color: rgba(255,255,255,.72);
+      padding: 54px 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: #fff;
+      font-weight: 900;
+    }
+    .footer-brand img {
+      width: 150px;
+      height: 50px;
+      border-radius: 4px;
+      background: #fff;
+      object-fit: contain;
+      padding: 4px 8px;
+    }
+
+    @media (max-width: 900px) {
+      .topbar, .menu { display: none; }
+      .nav { height: 74px; }
+      .brand { min-width: 0; }
+      .hero, .hero-inner { min-height: auto; }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 118px 0 58px;
+      }
+      .hero-visual { min-height: auto; }
+      .logo-pair { grid-template-columns: 1fr; }
+      .status { grid-template-columns: 1fr; }
+      .notice-grid, .program-grid, .proof-grid, .apply-grid, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .notice-cards, .program-list, .timeline, form {
+        grid-template-columns: 1fr;
+      }
+      textarea, .wide, .submit { grid-column: auto; }
+      .hero p { font-size: 17px; }
+      .wrap { width: min(100% - 28px, 680px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <span>남양주 진접읍 해밀예당1로 40 화성프라자 5층</span>
+      <span>상담 031-522-5431</span>
+    </div>
+    <nav class="wrap nav" aria-label="주요 메뉴">
+      <a class="brand" href="#top">
+        <img src="assets/math-standard-name.jpg" alt="수학의 기준 로고">
+        <span>수학의 기준 · 딱풀리는 수학<small>진접점</small></span>
+      </a>
+      <div class="menu">
+        <a href="#programs">과정안내</a>
+        <a href="#system">관리시스템</a>
+        <a href="#price">수강료</a>
+        <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noreferrer">체험신청</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div>
+          <span class="eyebrow">초등부터 고등까지</span>
+          <h1>아이에게 필요한 수학 관리를 따로 설계합니다.</h1>
+          <p>초등은 수학 자신감과 습관부터, 중·고등은 내신과 시험 대비부터. 학생별 진도, 오답, 학습 습관을 기록하고 끝까지 관리합니다.</p>
+          <div class="actions">
+            <a class="btn primary" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noreferrer">무료 체험수업 신청하기</a>
+            <a class="btn ghost" href="#programs">과정 먼저 보기</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="브랜드 로고">
+          <div class="hero-card">
+            <div class="logo-pair">
+              <div class="logo-box">
+                <img src="assets/ddak-logo-name.png" alt="딱풀리는 수학 로고">
+              </div>
+              <div class="logo-box">
+                <img src="assets/math-standard-name.jpg" alt="수학의 기준 로고">
+              </div>
+            </div>
+            <div class="status">
+              <div><strong>초등</strong>자신감 · 습관</div>
+              <div><strong>중등</strong>내신 · 오답</div>
+              <div><strong>고등</strong>시험 · 서술형</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notice" aria-label="핵심 안내">
+      <div class="wrap notice-grid">
+        <div>
+          <h2 class="section-title">공지사항 · 상담안내</h2>
+          <div class="notice-cards">
+            <article class="notice-card">
+              <small>무료 체험</small>
+              <h3>2주 체험수업 신청 가능</h3>
+              <p>처음부터 등록을 결정하지 않아도 됩니다. 아이가 실제 수업을 경험하고 현재 수학 상태를 상담받아보세요.</p>
+            </article>
+            <article class="notice-card">
+              <small>학습 관리</small>
+              <h3>출결, 진도, 과제, 오답 기록</h3>
+              <p>학생의 학습을 감으로 보지 않고 기록으로 확인해 필요한 보완점을 안내합니다.</p>
+            </article>
+          </div>
+        </div>
+        <article class="popup-card">
+          <small>Elementary Program</small>
+          <h3>초등 딱풀리는 수학</h3>
+          <p>초등 수학 자신감, 지금부터 딱 잡아야 합니다. 개념 이해와 학습 습관을 함께 길러줍니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="programs" id="programs">
+      <div class="wrap program-grid">
+        <div>
+          <h2 class="section-title">대상별<br>과정 선택</h2>
+          <div class="lead-line"></div>
+          <p>첫 화면에서는 통합 브랜드로 신뢰를 주고, 바로 아래에서 초등과 중·고등 과정을 명확하게 나누었습니다.</p>
+        </div>
+        <div class="program-list">
+          <article class="program-card featured">
+            <img src="assets/ddak-logo-name.png" alt="딱풀리는 수학 로고">
+            <h3>초등 딱풀리는 수학</h3>
+            <p>수학을 두려워하지 않도록 개념 이해, 문제 해결력, 학습 습관을 초등 눈높이에 맞춰 관리합니다.</p>
+            <div class="pill-row">
+              <span class="pill">초등 전문</span>
+              <span class="pill">1시간씩 주 4회</span>
+              <span class="pill">교재비 포함</span>
+            </div>
+          </article>
+          <article class="program-card">
+            <img src="assets/math-standard-name.jpg" alt="수학의 기준 로고">
+            <h3>중·고등 수학의 기준</h3>
+            <p>학교별 시험 범위와 학생별 진도에 맞춰 오답, 질의응답, 서술형 풀이를 관리합니다.</p>
+            <div class="pill-row">
+              <span class="pill">내신 대비</span>
+              <span class="pill">중등 2시간씩 주 3회</span>
+              <span class="pill">고등 3시간씩 주 3회</span>
+              <span class="pill">오답 클리닉</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="system" id="system">
+      <div class="wrap">
+        <h2 class="section-title">수업 관리 시스템</h2>
+        <div class="timeline">
+          <article class="step">
+            <b>1</b>
+            <h3>진단</h3>
+            <p>현재 학년, 학교, 진도, 계산 습관과 고민을 먼저 확인합니다.</p>
+          </article>
+          <article class="step">
+            <b>2</b>
+            <h3>개별 계획</h3>
+            <p>학생별 수준과 목표에 맞춰 학습 범위와 수업 흐름을 조정합니다.</p>
+          </article>
+          <article class="step">
+            <b>3</b>
+            <h3>오답 관리</h3>
+            <p>틀린 이유와 부족한 개념을 확인하고 다시 풀 수 있게 점검합니다.</p>
+          </article>
+          <article class="step">
+            <b>4</b>
+            <h3>상담 안내</h3>
+            <p>필요한 경우 학부모님께 학습 상황과 보완 방향을 안내합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" id="price">
+      <div class="wrap proof-grid">
+        <div class="quote-panel">
+          <div class="quote-mark">“</div>
+          <p>중요한 것은 많은 문제를 푸는 것이 아니라, 틀린 이유를 알고 다시 풀 수 있게 만드는 관리입니다.</p>
+          <span>학생별 진도 · 오답 · 습관 관리</span>
+        </div>
+        <div class="price-card">
+          <h2 class="section-title">수업 · 수강료 안내</h2>
+          <div class="price-row"><span>초등 딱풀리는 수학</span><strong>187,000원</strong></div>
+          <div class="price-row"><span>중학교 1학년</span><strong>200,000원</strong></div>
+          <div class="price-row"><span>중학교 2·3학년</span><strong>250,000원</strong></div>
+          <div class="price-row"><span>고등부</span><strong>350,000원</strong></div>
+          <p>초등은 1시간씩 주 4회, 중등은 2시간씩 주 3회, 고등은 3시간씩 주 3회 수업합니다. 초등은 교재비 포함, 중·고등 교재비는 별도입니다. 차량 운행은 없습니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply" id="apply">
+      <div class="wrap apply-grid">
+        <div>
+          <h2 class="section-title">2주 무료 체험수업 신청</h2>
+          <p>아이의 실제 수업 경험을 바탕으로 현재 수학 상태와 필요한 학습 방향을 상담받아보세요.</p>
+          <div class="contact-list">
+            <a href="tel:031-522-5431"><span>전화 상담</span><strong>031-522-5431</strong></a>
+            <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noreferrer"><span>카카오 채널 상담</span><strong>채팅하기</strong></a>
+            <a href="https://blog.naver.com/perfect-math1" target="_blank" rel="noreferrer"><span>초등 딱풀리는 수학 블로그</span><strong>바로가기</strong></a>
+            <a href="https://blog.naver.com/standrad-of-math" target="_blank" rel="noreferrer"><span>중·고등 수학의 기준 블로그</span><strong>바로가기</strong></a>
+            <div><span>위치</span><strong>화성프라자 5층</strong></div>
+          </div>
+        </div>
+        <form onsubmit="event.preventDefault(); window.open('http://pf.kakao.com/_yWFTn/chat', '_blank', 'noopener,noreferrer');">
+          <label>학생 이름<input name="student" placeholder="홍길동" required></label>
+          <label>학년<input name="grade" placeholder="초4 / 중2 / 고1" required></label>
+          <label>학교명<input name="school" placeholder="화봉초 / 풍양중 / 진접고"></label>
+          <label>연락처<input name="phone" placeholder="학부모 연락처" required></label>
+          <label>관심 과정
+            <select name="program">
+              <option>딱풀리는 수학</option>
+              <option>수학의 기준</option>
+              <option>상담 후 결정</option>
+            </select>
+          </label>
+          <label>상담 방식
+            <select name="contact">
+              <option>전화 상담</option>
+              <option>방문 상담</option>
+              <option>카카오톡 상담</option>
+            </select>
+          </label>
+          <textarea name="message" placeholder="현재 고민을 적어주세요. 예: 계산 실수, 개념 부족, 시험 대비, 학습 습관"></textarea>
+          <button class="submit" type="submit">무료 체험수업 신청하기</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/math-standard-name.jpg" alt="수학의 기준 로고">
+          <span>수학의 기준 · 딱풀리는 수학 진접점</span>
+        </div>
+        <p>경기도 남양주시 진접읍 해밀예당1로 40 화성프라자 5층</p>
+      </div>
+      <div>
+        <p>상담전화 031-522-5431</p>
+        <p>대상 초등 · 중등 · 고등 / 2주 무료 체험 가능</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
