@@ -258,6 +258,7 @@
     .btn.ghost { color: #fff; border-color: rgba(255,255,255,.32); background: rgba(255,255,255,.1); }
 
     section { padding: 84px 0; }
+    main > section:not(.hero) { scroll-margin-top: 92px; }
     .section-head {
       display: flex;
       justify-content: space-between;
@@ -605,6 +606,178 @@
       cursor: pointer;
     }
     .faq-chatbot-dot { width: 10px; height: 10px; border-radius: 50%; background: #19c37d; box-shadow: 0 0 0 6px rgba(25, 195, 125, .16); }
+
+    @media (min-width: 901px) {
+      main > section:not(.hero) { padding: 96px 0; scroll-margin-top: 110px; }
+      .section-head { gap: 34px; margin-bottom: 38px; }
+      .label { font-size: clamp(15px, 1vw, 16px); }
+      .section-title { font-size: clamp(38px, 3.3vw, 50px); line-height: 1.16; }
+      .section-copy {
+        max-width: 660px;
+        font-size: clamp(18px, 1.35vw, 20px);
+        line-height: 1.7;
+      }
+      .comparison, .why-grid, .recommend-grid, .mh-grid { gap: 26px; }
+      .compare-card {
+        min-height: 310px;
+        padding: 36px;
+      }
+      .compare-card small {
+        font-size: clamp(15px, 1vw, 16px);
+      }
+      .compare-card h3,
+      .recommend-card h3,
+      .mh-card h3,
+      .ib-box h3 {
+        font-size: clamp(22px, 1.6vw, 26px);
+        line-height: 1.3;
+      }
+      .compare-card p,
+      .mh-card p,
+      .ib-box p {
+        font-size: clamp(17px, 1.2vw, 19px);
+        line-height: 1.68;
+      }
+      .flow { gap: 12px; margin-top: 26px; }
+      .flow span {
+        padding: 15px 18px;
+        font-size: clamp(16px, 1.12vw, 18px);
+        line-height: 1.45;
+      }
+      .process-grid,
+      .feature-grid {
+        gap: 18px;
+      }
+      .process-card {
+        min-height: 330px;
+        padding: 28px;
+      }
+      .process-card b {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 18px;
+        font-size: 18px;
+      }
+      .process-card h3,
+      .feature-card h3 {
+        font-size: clamp(21px, 1.45vw, 24px);
+        line-height: 1.3;
+      }
+      .process-card li,
+      .check-list li,
+      .feature-list li {
+        padding-left: 20px;
+        margin-top: 10px;
+        font-size: clamp(17px, 1.2vw, 19px);
+        line-height: 1.65;
+      }
+      .quote-panel,
+      .info-card,
+      .recommend-card,
+      .mh-card,
+      .ib-box {
+        padding: 36px;
+      }
+      .quote-panel p {
+        font-size: clamp(28px, 2.2vw, 34px);
+        line-height: 1.32;
+      }
+      .advantages { gap: 16px; }
+      .advantage,
+      .tag-card {
+        min-height: 116px;
+        padding: 22px;
+        font-size: clamp(17px, 1.2vw, 19px);
+        line-height: 1.45;
+      }
+      .recommend-grid { gap: 26px; }
+      .feature-card {
+        min-height: 290px;
+        padding: 28px;
+      }
+      .feature-card b {
+        font-size: 15px;
+      }
+      .program-logo {
+        width: 250px;
+        height: 76px;
+        margin-bottom: 24px;
+      }
+      .tag-grid { gap: 16px; }
+      .faq-list {
+        gap: 16px;
+      }
+      details {
+        border-radius: 20px;
+      }
+      summary {
+        min-height: 72px;
+        padding: 20px 22px;
+        font-size: clamp(18px, 1.25vw, 20px);
+        line-height: 1.45;
+      }
+      details p {
+        padding: 0 22px 22px;
+        font-size: clamp(16px, 1.1vw, 18px);
+        line-height: 1.68;
+      }
+      .apply-grid { gap: 44px; }
+      .apply p {
+        font-size: clamp(18px, 1.35vw, 20px);
+        line-height: 1.7;
+      }
+      .contact-list { gap: 14px; margin-top: 32px; }
+      .contact-list a,
+      .contact-list div {
+        min-height: 70px;
+        padding: 0 22px;
+        font-size: 17px;
+      }
+      .contact-list span { font-size: 16px; }
+      .contact-list strong { font-size: 18px; }
+      form {
+        gap: 16px;
+        padding: 34px;
+      }
+      label {
+        gap: 10px;
+        font-size: 16px;
+      }
+      input,
+      select,
+      textarea {
+        min-height: 56px;
+        padding: 0 16px;
+        font-size: 17px;
+      }
+      textarea {
+        min-height: 132px;
+        padding-top: 16px;
+        line-height: 1.6;
+      }
+      .form-note {
+        padding: 16px 18px;
+        font-size: 16px;
+        line-height: 1.65;
+      }
+      .submit {
+        min-height: 62px;
+        font-size: 18px;
+      }
+      footer {
+        padding: 64px 0;
+        font-size: 17px;
+        line-height: 1.65;
+      }
+      .footer-grid { gap: 36px; }
+      .footer-brand { font-size: 19px; }
+      .faq-chatbot-head strong { font-size: 19px; }
+      .faq-chatbot-head span { font-size: 15px; }
+      .faq-question { font-size: 16px; line-height: 1.45; }
+      .faq-answer { font-size: 16px; line-height: 1.65; }
+      .faq-chatbot-actions a,
+      .faq-chatbot-toggle { font-size: 15px; }
+    }
 
     @media (max-width: 1020px) {
       .process-grid, .feature-grid { grid-template-columns: repeat(2, 1fr); }
