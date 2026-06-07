@@ -15,47 +15,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Patch hero brand mapping
+      - name: Patch index.html and remove temporary workflow
         run: |
-          node <<'NODE'
-          const fs = require('fs');
-          const indexPath = 'index.html';
-          const workflowPath = '.github/workflows/apply-brand-map.yml';
-          let html = fs.readFileSync(indexPath, 'utf8');
+          python - <<'PY'
+          from pathlib import Path
 
-          const oldCss = `    .hero-dashboard { display: grid; gap: 14px; }
-    .brand-panel {
-      padding: 26px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.18);
-      border: 1px solid rgba(255,255,255,.24);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-    .logo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .logo-box {
-      min-height: 152px;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      border-radius: 18px;
-      background: #fff;
-    }
-    .logo-box img { width: 100%; max-height: 116px; object-fit: contain; }
-    .mini-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
-    .mini-card {
-      min-height: 96px;
-      padding: 16px;
-      border-radius: 18px;
-      background: rgba(7,26,86,.74);
-      color: rgba(255,255,255,.76);
-      font-size: 13px;
-    }
-    .mini-card strong { display: block; margin-bottom: 4px; color: #fff; font-size: 20px; }`;
+          index_path = Path('index.html')
+          workflow_path = Path('.github/workflows/apply-brand-map.yml')
+          html = index_path.read_text(encoding='utf-8')
 
-          const newCss = `    .hero-dashboard { display: grid; gap: 14px; }
+          new_css = '''    .hero-dashboard { display: grid; gap: 14px; }
     .brand-panel {
       padding: 26px;
       border-radius: 22px;
@@ -127,12 +96,9 @@ jobs:
       color: #fff;
       font-size: 12px;
       font-weight: 900;
-    }`;
+    }'''
 
-          const oldMobile = `      .logo-pair, .mini-cards, .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
-      .process-grid, .feature-grid { grid-template-columns: 1fr; }`;
-
-          const newMobile = `      .brand-track-grid, .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
+          new_mobile = '''      .brand-track-grid, .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
       .brand-panel { padding: 12px; border-radius: 20px; }
       .brand-track {
         min-height: auto;
@@ -148,23 +114,9 @@ jobs:
       .brand-track-body strong {
         font-size: 32px;
       }
-      .process-grid, .feature-grid { grid-template-columns: 1fr; }`;
+      .process-grid, .feature-grid { grid-template-columns: 1fr; }'''
 
-          const oldHero = `        <div class="hero-dashboard" aria-label="브랜드 안내">
-          <div class="brand-panel">
-            <div class="logo-pair">
-              <div class="logo-box"><img src="assets/ddak-logo-name.png" alt="딱풀리는수학 로고"></div>
-              <div class="logo-box"><img src="assets/math-standard-name.jpg" alt="수학의 기준 로고"></div>
-            </div>
-            <div class="mini-cards">
-              <div class="mini-card"><strong>초등</strong>설명하는 힘 · 서술형 · 오답 점검</div>
-              <div class="mini-card"><strong>중등</strong>개념 적용 · 대표 유형 · 내신 대비</div>
-              <div class="mini-card"><strong>고등</strong>질문 · 첨삭 · 재테스트</div>
-            </div>
-          </div>
-        </div>`;
-
-          const newHero = `        <div class="hero-dashboard" aria-label="브랜드 안내">
+          new_hero = '''        <div class="hero-dashboard" aria-label="브랜드 안내">
           <div class="brand-panel">
             <div class="brand-track-grid">
               <article class="brand-track">
@@ -199,26 +151,25 @@ jobs:
               </article>
             </div>
           </div>
-        </div>`;
+        </div>'''
 
-          if (!html.includes('brand-track-grid')) {
-            for (const [label, oldValue, newValue] of [
-              ['hero css', oldCss, newCss],
-              ['mobile css', oldMobile, newMobile],
-              ['hero html', oldHero, newHero],
-            ]) {
-              if (!html.includes(oldValue)) {
-                throw new Error(`Could not find ${label} block`);
-              }
-              html = html.replace(oldValue, newValue);
-            }
-          }
+          if 'brand-track-grid' not in html:
+              css_start = html.index('    .hero-dashboard { display: grid; gap: 14px; }')
+              css_end = html.index('\n\n    section { padding:', css_start)
+              html = html[:css_start] + new_css + html[css_end:]
 
-          if (fs.existsSync(workflowPath)) {
-            fs.rmSync(workflowPath, { force: true });
-          }
-          fs.writeFileSync(indexPath, html);
-          NODE
+              mobile_start = html.index('      .logo-pair, .mini-cards, .comparison,')
+              mobile_end = html.index('\n      section { padding:', mobile_start)
+              html = html[:mobile_start] + new_mobile + html[mobile_end:]
+
+              hero_start = html.index('        <div class="hero-dashboard" aria-label="브랜드 안내">')
+              hero_end = html.index('\n      </div>\n    </section>', hero_start)
+              html = html[:hero_start] + new_hero + html[hero_end:]
+
+          index_path.write_text(html, encoding='utf-8')
+          if workflow_path.exists():
+              workflow_path.unlink()
+          PY
       - name: Commit patched index
         run: |
           git config user.name "github-actions[bot]"
