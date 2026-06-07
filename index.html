@@ -814,7 +814,7 @@
     (function () {
       var backdrop = document.getElementById("exitOfferBackdrop");
       if (!backdrop) return;
-      var storageKey = "mathStandardExitOfferSeenAt";
+      var storageKey = "mathStandardExitOfferDismissedAtV2";
       var oneDay = 24 * 60 * 60 * 1000;
       var shown = false;
       var mobileBackGuardArmed = false;
@@ -822,13 +822,20 @@
       function getSeenAt() { try { return Number(localStorage.getItem(storageKey) || 0); } catch (error) { return 0; } }
       function wasSeenRecently() { return Date.now() - getSeenAt() < oneDay; }
       function markSeen() { try { localStorage.setItem(storageKey, String(Date.now())); } catch (error) {} }
-      function showOffer() { if (shown || wasSeenRecently()) return false; shown = true; markSeen(); backdrop.hidden = false; backdrop.classList.add("is-visible"); return true; }
-      function closeOffer() { backdrop.classList.remove("is-visible"); backdrop.hidden = true; }
+      function isOfferVisible() { return !backdrop.hidden && backdrop.classList.contains("is-visible"); }
+      function showOffer() { if (isOfferVisible() || wasSeenRecently()) return false; shown = true; backdrop.hidden = false; backdrop.classList.add("is-visible"); return true; }
+      function closeOffer(remember) { backdrop.classList.remove("is-visible"); backdrop.hidden = true; if (remember !== false) markSeen(); }
+      function handleDesktopExitIntent(event) {
+        if (isMobileViewport() || wasSeenRecently()) return;
+        if (event.clientY <= 8) showOffer();
+      }
       function armMobileBackGuard() {
-        if (!isMobileViewport() || mobileBackGuardArmed || !window.history || !window.history.pushState) return;
+        if (!isMobileViewport() || mobileBackGuardArmed || wasSeenRecently() || !window.history || !window.history.pushState) return;
         try { window.history.pushState({ exitOfferGuard: true }, "", window.location.href); mobileBackGuardArmed = true; } catch (error) {}
       }
-      document.addEventListener("mouseout", function (event) { if (!isMobileViewport() && event.relatedTarget === null && event.clientY <= 8) showOffer(); });
+      document.addEventListener("mouseout", function (event) { if (event.relatedTarget === null) handleDesktopExitIntent(event); });
+      document.addEventListener("pointerout", function (event) { if (event.relatedTarget === null) handleDesktopExitIntent(event); });
+      document.documentElement.addEventListener("mouseleave", handleDesktopExitIntent);
       window.addEventListener("popstate", function () {
         if (!isMobileViewport() || !mobileBackGuardArmed) return;
         if (showOffer()) { mobileBackGuardArmed = false; armMobileBackGuard(); return; }
@@ -836,8 +843,8 @@
         window.history.back();
       });
       armMobileBackGuard();
-      backdrop.addEventListener("click", function (event) { if (event.target === backdrop || event.target.hasAttribute("data-exit-offer-close") || event.target.hasAttribute("data-exit-offer-action")) closeOffer(); });
-      document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeOffer(); });
+      backdrop.addEventListener("click", function (event) { if (event.target === backdrop || event.target.hasAttribute("data-exit-offer-close") || event.target.hasAttribute("data-exit-offer-action")) closeOffer(true); });
+      document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeOffer(true); });
     })();
     (function () {
       var chatbot = document.getElementById("faqChatbot");
