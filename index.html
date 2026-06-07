@@ -163,10 +163,10 @@
       align-items: stretch;
     }
     .hero-course-card {
-      min-height: 520px;
+      min-height: 430px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       padding: 28px;
       border-radius: 28px;
       border: 1px solid rgba(255,255,255,.24);
@@ -230,41 +230,11 @@
     }
     .hero-course-copy {
       margin: 0;
-      color: rgba(255,255,255,.82);
-      font-size: clamp(16px, 1.35vw, 18px);
-      line-height: 1.68;
+      color: rgba(255,255,255,.95);
+      font-size: clamp(18px, 1.6vw, 24px);
+      font-weight: 600;
+      line-height: 1.55;
       word-break: keep-all;
-    }
-    .hero-keywords {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .hero-keywords span {
-      min-height: 34px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.14);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 900;
-    }
-    .hero-course-cta {
-      min-height: 52px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: auto;
-      padding: 0 22px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #111;
-      font-weight: 900;
     }
     .hero-secondary-actions {
       display: flex;
@@ -272,6 +242,7 @@
       gap: 10px;
       flex-wrap: wrap;
     }
+    .hero-secondary-actions .btn { min-width: 176px; }
     .btn {
       min-height: 54px;
       display: inline-flex;
@@ -659,11 +630,8 @@
       .hero-course-brand { font-size: 15px; }
       .hero-course-target { min-height: 30px; margin-top: 8px; font-size: 13px; }
       .hero-course-title { font-size: clamp(22px, 6vw, 28px); line-height: 1.28; }
-      .hero-course-copy { font-size: 16px; line-height: 1.68; }
-      .hero-keywords { gap: 7px; }
-      .hero-keywords span { min-height: 30px; padding: 0 10px; font-size: 12px; }
-      .hero-course-cta { min-height: 48px; }
-      .hero-secondary-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-course-copy { font-size: clamp(17px, 4.6vw, 20px); line-height: 1.58; }
+      .hero-secondary-actions { display: grid; grid-template-columns: 1fr; gap: 8px; }
       .hero-secondary-actions .btn { width: 100%; min-height: 46px; padding: 0 12px; font-size: 14px; }
       .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
       .process-grid, .feature-grid { grid-template-columns: 1fr; }
@@ -752,15 +720,6 @@
             </div>
             <h2 class="hero-course-title">설명하는 힘, 서술형 풀이, 오답 점검 습관을 키웁니다.</h2>
             <p class="hero-course-copy">정답만 빠르게 맞히는 공부를 넘어, 왜 그렇게 풀었는지 말하고 쓰며 스스로 점검하는 초등 수학 과정입니다.</p>
-            <ul class="hero-keywords" aria-label="딱풀리는수학 핵심 키워드">
-              <li><span>설명하는 힘</span></li>
-              <li><span>서술형 풀이</span></li>
-              <li><span>오답 점검</span></li>
-              <li><span>스마트 노트</span></li>
-              <li><span>학습 보고서</span></li>
-              <li><span>화봉초 IB형 수학 준비</span></li>
-            </ul>
-            <a class="hero-course-cta" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">초등 상담하기</a>
           </article>
           <article class="hero-course-card secondary">
             <div class="hero-course-top">
@@ -774,19 +733,10 @@
             </div>
             <h2 class="hero-course-title">개념은 미리 익히고, 학원에서는 직접 풀며 실력을 만듭니다.</h2>
             <p class="hero-course-copy">영상 개념 학습 후 학원에서는 문제풀이, 질의응답, 오답 클리닉, 재테스트를 통해 학교 시험 대비 실력을 완성합니다.</p>
-            <ul class="hero-keywords" aria-label="수학의 기준 핵심 키워드">
-              <li><span>플립러닝</span></li>
-              <li><span>영상 개념 학습</span></li>
-              <li><span>학원 문제풀이</span></li>
-              <li><span>질의응답</span></li>
-              <li><span>오답 클리닉</span></li>
-              <li><span>재테스트</span></li>
-              <li><span>내신 대비</span></li>
-            </ul>
-            <a class="hero-course-cta" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">중고등 상담하기</a>
           </article>
         </div>
         <div class="hero-secondary-actions" aria-label="빠른 상담 연결">
+          <a class="btn primary" href="#apply">상담하기</a>
           <a class="btn white" href="tel:031-522-5431">전화 상담하기</a>
           <a class="btn ghost" href="#apply">1주 체험 문의하기</a>
         </div>
