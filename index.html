@@ -510,6 +510,114 @@
     .exit-offer-phone { background: var(--navy); color: #fff; }
     .exit-offer-later { border: 1px solid #e5e7eb; background: #fff; color: #4b5563; cursor: pointer; }
 
+    .faq-chatbot {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      display: grid;
+      justify-items: end;
+      gap: 12px;
+    }
+    .faq-chatbot-panel {
+      width: min(360px, calc(100vw - 28px));
+      overflow: hidden;
+      border-radius: 24px;
+      background: #fff;
+      color: var(--ink);
+      box-shadow: 0 26px 70px rgba(7, 26, 86, .24);
+      border: 1px solid rgba(7, 26, 86, .08);
+      transform: translateY(12px);
+      opacity: 0;
+      pointer-events: none;
+      transition: .22s ease;
+    }
+    .faq-chatbot.is-open .faq-chatbot-panel {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .faq-chatbot-head {
+      padding: 18px 18px 16px;
+      color: #fff;
+      background: linear-gradient(135deg, #064bdc, #071a56);
+    }
+    .faq-chatbot-head strong { display: block; font-size: 17px; }
+    .faq-chatbot-head span { display: block; margin-top: 4px; color: rgba(255,255,255,.72); font-size: 13px; }
+    .faq-chatbot-body {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      background: #f7faff;
+    }
+    .faq-question {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid #e3ebf7;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ink);
+      text-align: left;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .faq-question.is-active {
+      border-color: rgba(7, 71, 217, .35);
+      background: #edf5ff;
+      color: var(--blue);
+    }
+    .faq-answer {
+      min-height: 96px;
+      padding: 14px;
+      border-radius: 16px;
+      background: #fff;
+      color: #4b5563;
+      font-size: 14px;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    .faq-chatbot-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 0 14px 14px;
+      background: #f7faff;
+    }
+    .faq-chatbot-actions a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .faq-chatbot-actions a:first-child { background: var(--yellow); color: #111; }
+    .faq-chatbot-actions a:last-child { background: var(--navy); color: #fff; }
+    .faq-chatbot-toggle {
+      min-width: 154px;
+      min-height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--yellow);
+      color: #111;
+      box-shadow: 0 18px 42px rgba(7, 26, 86, .22);
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .faq-chatbot-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #19c37d;
+      box-shadow: 0 0 0 6px rgba(25, 195, 125, .16);
+    }
+
     @media (max-width: 900px) {
       body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
       .topbar, .menu { display: none; }
@@ -577,6 +685,18 @@
       .exit-offer-modal { width: 100%; padding: 24px 18px 18px; border-radius: 18px; }
       .exit-offer-actions { grid-template-columns: 1fr; }
       .exit-offer-actions a, .exit-offer-later { min-height: 44px; font-size: 14px; }
+      .faq-chatbot {
+        right: 12px;
+        bottom: calc(86px + env(safe-area-inset-bottom));
+      }
+      .faq-chatbot-toggle {
+        min-width: 132px;
+        min-height: 46px;
+        font-size: 13px;
+      }
+      .faq-chatbot-panel {
+        width: min(352px, calc(100vw - 24px));
+      }
     }
   </style>
 </head>
@@ -795,6 +915,30 @@
     </div>
   </div>
 
+  <aside class="faq-chatbot" id="faqChatbot" aria-label="학원 FAQ 챗봇">
+    <div class="faq-chatbot-panel" id="faqChatbotPanel" hidden>
+      <div class="faq-chatbot-head">
+        <strong>궁금한 점을 빠르게 확인하세요</strong>
+        <span>자주 묻는 질문을 누르면 바로 답변이 표시됩니다.</span>
+      </div>
+      <div class="faq-chatbot-body">
+        <button class="faq-question is-active" type="button" data-answer="trial">무료 체험은 어떻게 진행되나요?</button>
+        <button class="faq-question" type="button" data-answer="program">초등과 중·고등 수업은 어떻게 다른가요?</button>
+        <button class="faq-question" type="button" data-answer="price">수강료와 수업 횟수가 궁금해요.</button>
+        <button class="faq-question" type="button" data-answer="location">학원 위치와 상담 방법은요?</button>
+        <div class="faq-answer" id="faqAnswer">1주 무료 체험수업으로 아이의 현재 진도, 오답 습관, 개념 이해도를 먼저 확인합니다. 신청은 카카오톡 상담창에서 남겨주시면 빠르게 안내드리겠습니다.</div>
+      </div>
+      <div class="faq-chatbot-actions">
+        <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오상담</a>
+        <a href="tel:031-522-5431">전화상담</a>
+      </div>
+    </div>
+    <button class="faq-chatbot-toggle" type="button" id="faqChatbotToggle" aria-expanded="false" aria-controls="faqChatbotPanel">
+      <span class="faq-chatbot-dot" aria-hidden="true"></span>
+      학원 문의
+    </button>
+  </aside>
+
   <script>
     (function () {
       var backdrop = document.getElementById("exitOfferBackdrop");
@@ -833,6 +977,44 @@
       });
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") closeOffer();
+      });
+    })();
+
+    (function () {
+      var chatbot = document.getElementById("faqChatbot");
+      var toggle = document.getElementById("faqChatbotToggle");
+      var panel = document.getElementById("faqChatbotPanel");
+      var answerBox = document.getElementById("faqAnswer");
+      if (!chatbot || !toggle || !panel || !answerBox) return;
+
+      var answers = {
+        trial: "1주 무료 체험수업으로 아이의 현재 진도, 오답 습관, 개념 이해도를 먼저 확인합니다. 신청은 카카오톡 상담창에서 남겨주시면 빠르게 안내드리겠습니다.",
+        program: "초등 딱풀리는 수학은 자신감과 학습 습관을 중심으로, 중·고등 수학의 기준은 내신 대비와 오답 관리, 서술형 풀이를 중심으로 운영합니다.",
+        price: "초등은 187,000원, 중1은 200,000원, 중2·3은 250,000원, 고등부는 350,000원입니다. 초등은 교재비 포함이며 중·고등 교재비는 별도입니다.",
+        location: "학원은 남양주시 진접읍 해밀예당1로 40 화성프라자 5층에 있습니다. 전화상담은 031-522-5431, 카카오 상담도 가능합니다."
+      };
+
+      function setOpen(open) {
+        chatbot.classList.toggle("is-open", open);
+        panel.hidden = !open;
+        toggle.setAttribute("aria-expanded", String(open));
+      }
+
+      toggle.addEventListener("click", function () {
+        setOpen(!chatbot.classList.contains("is-open"));
+      });
+
+      chatbot.addEventListener("click", function (event) {
+        var question = event.target.closest("[data-answer]");
+        if (!question) return;
+        chatbot.querySelectorAll(".faq-question").forEach(function (button) {
+          button.classList.toggle("is-active", button === question);
+        });
+        answerBox.textContent = answers[question.getAttribute("data-answer")];
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") setOpen(false);
       });
     })();
   </script>
