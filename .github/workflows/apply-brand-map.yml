@@ -1,0 +1,232 @@
+name: Apply hero brand mapping patch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/apply-brand-map.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Patch hero brand mapping
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const indexPath = 'index.html';
+          const workflowPath = '.github/workflows/apply-brand-map.yml';
+          let html = fs.readFileSync(indexPath, 'utf8');
+
+          const oldCss = `    .hero-dashboard { display: grid; gap: 14px; }
+    .brand-panel {
+      padding: 26px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.24);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+    .logo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .logo-box {
+      min-height: 152px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+    }
+    .logo-box img { width: 100%; max-height: 116px; object-fit: contain; }
+    .mini-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 14px; }
+    .mini-card {
+      min-height: 96px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(7,26,86,.74);
+      color: rgba(255,255,255,.76);
+      font-size: 13px;
+    }
+    .mini-card strong { display: block; margin-bottom: 4px; color: #fff; font-size: 20px; }`;
+
+          const newCss = `    .hero-dashboard { display: grid; gap: 14px; }
+    .brand-panel {
+      padding: 26px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.24);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+    .brand-track-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .brand-track {
+      min-height: 340px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 18px;
+      background: #fff;
+      color: var(--ink);
+    }
+    .brand-track img {
+      width: 100%;
+      height: 118px;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+    .brand-track-body {
+      min-height: 172px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      border-radius: 16px;
+      color: #fff;
+      background: linear-gradient(145deg, #173b91, #071a56);
+    }
+    .brand-track-body small {
+      color: rgba(255,255,255,.72);
+      font-weight: 900;
+    }
+    .brand-track-body strong {
+      display: block;
+      margin: 4px 0 8px;
+      font-size: 30px;
+      line-height: 1.1;
+    }
+    .brand-track-body p {
+      margin: 0;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .brand-track-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .brand-track-badges span {
+      min-height: 26px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+    }`;
+
+          const oldMobile = `      .logo-pair, .mini-cards, .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
+      .process-grid, .feature-grid { grid-template-columns: 1fr; }`;
+
+          const newMobile = `      .brand-track-grid, .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form { grid-template-columns: 1fr; }
+      .brand-panel { padding: 12px; border-radius: 20px; }
+      .brand-track {
+        min-height: auto;
+        padding: 14px;
+        border-radius: 20px;
+      }
+      .brand-track img {
+        height: 126px;
+      }
+      .brand-track-body {
+        min-height: 154px;
+      }
+      .brand-track-body strong {
+        font-size: 32px;
+      }
+      .process-grid, .feature-grid { grid-template-columns: 1fr; }`;
+
+          const oldHero = `        <div class="hero-dashboard" aria-label="브랜드 안내">
+          <div class="brand-panel">
+            <div class="logo-pair">
+              <div class="logo-box"><img src="assets/ddak-logo-name.png" alt="딱풀리는수학 로고"></div>
+              <div class="logo-box"><img src="assets/math-standard-name.jpg" alt="수학의 기준 로고"></div>
+            </div>
+            <div class="mini-cards">
+              <div class="mini-card"><strong>초등</strong>설명하는 힘 · 서술형 · 오답 점검</div>
+              <div class="mini-card"><strong>중등</strong>개념 적용 · 대표 유형 · 내신 대비</div>
+              <div class="mini-card"><strong>고등</strong>질문 · 첨삭 · 재테스트</div>
+            </div>
+          </div>
+        </div>`;
+
+          const newHero = `        <div class="hero-dashboard" aria-label="브랜드 안내">
+          <div class="brand-panel">
+            <div class="brand-track-grid">
+              <article class="brand-track">
+                <img src="assets/ddak-logo-name.png" alt="딱풀리는수학 진접점 로고">
+                <div class="brand-track-body">
+                  <div>
+                    <small>딱풀리는수학 진접점</small>
+                    <strong>초등</strong>
+                    <p>설명하는 힘, 서술형 풀이, 오답 점검 습관을 키우는 초등 수학 과정입니다.</p>
+                  </div>
+                  <div class="brand-track-badges" aria-label="초등 핵심 관리">
+                    <span>설명</span>
+                    <span>서술형</span>
+                    <span>오답 점검</span>
+                  </div>
+                </div>
+              </article>
+              <article class="brand-track">
+                <img src="assets/math-standard-name.jpg" alt="수학의 기준 진접본원 로고">
+                <div class="brand-track-body">
+                  <div>
+                    <small>수학의 기준 진접본원</small>
+                    <strong>중등 · 고등</strong>
+                    <p>개념 적용, 대표 유형, 내신 대비, 서술형, 재테스트까지 관리하는 과정입니다.</p>
+                  </div>
+                  <div class="brand-track-badges" aria-label="중고등 핵심 관리">
+                    <span>내신</span>
+                    <span>오답 첨삭</span>
+                    <span>재테스트</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>`;
+
+          if (!html.includes('brand-track-grid')) {
+            for (const [label, oldValue, newValue] of [
+              ['hero css', oldCss, newCss],
+              ['mobile css', oldMobile, newMobile],
+              ['hero html', oldHero, newHero],
+            ]) {
+              if (!html.includes(oldValue)) {
+                throw new Error(`Could not find ${label} block`);
+              }
+              html = html.replace(oldValue, newValue);
+            }
+          }
+
+          if (fs.existsSync(workflowPath)) {
+            fs.rmSync(workflowPath, { force: true });
+          }
+          fs.writeFileSync(indexPath, html);
+          NODE
+      - name: Commit patched index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/apply-brand-map.yml
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Connect hero brands to school levels"
+            git push
+          fi
