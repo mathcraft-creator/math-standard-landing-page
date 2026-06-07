@@ -817,13 +817,25 @@
       var storageKey = "mathStandardExitOfferSeenAt";
       var oneDay = 24 * 60 * 60 * 1000;
       var shown = false;
-      function wasSeenRecently() { var seenAt = Number(localStorage.getItem(storageKey) || 0); return Date.now() - seenAt < oneDay; }
-      function markSeen() { localStorage.setItem(storageKey, String(Date.now())); }
-      function showOffer() { if (shown || wasSeenRecently()) return; shown = true; markSeen(); backdrop.hidden = false; backdrop.classList.add("is-visible"); }
+      var mobileBackGuardArmed = false;
+      function isMobileViewport() { return window.matchMedia ? window.matchMedia("(max-width: 768px)").matches : window.innerWidth <= 768; }
+      function getSeenAt() { try { return Number(localStorage.getItem(storageKey) || 0); } catch (error) { return 0; } }
+      function wasSeenRecently() { return Date.now() - getSeenAt() < oneDay; }
+      function markSeen() { try { localStorage.setItem(storageKey, String(Date.now())); } catch (error) {} }
+      function showOffer() { if (shown || wasSeenRecently()) return false; shown = true; markSeen(); backdrop.hidden = false; backdrop.classList.add("is-visible"); return true; }
       function closeOffer() { backdrop.classList.remove("is-visible"); backdrop.hidden = true; }
-      document.addEventListener("mouseout", function (event) { if (event.relatedTarget === null && event.clientY <= 8) showOffer(); });
-      window.addEventListener("scroll", function () { var scrollable = document.documentElement.scrollHeight - window.innerHeight; if (window.innerWidth <= 768 && scrollable > 0 && window.scrollY / scrollable > 0.35) showOffer(); }, { passive: true });
-      window.setTimeout(function () { if (window.innerWidth <= 768) showOffer(); }, 24000);
+      function armMobileBackGuard() {
+        if (!isMobileViewport() || mobileBackGuardArmed || !window.history || !window.history.pushState) return;
+        try { window.history.pushState({ exitOfferGuard: true }, "", window.location.href); mobileBackGuardArmed = true; } catch (error) {}
+      }
+      document.addEventListener("mouseout", function (event) { if (!isMobileViewport() && event.relatedTarget === null && event.clientY <= 8) showOffer(); });
+      window.addEventListener("popstate", function () {
+        if (!isMobileViewport() || !mobileBackGuardArmed) return;
+        if (showOffer()) { mobileBackGuardArmed = false; armMobileBackGuard(); return; }
+        mobileBackGuardArmed = false;
+        window.history.back();
+      });
+      armMobileBackGuard();
       backdrop.addEventListener("click", function (event) { if (event.target === backdrop || event.target.hasAttribute("data-exit-offer-close") || event.target.hasAttribute("data-exit-offer-action")) closeOffer(); });
       document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeOffer(); });
     })();
