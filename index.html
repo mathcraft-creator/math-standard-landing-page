@@ -1,1585 +1,436 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>수학의 기준 진접본원 · 딱풀리는수학 진접점</title>
-  <meta name="description" content="강의는 집에서, 공부는 학원에서. 수학의 기준 진접본원과 딱풀리는수학 진접점의 관리형 플립러닝 수학학원 안내">
-  <style>
-    :root {
-      --ink: #111827;
-      --muted: #5b6472;
-      --line: #e8edf6;
-      --navy: #071a56;
-      --blue: #0747d9;
-      --blue-2: #0788ff;
-      --sky: #eaf5ff;
-      --yellow: #ffd119;
-      --teal: #11a6a1;
-      --paper: #f5f8fd;
-      --white: #ffffff;
-      --shadow: 0 24px 70px rgba(7, 26, 86, .18);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.58;
-      letter-spacing: 0;
-    }
-    a { color: inherit; text-decoration: none; }
-    button, input, select, textarea { font: inherit; }
-    .wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
-
-    header {
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 30;
-      color: #fff;
-      background: rgba(5, 24, 78, .76);
-      border-bottom: 1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(18px);
-    }
-    .topbar {
-      min-height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      color: rgba(255,255,255,.76);
-      font-size: 12px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-    }
-    .nav {
-      min-height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-      font-weight: 900;
-    }
-    .brand img {
-      width: 126px;
-      height: 44px;
-      object-fit: contain;
-      padding: 4px 8px;
-      border-radius: 6px;
-      background: #fff;
-      flex: 0 0 auto;
-    }
-    .brand small {
-      display: block;
-      color: rgba(255,255,255,.7);
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      color: rgba(255,255,255,.88);
-      font-size: 14px;
-      font-weight: 800;
-    }
-    .menu a:last-child {
-      min-height: 42px;
-      display: inline-flex;
-      align-items: center;
-      padding: 0 18px;
-      border-radius: 999px;
-      background: #fff;
-      color: var(--blue);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      color: #fff;
-      background:
-        radial-gradient(circle at 78% 20%, rgba(120, 206, 255, .58), transparent 25%),
-        radial-gradient(circle at 18% 76%, rgba(255, 209, 25, .28), transparent 18%),
-        linear-gradient(135deg, #0440c9 0%, #0788ff 47%, #0630a8 100%);
-    }
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, transparent 0 52%, rgba(255,255,255,.12) 52% 58%, transparent 58%),
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: auto, 54px 54px, 54px 54px;
-      opacity: .86;
-    }
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      min-height: 760px;
-      display: grid;
-      grid-template-columns: 1fr;
-      align-items: center;
-      gap: 24px;
-      padding: 128px 0 68px;
-    }
-    .hero-heading {
-      max-width: 980px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 0;
-      color: rgba(255,255,255,.9);
-      font-size: clamp(18px, 2.2vw, 26px);
-      line-height: 1.35;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .hero-kicker::before {
-      content: "";
-      flex: 0 0 auto;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--yellow);
-      box-shadow: 0 0 0 7px rgba(255,209,25,.18);
-    }
-    .hero-choices {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: stretch;
-    }
-    .hero-course-card {
-      min-height: 430px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 28px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,.24);
-      background: linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(14px);
-    }
-    .hero-course-card.elementary {
-      background: linear-gradient(145deg, rgba(255,255,255,.24), rgba(33, 184, 224, .16));
-    }
-    .hero-course-card.secondary {
-      background: linear-gradient(145deg, rgba(255,255,255,.2), rgba(7, 26, 86, .22));
-    }
-    .hero-course-top {
-      display: grid;
-      grid-template-columns: minmax(150px, 190px) 1fr;
-      align-items: center;
-      gap: 16px;
-    }
-    .hero-logo-box {
-      min-height: 92px;
-      display: grid;
-      place-items: center;
-      padding: 14px;
-      border-radius: 20px;
-      background: #fff;
-      box-shadow: 0 14px 34px rgba(7,26,86,.14);
-    }
-    .hero-logo-box img {
-      width: 100%;
-      max-height: 62px;
-      object-fit: contain;
-    }
-    .hero-course-brand {
-      display: block;
-      color: rgba(255,255,255,.84);
-      font-size: clamp(18px, 1.7vw, 24px);
-      line-height: 1.2;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .hero-course-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      margin-top: 10px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #061b3d;
-      font-size: clamp(14px, 1.1vw, 17px);
-      font-weight: 900;
-      line-height: 1.2;
-      text-decoration: none;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, .16);
-      cursor: pointer;
-      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
-    }
-    .hero-course-link:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 12px 24px rgba(0, 0, 0, .2); }
-    .hero-course-title {
-      margin: 0;
-      color: #fff;
-      font-size: clamp(24px, 2.7vw, 34px);
-      line-height: 1.24;
-      letter-spacing: 0;
-      word-break: keep-all;
-    }
-    .hero-course-copy {
-      margin: 0;
-      color: rgba(255,255,255,.95);
-      font-size: clamp(18px, 1.6vw, 24px);
-      font-weight: 600;
-      line-height: 1.55;
-      word-break: keep-all;
-    }
-    .hero-secondary-actions {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .hero-secondary-actions .btn { min-width: 176px; }
-    .btn {
-      min-height: 54px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 22px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-weight: 900;
-    }
-    .btn.primary { background: var(--yellow); color: #111; }
-    .btn.white { background: #fff; color: var(--blue); }
-    .btn.ghost { color: #fff; border-color: rgba(255,255,255,.32); background: rgba(255,255,255,.1); }
-
-    section { padding: 84px 0; }
-    main > section:not(.hero) { scroll-margin-top: 92px; }
-    #ddak-elementary,
-    #math-standard-secondary { scroll-margin-top: 92px; }
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 28px;
-      margin-bottom: 30px;
-    }
-    .section-title { margin: 0; font-size: clamp(30px, 4vw, 48px); line-height: 1.15; letter-spacing: 0; }
-    .section-copy { max-width: 560px; margin: 0; color: var(--muted); word-break: keep-all; }
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 12px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 900;
-    }
-    .label::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
-
-    .system-intro { background: var(--navy); color: #fff; border-radius: 0 0 34px 34px; }
-    .system-intro .section-copy { color: rgba(255,255,255,.74); }
-    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .compare-card {
-      min-height: 260px;
-      padding: 30px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
-      border: 1px solid rgba(255,255,255,.14);
-    }
-    .compare-card.highlight { background: #fff; color: var(--ink); }
-    .compare-card small { color: var(--yellow); font-weight: 900; }
-    .compare-card.highlight small { color: var(--blue); }
-    .compare-card h3 { margin: 12px 0; font-size: 25px; }
-    .compare-card p { margin: 0; color: rgba(255,255,255,.74); word-break: keep-all; }
-    .compare-card.highlight p { color: var(--muted); }
-    .flow { display: grid; gap: 10px; margin-top: 22px; }
-    .flow span { display: block; padding: 12px 14px; border-radius: 14px; background: rgba(255,255,255,.12); font-weight: 900; }
-    .compare-card.highlight .flow span { background: var(--sky); color: #0b4cc8; }
-
-    .process { background: #fff; }
-    .process-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .process-card {
-      min-height: 300px;
-      padding: 24px;
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      background: #fff;
-      box-shadow: 0 16px 36px rgba(7,26,86,.08);
-    }
-    .process-card b {
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      margin-bottom: 16px;
-      background: var(--blue);
-      color: #fff;
-    }
-    .process-card h3 { margin: 0 0 10px; font-size: 21px; }
-    .process-card ul, .check-list, .feature-list { margin: 0; padding: 0; list-style: none; }
-    .process-card li, .check-list li, .feature-list li {
-      position: relative;
-      padding-left: 18px;
-      margin-top: 8px;
-      color: var(--muted);
-      word-break: keep-all;
-    }
-    .process-card li::before, .check-list li::before, .feature-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .72em;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--teal);
-    }
-
-    .why { background: var(--paper); }
-    .why-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; align-items: stretch; }
-    .quote-panel, .info-card {
-      border-radius: 26px;
-      padding: 34px;
-      background: #fff;
-      box-shadow: 0 16px 42px rgba(7,26,86,.08);
-    }
-    .quote-panel {
-      color: #fff;
-      background: linear-gradient(145deg, #064bdc, #071a56);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .quote-mark { color: var(--yellow); font-size: 72px; line-height: .75; font-weight: 900; }
-    .quote-panel p { margin: 14px 0 0; font-size: 25px; font-weight: 900; word-break: keep-all; }
-    .advantages { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .advantage { min-height: 110px; padding: 18px; border-radius: 18px; background: var(--sky); font-weight: 900; color: #0b4cc8; }
-
-    .recommend { background: #fff; }
-    .recommend-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
-    .recommend-card {
-      padding: 30px;
-      border-radius: 26px;
-      background: #fff;
-      border: 1px solid var(--line);
-      box-shadow: 0 16px 42px rgba(7,26,86,.08);
-    }
-    .recommend-card h3 { margin: 0 0 16px; font-size: 25px; }
-
-    .elementary { color: #111; background: linear-gradient(180deg, #fff9cf, #fff); }
-    .program-logo { width: 230px; height: 68px; object-fit: contain; object-position: left center; margin-bottom: 18px; }
-    .feature-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-    .feature-card {
-      min-height: 245px;
-      padding: 22px;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid rgba(255,209,25,.7);
-      box-shadow: 0 16px 40px rgba(7,26,86,.08);
-    }
-    .feature-card b { color: #8a6500; font-size: 13px; }
-    .feature-card h3 { margin: 8px 0 10px; font-size: 20px; }
-    .ib-box {
-      margin-top: 22px;
-      padding: 28px;
-      border-radius: 24px;
-      background: #fff;
-      border: 1px solid rgba(255,209,25,.75);
-      box-shadow: 0 16px 40px rgba(7,26,86,.08);
-    }
-    .elementary-lead {
-      max-width: 980px;
-      margin: -12px 0 34px;
-      color: #384152;
-      font-size: clamp(18px, 1.35vw, 20px);
-      line-height: 1.7;
-      font-weight: 800;
-      word-break: keep-all;
-    }
-    .elementary-block { margin-top: 34px; }
-    .elementary-block-head {
-      max-width: 920px;
-      margin-bottom: 18px;
-    }
-    .elementary-block-head h3 {
-      margin: 0 0 10px;
-      font-size: clamp(26px, 2.4vw, 36px);
-      line-height: 1.24;
-      letter-spacing: 0;
-      word-break: keep-all;
-    }
-    .elementary-block-head p {
-      margin: 0;
-      color: #4b5563;
-      font-size: clamp(17px, 1.2vw, 19px);
-      line-height: 1.7;
-      word-break: keep-all;
-    }
-    .elementary-point-grid,
-    .elementary-check-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .elementary-step-grid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .elementary-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
-    .elementary-point-card,
-    .elementary-step-card,
-    .elementary-detail-card,
-    .elementary-check-card {
-      padding: 24px;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid rgba(255,209,25,.72);
-      box-shadow: 0 16px 40px rgba(7,26,86,.08);
-    }
-    .elementary-point-card {
-      min-height: 132px;
-      display: flex;
-      align-items: center;
-      color: #0f172a;
-      font-size: clamp(17px, 1.2vw, 19px);
-      line-height: 1.45;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .elementary-step-card {
-      min-height: 260px;
-    }
-    .elementary-step-card b,
-    .elementary-detail-card b {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      margin-bottom: 12px;
-      padding: 0 10px;
-      border-radius: 999px;
-      background: #fff3a6;
-      color: #8a6500;
-      font-size: 14px;
-      font-weight: 900;
-    }
-    .elementary-step-card h4,
-    .elementary-detail-card h4 {
-      margin: 0 0 10px;
-      color: #0f172a;
-      font-size: clamp(20px, 1.45vw, 24px);
-      line-height: 1.3;
-      word-break: keep-all;
-    }
-    .elementary-step-card p,
-    .elementary-detail-card p,
-    .elementary-ib-panel p,
-    .elementary-cta p {
-      margin: 0;
-      color: #4b5563;
-      font-size: clamp(16px, 1.14vw, 18px);
-      line-height: 1.68;
-      word-break: keep-all;
-    }
-    .elementary-highlight {
-      margin: 18px 0 0;
-      padding: 22px 26px;
-      border-radius: 22px;
-      background: #fff;
-      border: 1px solid rgba(255,209,25,.78);
-      color: #0f172a;
-      font-size: clamp(18px, 1.35vw, 21px);
-      line-height: 1.55;
-      font-weight: 900;
-      word-break: keep-all;
-      box-shadow: 0 16px 40px rgba(7,26,86,.08);
-    }
-    .elementary-detail-card ul,
-    .elementary-ib-panel ul {
-      margin: 18px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-    .elementary-detail-card li,
-    .elementary-ib-panel li {
-      position: relative;
-      padding-left: 20px;
-      margin-top: 10px;
-      color: #4b5563;
-      font-size: clamp(16px, 1.14vw, 18px);
-      line-height: 1.6;
-      word-break: keep-all;
-    }
-    .elementary-detail-card li::before,
-    .elementary-ib-panel li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: .68em;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--teal);
-    }
-    .elementary-ib-panel,
-    .elementary-cta {
-      padding: 34px;
-      border-radius: 26px;
-      background: #fff;
-      border: 1px solid rgba(255,209,25,.78);
-      box-shadow: 0 18px 44px rgba(7,26,86,.09);
-    }
-    .elementary-ib-panel h3,
-    .elementary-cta h3 {
-      margin: 0 0 12px;
-      font-size: clamp(24px, 2vw, 32px);
-      line-height: 1.3;
-      word-break: keep-all;
-    }
-    .elementary-ib-panel strong {
-      display: block;
-      margin-top: 18px;
-      color: #0b4cc8;
-      font-size: clamp(18px, 1.35vw, 21px);
-      line-height: 1.5;
-      word-break: keep-all;
-    }
-    .elementary-check-card {
-      min-height: 104px;
-      display: flex;
-      align-items: center;
-      color: #0f172a;
-      font-size: clamp(16px, 1.14vw, 18px);
-      line-height: 1.5;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .elementary-cta {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 22px;
-    }
-    .elementary-cta a {
-      min-width: 190px;
-      min-height: 56px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 24px;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #111;
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow: 0 14px 28px rgba(7,26,86,.16);
-    }
-
-    .middle-high { color: #fff; background: var(--navy); border-radius: 34px 34px 0 0; }
-    .middle-high .section-copy { color: rgba(255,255,255,.74); }
-    .mh-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 22px; align-items: stretch; }
-    .mh-card {
-      padding: 30px;
-      border-radius: 24px;
-      background: linear-gradient(145deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
-      border: 1px solid rgba(255,255,255,.14);
-    }
-    .mh-card img {
-      width: 240px;
-      max-width: 100%;
-      height: 74px;
-      object-fit: contain;
-      object-position: left center;
-      padding: 6px 10px;
-      border-radius: 8px;
-      background: #fff;
-      margin-bottom: 18px;
-    }
-    .mh-card p { color: rgba(255,255,255,.76); word-break: keep-all; }
-    .tag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .tag-card { min-height: 92px; padding: 18px; border-radius: 18px; background: rgba(255,255,255,.1); font-weight: 900; }
-
-    .faq-section { background: var(--paper); }
-    .faq-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    details {
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid var(--line);
-      box-shadow: 0 12px 28px rgba(7,26,86,.06);
-      overflow: hidden;
-    }
-    summary { min-height: 60px; display: flex; align-items: center; padding: 16px 18px; cursor: pointer; font-weight: 900; }
-    details p { margin: 0; padding: 0 18px 18px; color: var(--muted); word-break: keep-all; }
-
-    .apply {
-      color: #fff;
-      background:
-        radial-gradient(circle at 18% 22%, rgba(255,209,25,.18), transparent 19%),
-        linear-gradient(135deg, #06236f 0%, #064bdc 58%, #11a6a1 100%);
-      border-radius: 34px 34px 0 0;
-    }
-    .apply-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 36px; align-items: start; }
-    .apply p { word-break: keep-all; }
-    .contact-list { display: grid; gap: 12px; margin-top: 28px; }
-    .contact-list a, .contact-list div {
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 0 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.16);
-      color: rgba(255,255,255,.9);
-      font-weight: 900;
-    }
-    .contact-list a:hover { background: rgba(255,255,255,.18); }
-    form {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      padding: 28px;
-      border-radius: 26px;
-      background: rgba(255,255,255,.96);
-      color: var(--ink);
-      box-shadow: var(--shadow);
-    }
-    label { display: grid; gap: 8px; color: #4d5562; font-size: 13px; font-weight: 900; }
-    input, select, textarea {
-      width: 100%;
-      min-height: 48px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 0 13px;
-      background: #fff;
-      color: var(--ink);
-      outline: none;
-    }
-    textarea { grid-column: 1 / -1; min-height: 106px; padding-top: 12px; resize: vertical; }
-    .form-note {
-      grid-column: 1 / -1;
-      margin: 0;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: #f2f6ff;
-      color: #59616f;
-      font-size: 13px;
-      font-weight: 800;
-      word-break: keep-all;
-    }
-    .submit {
-      grid-column: 1 / -1;
-      min-height: 54px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #111;
-      font-weight: 900;
-      cursor: pointer;
-    }
-
-    footer { padding: 50px 0; color: rgba(255,255,255,.7); background: #071a56; }
-    .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-    .footer-brand { display: flex; align-items: center; gap: 14px; color: #fff; font-weight: 900; }
-    .footer-brand img { width: 146px; height: 48px; object-fit: contain; padding: 4px 8px; border-radius: 6px; background: #fff; }
-
-    .mobile-cta { display: none; }
-    .exit-offer-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 120;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(5px);
-    }
-    .exit-offer-backdrop.is-visible { display: flex; }
-    .exit-offer-modal {
-      position: relative;
-      width: min(92vw, 430px);
-      padding: 26px 24px 22px;
-      border-radius: 20px;
-      background: #fff;
-      color: var(--ink);
-      box-shadow: 0 24px 60px rgba(15, 23, 42, .28);
-    }
-    .exit-offer-close {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: #f3f4f6;
-      color: #4b5563;
-      font-size: 22px;
-      line-height: 1;
-      cursor: pointer;
-    }
-    .exit-offer-eyebrow { margin: 0 0 8px; color: #f97316; font-size: 13px; font-weight: 900; }
-    .exit-offer-title { margin: 0 34px 12px 0; font-size: clamp(22px, 4.8vw, 30px); line-height: 1.2; }
-    .exit-offer-copy { margin: 0 0 18px; color: #4b5563; font-size: 15px; line-height: 1.65; }
-    .exit-offer-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .exit-offer-actions a, .exit-offer-later {
-      min-height: 46px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      font-weight: 900;
-      text-decoration: none;
-    }
-    .exit-offer-primary { grid-column: 1 / -1; background: #f97316; color: #fff; }
-    .exit-offer-phone { background: var(--navy); color: #fff; }
-    .exit-offer-later { border: 1px solid #e5e7eb; background: #fff; color: #4b5563; cursor: pointer; }
-    .phone-modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 130;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(7, 26, 86, .58);
-      backdrop-filter: blur(6px);
-    }
-    .phone-modal-backdrop.is-visible { display: flex; }
-    .phone-modal {
-      position: relative;
-      width: min(92vw, 430px);
-      padding: 30px 26px 24px;
-      border-radius: 24px;
-      background:
-        linear-gradient(180deg, rgba(234,245,255,.96), #fff 44%),
-        #fff;
-      color: var(--ink);
-      border: 1px solid rgba(255,255,255,.7);
-      box-shadow: 0 28px 70px rgba(7, 26, 86, .32);
-    }
-    .phone-modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 34px;
-      height: 34px;
-      border: 0;
-      border-radius: 50%;
-      background: #fff;
-      color: #4b5563;
-      font-size: 22px;
-      line-height: 1;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(7,26,86,.12);
-    }
-    .phone-modal-title {
-      margin: 0 38px 10px 0;
-      color: var(--navy);
-      font-size: clamp(24px, 4vw, 32px);
-      line-height: 1.2;
-      font-weight: 900;
-    }
-    .phone-modal-number {
-      display: block;
-      margin: 10px 0 18px;
-      color: var(--blue);
-      font-size: clamp(30px, 6vw, 42px);
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: 0;
-    }
-    .phone-modal-time {
-      margin: 0 0 20px;
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--sky);
-      color: #334155;
-      font-weight: 900;
-      word-break: keep-all;
-    }
-    .phone-modal-time span {
-      display: block;
-      color: var(--blue);
-      font-size: 14px;
-    }
-    .phone-modal-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .phone-modal-actions button,
-    .phone-modal-actions a {
-      min-height: 48px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 0;
-      border-radius: 14px;
-      font-weight: 900;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .phone-copy-button { background: var(--yellow); color: #111; }
-    .phone-kakao-link { background: var(--navy); color: #fff; }
-    .phone-copy-feedback {
-      min-height: 22px;
-      margin: 12px 0 0;
-      color: #0b4cc8;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .faq-chatbot { position: fixed; right: 22px; bottom: 22px; z-index: 80; display: grid; justify-items: end; gap: 12px; }
-    .faq-chatbot-panel {
-      width: min(360px, calc(100vw - 28px));
-      overflow: hidden;
-      border-radius: 24px;
-      background: #fff;
-      color: var(--ink);
-      box-shadow: 0 26px 70px rgba(7, 26, 86, .24);
-      border: 1px solid rgba(7, 26, 86, .08);
-      transform: translateY(12px);
-      opacity: 0;
-      pointer-events: none;
-      transition: .22s ease;
-    }
-    .faq-chatbot.is-open .faq-chatbot-panel { transform: translateY(0); opacity: 1; pointer-events: auto; }
-    .faq-chatbot-head { padding: 18px 18px 16px; color: #fff; background: linear-gradient(135deg, #064bdc, #071a56); }
-    .faq-chatbot-head strong { display: block; font-size: 17px; }
-    .faq-chatbot-head span { display: block; margin-top: 4px; color: rgba(255,255,255,.72); font-size: 13px; }
-    .faq-chatbot-body { display: grid; gap: 10px; padding: 14px; background: #f7faff; }
-    .faq-question {
-      width: 100%;
-      min-height: 44px;
-      padding: 10px 12px;
-      border: 1px solid #e3ebf7;
-      border-radius: 14px;
-      background: #fff;
-      color: var(--ink);
-      text-align: left;
-      font-weight: 900;
-      cursor: pointer;
-    }
-    .faq-question.is-active { border-color: rgba(7, 71, 217, .35); background: #edf5ff; color: var(--blue); }
-    .faq-answer { min-height: 96px; padding: 14px; border-radius: 16px; background: #fff; color: #4b5563; font-size: 14px; line-height: 1.6; word-break: keep-all; }
-    .faq-chatbot-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 14px 14px; background: #f7faff; }
-    .faq-chatbot-actions a { min-height: 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 13px; font-weight: 900; }
-    .faq-chatbot-actions a:first-child { background: var(--yellow); color: #111; }
-    .faq-chatbot-actions a:last-child { background: var(--navy); color: #fff; }
-    .faq-chatbot-toggle {
-      min-width: 154px;
-      min-height: 54px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--yellow);
-      color: #111;
-      box-shadow: 0 18px 42px rgba(7, 26, 86, .22);
-      font-weight: 900;
-      cursor: pointer;
-    }
-    .faq-chatbot-dot { width: 10px; height: 10px; border-radius: 50%; background: #19c37d; box-shadow: 0 0 0 6px rgba(25, 195, 125, .16); }
-
-    @media (min-width: 901px) {
-      main > section:not(.hero) { padding: 96px 0; scroll-margin-top: 110px; }
-      #ddak-elementary,
-      #math-standard-secondary { scroll-margin-top: 110px; }
-      .section-head { gap: 34px; margin-bottom: 38px; }
-      .label { font-size: clamp(15px, 1vw, 16px); }
-      .section-title { font-size: clamp(38px, 3.3vw, 50px); line-height: 1.16; }
-      .section-copy {
-        max-width: 660px;
-        font-size: clamp(18px, 1.35vw, 20px);
-        line-height: 1.7;
-      }
-      .comparison, .why-grid, .recommend-grid, .mh-grid { gap: 26px; }
-      .compare-card {
-        min-height: 310px;
-        padding: 36px;
-      }
-      .compare-card small {
-        font-size: clamp(15px, 1vw, 16px);
-      }
-      .compare-card h3,
-      .recommend-card h3,
-      .mh-card h3,
-      .ib-box h3 {
-        font-size: clamp(22px, 1.6vw, 26px);
-        line-height: 1.3;
-      }
-      .compare-card p,
-      .mh-card p,
-      .ib-box p {
-        font-size: clamp(17px, 1.2vw, 19px);
-        line-height: 1.68;
-      }
-      .flow { gap: 12px; margin-top: 26px; }
-      .flow span {
-        padding: 15px 18px;
-        font-size: clamp(16px, 1.12vw, 18px);
-        line-height: 1.45;
-      }
-      .process-grid,
-      .feature-grid,
-      .elementary-step-grid,
-      .elementary-point-grid,
-      .elementary-detail-grid,
-      .elementary-check-grid {
-        gap: 18px;
-      }
-      .process-card {
-        min-height: 330px;
-        padding: 28px;
-      }
-      .process-card b {
-        width: 48px;
-        height: 48px;
-        margin-bottom: 18px;
-        font-size: 18px;
-      }
-      .process-card h3,
-      .feature-card h3 {
-        font-size: clamp(21px, 1.45vw, 24px);
-        line-height: 1.3;
-      }
-      .process-card li,
-      .check-list li,
-      .feature-list li {
-        padding-left: 20px;
-        margin-top: 10px;
-        font-size: clamp(17px, 1.2vw, 19px);
-        line-height: 1.65;
-      }
-      .quote-panel,
-      .info-card,
-      .recommend-card,
-      .mh-card,
-      .ib-box {
-        padding: 36px;
-      }
-      .quote-panel p {
-        font-size: clamp(28px, 2.2vw, 34px);
-        line-height: 1.32;
-      }
-      .advantages { gap: 16px; }
-      .advantage,
-      .tag-card {
-        min-height: 116px;
-        padding: 22px;
-        font-size: clamp(17px, 1.2vw, 19px);
-        line-height: 1.45;
-      }
-      .recommend-grid { gap: 26px; }
-      .feature-card {
-        min-height: 290px;
-        padding: 28px;
-      }
-      .elementary-point-card,
-      .elementary-step-card,
-      .elementary-detail-card,
-      .elementary-check-card {
-        padding: 28px;
-      }
-      .elementary-step-card {
-        min-height: 286px;
-      }
-      .feature-card b {
-        font-size: 15px;
-      }
-      .program-logo {
-        width: 250px;
-        height: 76px;
-        margin-bottom: 24px;
-      }
-      .tag-grid { gap: 16px; }
-      .faq-list {
-        gap: 16px;
-      }
-      details {
-        border-radius: 20px;
-      }
-      summary {
-        min-height: 72px;
-        padding: 20px 22px;
-        font-size: clamp(18px, 1.25vw, 20px);
-        line-height: 1.45;
-      }
-      details p {
-        padding: 0 22px 22px;
-        font-size: clamp(16px, 1.1vw, 18px);
-        line-height: 1.68;
-      }
-      .apply-grid { gap: 44px; }
-      .apply p {
-        font-size: clamp(18px, 1.35vw, 20px);
-        line-height: 1.7;
-      }
-      .contact-list { gap: 14px; margin-top: 32px; }
-      .contact-list a,
-      .contact-list div {
-        min-height: 70px;
-        padding: 0 22px;
-        font-size: 17px;
-      }
-      .contact-list span { font-size: 16px; }
-      .contact-list strong { font-size: 18px; }
-      form {
-        gap: 16px;
-        padding: 34px;
-      }
-      label {
-        gap: 10px;
-        font-size: 16px;
-      }
-      input,
-      select,
-      textarea {
-        min-height: 56px;
-        padding: 0 16px;
-        font-size: 17px;
-      }
-      textarea {
-        min-height: 132px;
-        padding-top: 16px;
-        line-height: 1.6;
-      }
-      .form-note {
-        padding: 16px 18px;
-        font-size: 16px;
-        line-height: 1.65;
-      }
-      .submit {
-        min-height: 62px;
-        font-size: 18px;
-      }
-      footer {
-        padding: 64px 0;
-        font-size: 17px;
-        line-height: 1.65;
-      }
-      .footer-grid { gap: 36px; }
-      .footer-brand { font-size: 19px; }
-      .faq-chatbot-head strong { font-size: 19px; }
-      .faq-chatbot-head span { font-size: 15px; }
-      .faq-question { font-size: 16px; line-height: 1.45; }
-      .faq-answer { font-size: 16px; line-height: 1.65; }
-      .faq-chatbot-actions a,
-      .faq-chatbot-toggle { font-size: 15px; }
-    }
-
-    @media (max-width: 1020px) {
-      .process-grid, .feature-grid, .elementary-step-grid, .elementary-point-grid, .elementary-check-grid { grid-template-columns: repeat(2, 1fr); }
-      .elementary-detail-grid { grid-template-columns: 1fr; }
-      .process-card, .feature-card, .elementary-step-card { min-height: auto; }
-      .menu { gap: 16px; }
-    }
-
-    @media (max-width: 900px) {
-      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
-      .topbar, .menu { display: none; }
-      .nav { min-height: 74px; }
-      .brand img { width: 96px; height: 38px; }
-      .brand span { font-size: 13px; line-height: 1.24; }
-      .wrap { width: min(100% - 28px, 680px); }
-      .hero-inner { min-height: auto; gap: 18px; padding: 104px 0 54px; }
-      .hero-heading { margin: 0; text-align: left; }
-      .hero-kicker { font-size: clamp(18px, 5.3vw, 24px); line-height: 1.36; }
-      .hero-choices { grid-template-columns: 1fr; gap: 14px; }
-      .hero-course-card { min-height: auto; gap: 15px; padding: 20px; border-radius: 22px; }
-      .hero-course-top { grid-template-columns: minmax(128px, 42%) 1fr; gap: 12px; }
-      .hero-logo-box { min-height: 74px; padding: 10px; border-radius: 16px; }
-      .hero-logo-box img { max-height: 56px; }
-      .hero-course-brand { font-size: clamp(17px, 4.6vw, 20px); }
-      .hero-course-link { min-height: 44px; margin-top: 8px; padding: 9px 13px; font-size: clamp(13px, 3.7vw, 15px); white-space: normal; text-align: center; }
-      .hero-course-title { font-size: clamp(22px, 6vw, 28px); line-height: 1.28; }
-      .hero-course-copy { font-size: clamp(17px, 4.6vw, 20px); line-height: 1.58; }
-      .hero-secondary-actions { display: grid; grid-template-columns: 1fr; gap: 8px; }
-      .hero-secondary-actions .btn { width: 100%; min-height: 46px; padding: 0 12px; font-size: 14px; }
-      .comparison, .why-grid, .recommend-grid, .mh-grid, .tag-grid, .faq-list, .apply-grid, .footer-grid, form, .elementary-step-grid, .elementary-point-grid, .elementary-detail-grid, .elementary-check-grid, .elementary-cta { grid-template-columns: 1fr; }
-      .process-grid, .feature-grid { grid-template-columns: 1fr; }
-      .elementary-lead { margin: -4px 0 26px; font-size: 16px; line-height: 1.68; }
-      .elementary-block { margin-top: 28px; }
-      .elementary-block-head h3 { font-size: clamp(24px, 7vw, 30px); }
-      .elementary-block-head p, .elementary-step-card p, .elementary-detail-card p, .elementary-ib-panel p, .elementary-cta p { font-size: 16px; }
-      .elementary-point-card, .elementary-step-card, .elementary-detail-card, .elementary-check-card, .elementary-ib-panel, .elementary-cta { padding: 20px; border-radius: 20px; }
-      .elementary-step-card h4, .elementary-detail-card h4 { font-size: 20px; }
-      .elementary-highlight { padding: 18px 20px; font-size: 17px; }
-      .elementary-cta { gap: 16px; }
-      .elementary-cta a { width: 100%; min-height: 52px; }
-      section { padding: 62px 0; }
-      .section-head { display: block; }
-      .section-copy { margin-top: 12px; }
-      textarea, .form-note, .submit { grid-column: auto; }
-      .contact-list a, .contact-list div { min-height: 60px; flex-direction: column; align-items: flex-start; justify-content: center; gap: 2px; padding: 12px 16px; }
-      .mobile-cta {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 40;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-        background: rgba(7, 26, 86, .95);
-        border-top: 1px solid rgba(255,255,255,.14);
-        box-shadow: 0 -14px 32px rgba(16, 23, 42, .24);
-        backdrop-filter: blur(14px);
-      }
-      .mobile-cta a {
-        min-height: 46px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 8px;
-        border-radius: 999px;
-        background: rgba(255,255,255,.12);
-        color: #fff;
-        font-size: 13px;
-        font-weight: 900;
-        white-space: nowrap;
-      }
-      .mobile-cta a:last-child { background: var(--yellow); color: #111; }
-      .exit-offer-backdrop { align-items: flex-end; padding: 16px 14px calc(88px + env(safe-area-inset-bottom)); }
-      .exit-offer-modal { width: 100%; padding: 24px 18px 18px; border-radius: 18px; }
-      .exit-offer-actions { grid-template-columns: 1fr; }
-      .exit-offer-actions a, .exit-offer-later { min-height: 44px; font-size: 14px; }
-      .phone-modal-backdrop { align-items: flex-end; padding: 16px 14px calc(88px + env(safe-area-inset-bottom)); }
-      .phone-modal { width: 100%; padding: 26px 18px 18px; border-radius: 20px; }
-      .phone-modal-actions { grid-template-columns: 1fr; }
-      .phone-modal-actions button,
-      .phone-modal-actions a { min-height: 46px; font-size: 14px; }
-      .faq-chatbot { right: 12px; bottom: calc(86px + env(safe-area-inset-bottom)); }
-      .faq-chatbot.is-hero-hidden { opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(8px); }
-      .faq-chatbot-toggle { min-width: 132px; min-height: 46px; font-size: 13px; }
-      .faq-chatbot-panel { width: min(352px, calc(100vw - 24px)); }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="wrap topbar">
-      <span>경기도 남양주시 진접읍 해밀예당1로 40, 진접 우체국 옆 화성프라자 5층</span>
-      <span>상담 031-522-5431</span>
-    </div>
-    <nav class="wrap nav" aria-label="주요 메뉴">
-      <a class="brand" href="#top">
-        <img src="assets/math-standard-name.jpg" alt="수학의 기준 로고">
-        <span>수학의 기준 진접본원 · 딱풀리는수학 진접점<small>초등 · 중등 · 고등 관리형 수학학원</small></span>
-      </a>
-      <div class="menu">
-        <a href="#fliplearning">플립러닝</a>
-        <a href="#ddak-elementary">초등</a>
-        <a href="#math-standard-secondary">중고등</a>
-        <a href="#faq">FAQ</a>
-        <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">상담하기</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>수학의 기준 · 딱풀리는수학 | 진접 초등·중고등 수학</title>
+    <meta
+      name="description"
+      content="진접 초3~초6 개별 맞춤 설명형 수학, 중·고등 플립러닝과 학교별 내신 대비. 딱풀리는수학 진접점과 수학의 기준 진접본원에서 아이에게 맞는 학습을 만나보세요."
+    />
+    <meta name="theme-color" content="#0a2455" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="수학의 기준 · 딱풀리는수학 | 진접 초등·중고등 수학" />
+    <meta
+      property="og:description"
+      content="진접 초3~초6 개별 맞춤 설명형 수학, 중·고등 플립러닝과 학교별 내신 대비. 딱풀리는수학 진접점과 수학의 기준 진접본원에서 아이에게 맞는 학습을 만나보세요."
+    />
+    <link rel="stylesheet" href="./assets/site.css" />
+    <script src="./assets/site.js" defer></script>
+    <link rel="canonical" href="https://math-standard-landing-page.vercel.app/" />
+    <meta property="og:url" content="https://math-standard-landing-page.vercel.app/" />
+    <script src="./assets/exit-offer.js" defer></script>
+  </head>
+  <body data-page="home" id="top">
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="./index.html" aria-label="수학의 기준 · 딱풀리는수학 홈">
+          <img src="./assets/math-standard-name.jpg" alt="수학의 기준" width="108" height="40" />
+          <span class="brand-text">
+            <strong>딱풀리는수학 · 수학의 기준</strong>
+            진접에서 함께 자라는 수학
+          </span>
+        </a>
+        <nav class="menu" aria-label="주 메뉴">
+          <a class="nav-home" href="./index.html" aria-current="page">홈</a>
+          <a href="./elementary.html">초등</a>
+          <a href="./secondary.html">중·고등</a>
+          <a class="nav-contact" href="#apply">상담하기</a>
+        </nav>
       </div>
+    </header>
+    <main id="main">
+      <section class="home-hero">
+        <div class="wrap">
+          <div class="home-title">
+            <span class="eyebrow">THINK · SOLVE · GROW</span>
+            <h1>
+              아이의 생각이 풀이가 되고,
+              <br />
+              배운 내용이
+              <span>실력이 되도록.</span>
+            </h1>
+            <p>초등부터 중·고등까지, 지금 우리 아이에게 맞는 수학을 만나보세요.</p>
+          </div>
+          <div class="course-grid">
+            <a class="course-card elementary" href="./elementary.html">
+              <div class="course-copy">
+                <span class="course-logo">
+                  <img src="./assets/ddak-logo-name.png" alt="딱풀리는수학" width="145" height="38" />
+                </span>
+                <span class="course-age">초등 수학 · 초3~초6</span>
+                <h2>
+                  아이의 생각이
+                  <br />
+                  풀이로 보이는
+                  <br />
+                  수학.
+                </h2>
+                <p class="course-description">
+                  내 수준에 맞게 배우고,
+                  <br />
+                  내 생각을 말하고 씁니다.
+                </p>
+                <span class="course-brand">개별 진도 · 풀이과정 · 설명하기</span>
+                <span class="course-button">
+                  초등 수업 자세히 보기
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </span>
+              </div>
+              <img
+                class="course-portrait"
+                src="./assets/elementary-portrait.png"
+                alt="딱풀리는수학 초등 과정 소개 인물 사진"
+                width="1122"
+                height="1402"
+                fetchpriority="high"
+              />
+            </a>
+            <a class="course-card secondary" href="./secondary.html">
+              <div class="course-copy">
+                <span class="course-logo">
+                  <img src="./assets/math-standard-name.jpg" alt="수학의 기준" width="145" height="38" />
+                </span>
+                <span class="course-age">중·고등 수학 · 내신 대비</span>
+                <h2>
+                  혼자 푸는 힘,
+                  <br />
+                  시험에서 꺼내 쓰는
+                  <br />
+                  실력.
+                </h2>
+                <p class="course-description">
+                  개념은 미리 익히고,
+                  <br />
+                  풀이와 오답은 끝까지 확인합니다.
+                </p>
+                <span class="course-brand">플립러닝 · 학교별 내신 · 재테스트</span>
+                <span class="course-button">
+                  중·고등 수업 자세히 보기
+                  <span class="arrow" aria-hidden="true">↗</span>
+                </span>
+              </div>
+              <img
+                class="course-portrait"
+                src="./assets/secondary-portrait.png"
+                alt="수학의 기준 중·고등 과정 소개 인물 사진"
+                width="774"
+                height="1000"
+                fetchpriority="high"
+              />
+            </a>
+          </div>
+          <div class="home-under">
+            <span>어디서부터 시작할지 고민이라면</span>
+            <a href="#apply">진단·1주 체험 문의 →</a>
+            <a href="tel:031-522-5431">031-522-5431</a>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">OUR PROMISE</span>
+            <h2>
+              아이마다 출발점은 달라도,
+              <br />
+              확인하는 기준은 같습니다.
+            </h2>
+          </div>
+          <div class="grid-3">
+            <article class="promise-panel">
+              <p class="promise-index">01 / 먼저 살펴봅니다</p>
+              <h3>지금 어디에서 막히는지</h3>
+              <p>
+                진도보다 현재 이해 수준을 먼저 봅니다. 아이가 아는 것과 어려워하는 것을 구분해 필요한 공부를
+                찾습니다.
+              </p>
+            </article>
+            <article class="promise-panel">
+              <p class="promise-index">02 / 직접 확인합니다</p>
+              <h3>혼자 풀고 설명할 수 있는지</h3>
+              <p>
+                정답만 확인하지 않습니다. 풀이 한 줄과 질문 하나에서 아이의 생각을 읽고, 필요한 부분을 함께
+                고칩니다.
+              </p>
+            </article>
+            <article class="promise-panel">
+              <p class="promise-index">03 / 함께 나눕니다</p>
+              <h3>오늘 무엇이 달라졌는지</h3>
+              <p>
+                오늘의 진도와 이해한 내용, 보완할 부분을 학부모님께 전달합니다. 아이의 학습 과정을 함께
+                살펴봅니다.
+              </p>
+            </article>
+          </div>
+          <div class="quote-strip">
+            <p>
+              “우리 아이에게 맞을까요?”
+              <br />
+              그 질문부터 함께 시작하겠습니다.
+            </p>
+            <a class="button yellow" href="#apply">우리 아이 학습 상담 →</a>
+          </div>
+        </div>
+      </section>
+      <section class="section soft" id="faq">
+        <div class="wrap split-section">
+          <div class="section-head">
+            <span class="eyebrow">BEFORE WE MEET</span>
+            <h2>
+              처음 오시는
+              <br />
+              학부모님께.
+            </h2>
+            <p>
+              과정 선택부터 상담 준비까지,
+              <br />
+              자주 궁금해하시는 내용을 정리했습니다.
+            </p>
+          </div>
+          <div class="faq-list">
+            <details id="faq-course">
+              <summary>어떤 과정을 선택하면 될까요?</summary>
+              <p>
+                초3~초6은 딱풀리는수학에서 개별 진도와 설명하는 수학을 배웁니다. 중·고등은 수학의 기준에서
+                플립러닝과 학교별 내신 대비를 진행합니다. 현재 학습 상황에 맞는 과정이 궁금하다면 상담에서
+                함께 확인해 주세요.
+              </p>
+            </details>
+            <details id="faq-trial">
+              <summary>등록 전에 수업을 경험해 볼 수 있나요?</summary>
+              <p>
+                먼저 진단과 상담으로 아이의 현재 수준을 살펴보고, 1주일 체험으로 학습 방식이 맞는지 확인할 수
+                있습니다. 체험 일정과 진행 방법은 상담에서 안내드립니다.
+              </p>
+            </details>
+            <details id="faq-visit">
+              <summary>상담할 때 무엇을 준비하면 좋을까요?</summary>
+              <p>
+                아이의 학년과 현재 고민을 알려주세요. 최근 풀던 문제집이나 학교 시험지가 있으면 막히는 지점을
+                확인하는 데 도움이 됩니다. 방문 전 전화나 카카오톡으로 시간을 확인해 주세요.
+              </p>
+            </details>
+          </div>
+        </div>
+      </section>
+      <section class="section consult" id="apply">
+        <div class="wrap consult-grid">
+          <div class="consult-copy">
+            <span class="eyebrow">LET'S TALK</span>
+            <h2>
+              우리 아이에게 필요한
+              <br />
+              공부부터 확인하세요.
+            </h2>
+            <p>
+              학년과 지금의 고민을 알려주세요.
+              <br />
+              어디에서 막히는지 살펴보고, 아이에게 맞는 학습 방향을 함께 찾겠습니다.
+            </p>
+            <p>1주일 체험 수업으로 학습 방식이 맞는지 확인한 뒤 결정하셔도 괜찮습니다.</p>
+            <div class="contact-links">
+              <a href="tel:031-522-5431">
+                <span>전화 상담</span>
+                031-522-5431 ↗
+              </a>
+              <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">
+                <span>카카오 채널</span>
+                채팅으로 문의하기 ↗
+              </a>
+              <a href="https://blog.naver.com/perfect-math1" target="_blank" rel="noopener noreferrer">
+                <span>초등 소식</span>
+                딱풀리는수학 블로그 ↗
+              </a>
+              <a href="https://blog.naver.com/standrad-of-math" target="_blank" rel="noopener noreferrer">
+                <span>중·고등 소식</span>
+                수학의 기준 블로그 ↗
+              </a>
+            </div>
+          </div>
+          <form id="consultForm" class="consult-form">
+            <div class="form-grid">
+              <label>
+                학생 이름
+                <input name="student" placeholder="학생 이름" autocomplete="off" required />
+              </label>
+              <label>
+                학년
+                <input name="grade" placeholder="예: 초4 / 중2 / 고1" required />
+              </label>
+              <label>
+                학교명
+                <span class="note">(선택)</span>
+                <input name="school" placeholder="현재 다니는 학교" />
+              </label>
+              <label>
+                연락처
+                <input name="phone" type="tel" autocomplete="tel" placeholder="학부모 연락처" required />
+              </label>
+              <label>
+                관심 과정
+                <select name="program">
+                  <option>딱풀리는수학 진접점</option>
+                  <option>수학의 기준 진접본원</option>
+                  <option selected>상담 후 결정</option>
+                </select>
+              </label>
+              <label>
+                상담 방식
+                <select name="contact">
+                  <option>카카오톡 상담</option>
+                  <option>전화 상담</option>
+                  <option>방문 상담</option>
+                </select>
+              </label>
+              <label class="full">
+                현재 고민
+                <span class="note">(선택)</span>
+                <textarea
+                  name="message"
+                  placeholder="아이의 학습 상황이나 1주 체험 문의를 남겨주세요."
+                ></textarea>
+              </label>
+            </div>
+            <p id="consultFormNote" class="form-note" role="status" aria-live="polite">
+              입력 내용은 이 페이지에 저장되지 않습니다. 상담 문장을 복사한 뒤 카카오톡에 붙여넣어 직접 전송해
+              주세요.
+            </p>
+            <noscript>
+              <p class="form-note">
+                상담 문장 작성을 이용하려면 JavaScript가 필요합니다. 전화 또는 카카오 채널로 직접 문의해
+                주세요.
+              </p>
+            </noscript>
+            <button class="button" type="submit" disabled>상담 내용 복사하고 카카오톡 열기 ↗</button>
+            <div id="consultResult" class="message-result" hidden>
+              <label for="consultMessage">카카오톡에 보낼 상담 내용</label>
+              <textarea id="consultMessage" readonly></textarea>
+              <p class="note">
+                자동 복사가 안 되면 위 내용을 직접 선택해 복사해 주세요. 상담창이 열리지 않았다면 아래 링크를
+                이용하세요.
+              </p>
+              <a
+                class="text-link"
+                href="http://pf.kakao.com/_yWFTn/chat"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                카카오톡 상담창 열기 ↗
+              </a>
+            </div>
+          </form>
+        </div>
+      </section>
+      <section class="section" id="location">
+        <div class="wrap location">
+          <div>
+            <span class="eyebrow">COME VISIT US</span>
+            <h2>
+              가까이에서,
+              <br />
+              꼼꼼하게 함께합니다.
+            </h2>
+            <p class="location-address">
+              남양주시 진접읍 해밀예당1로 40
+              <br />
+              화성프라자 5층
+            </p>
+            <p class="lead">
+              진접 우체국과 롯데시네마 사이,
+              <br />
+              1층에 파리바게트가 있는 건물입니다.
+            </p>
+            <div class="actions">
+              <a
+                class="button outline"
+                href="https://naver.me/Gn0DQWNs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                네이버 지도에서 위치 보기 ↗
+              </a>
+            </div>
+          </div>
+          <div class="location-info">
+            <span class="eyebrow">찾아오시는 길</span>
+            <h3>
+              익숙한 동네에서 만나는
+              <br />
+              우리 아이의 수학 공부
+            </h3>
+            <div class="route">
+              <span>진접 우체국</span>
+              <span>→</span>
+              <strong>화성프라자 5층</strong>
+              <span>←</span>
+              <span>롯데시네마</span>
+            </div>
+            <p class="note">방문 전 전화 또는 카카오톡으로 상담 시간을 확인해 주세요.</p>
+            <a class="text-link" href="tel:031-522-5431">031-522-5431</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <strong>딱풀리는수학 진접점 · 수학의 기준 진접본원</strong>
+          <p>남양주시 진접읍 해밀예당1로 40 화성프라자 5층 · 031-522-5431</p>
+          <p>아이마다 다른 출발점, 끝까지 확인하는 수학.</p>
+        </div>
+        <nav class="footer-nav" aria-label="하단 메뉴">
+          <a href="./index.html">홈</a>
+          <a href="./elementary.html">초등</a>
+          <a href="./secondary.html">중·고등</a>
+          <a href="#apply">상담</a>
+        </nav>
+      </div>
+    </footer>
+    <nav class="mobile-cta" aria-label="빠른 상담">
+      <a href="tel:031-522-5431">전화 상담</a>
+      <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오 상담</a>
+      <a href="#apply">1주 체험 문의</a>
     </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-inner">
-        <div class="hero-heading">
-          <h1 class="hero-kicker">초등부터 중·고등까지, 아이에게 맞는 수학 학습 시스템</h1>
-        </div>
-        <div class="hero-choices" aria-label="초등과 중고등 수학 과정 안내">
-          <article class="hero-course-card elementary">
-            <div class="hero-course-top">
-              <div class="hero-logo-box">
-                <img src="assets/ddak-logo-name.png" alt="딱풀리는수학 진접점 로고">
-              </div>
-              <div>
-                <strong class="hero-course-brand">딱풀리는수학 진접점</strong>
-                <a class="hero-course-link" href="#ddak-elementary">초등 수학 바로가기</a>
-              </div>
-            </div>
-            <h2 class="hero-course-title">설명하는 힘, 서술형 풀이, 오답 점검 습관을 키웁니다.</h2>
-            <p class="hero-course-copy">정답만 빠르게 맞히는 공부를 넘어, 왜 그렇게 풀었는지 말하고 쓰며 스스로 점검하는 초등 수학 과정입니다.</p>
-          </article>
-          <article class="hero-course-card secondary">
-            <div class="hero-course-top">
-              <div class="hero-logo-box">
-                <img src="assets/math-standard-name.jpg" alt="수학의 기준 진접본원 로고">
-              </div>
-              <div>
-                <strong class="hero-course-brand">수학의 기준 진접본원</strong>
-                <a class="hero-course-link" href="#fliplearning">중고등 수학 바로가기</a>
-              </div>
-            </div>
-            <h2 class="hero-course-title">개념은 미리 익히고, 학원에서는 직접 풀며 실력을 만듭니다.</h2>
-            <p class="hero-course-copy">영상 개념 학습 후 학원에서는 문제풀이, 질의응답, 오답 클리닉, 재테스트를 통해 학교 시험 대비 실력을 완성합니다.</p>
-          </article>
-        </div>
-        <div class="hero-secondary-actions" aria-label="빠른 상담 연결">
-          <a class="btn primary" href="#apply">상담하기</a>
-          <a class="btn white" href="tel:031-522-5431">전화 상담하기</a>
-          <a class="btn ghost" href="#apply">1주 체험 문의하기</a>
-        </div>
+    <aside class="faq-widget" aria-label="빠른 질문">
+      <div id="faqChatbotPanel" class="faq-widget-panel" hidden>
+        <strong>어떤 과정이 궁금하신가요?</strong>
+        <a href="#faq-course">어떤 과정을 선택하면 될까요? →</a>
+        <a href="#faq-trial">등록 전에 수업을 경험해 볼 수 있나요? →</a>
+        <a href="#faq-visit">상담할 때 무엇을 준비하면 좋을까요? →</a>
+        <a href="#apply">상담으로 더 알아보기 →</a>
       </div>
-    </section>
-
-    <section class="system-intro" id="fliplearning">
-      <div class="wrap">
-        <div class="section-head">
-          <div>
-            <span class="label">FLIPPED LEARNING</span>
-            <h2 class="section-title">수학의 기준 플립러닝 수업 시스템</h2>
-          </div>
-          <p class="section-copy">모두가 같은 강의를 같은 속도로 듣는 방식보다, 학생이 실제로 막히는 부분을 바로 확인하고 교정하는 시간이 중요합니다.</p>
-        </div>
-        <div class="comparison">
-          <article class="compare-card">
-            <small>기존 학원</small>
-            <h3>강의 중심 수업</h3>
-            <p>학원에서는 강의를 듣고, 집에서는 혼자 숙제와 복습을 해야 합니다. 막히는 순간에 질문과 교정이 늦어질 수 있습니다.</p>
-            <div class="flow"><span>학원에서 강의 수강</span><span>집에서 숙제 및 복습</span></div>
-          </article>
-          <article class="compare-card highlight">
-            <small>수학의 기준</small>
-            <h3>관리형 플립러닝</h3>
-            <p>개념은 집에서 영상으로 먼저 익히고, 학원에서는 문제 풀이, 질의응답, 오답 교정에 집중합니다.</p>
-            <div class="flow"><span>집에서 개념 강의 시청</span><span>학원에서 문제 풀이 · 질문 · 오답 교정</span></div>
-          </article>
-        </div>
+      <button
+        id="faqChatbotToggle"
+        class="faq-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="faqChatbotPanel"
+      >
+        궁금한 점 있나요?
+      </button>
+    </aside>
+    <dialog id="phoneDialog" aria-labelledby="phoneTitle">
+      <div class="dialog-head">
+        <h2 id="phoneTitle">전화 상담</h2>
+        <button type="button" data-phone-close aria-label="전화 상담 닫기">×</button>
       </div>
-    </section>
-
-    <section class="process" id="process">
-      <div class="wrap">
-        <div class="section-head"><div><span class="label">5 STEP SYSTEM</span><h2 class="section-title">수업은 이렇게 진행됩니다</h2></div><p class="section-copy">혼자 문제를 푸는 시간을 학원으로 가져와, 풀이 과정과 오답 원인을 선생님이 바로 확인합니다.</p></div>
-        <div class="process-grid">
-          <article class="process-card"><b>1</b><h3>개념 강의 시청</h3><ul><li>집에서 개념 영상 시청</li><li>원하는 부분 반복 시청</li><li>개인 속도에 맞춘 학습</li></ul></article>
-          <article class="process-card"><b>2</b><h3>학원 문제 풀이</h3><ul><li>학원에 오면 바로 문제 풀이</li><li>담당 선생님이 학습 상태 확인</li><li>풀이 과정까지 점검</li></ul></article>
-          <article class="process-card"><b>3</b><h3>개별 질의응답</h3><ul><li>어디서 막혔는지 확인</li><li>정답보다 사고 과정 지도</li><li>스스로 해결하도록 유도</li></ul></article>
-          <article class="process-card"><b>4</b><h3>오답 클리닉</h3><ul><li>오답 원인 분석</li><li>풀이 과정 수정</li><li>유사 문제 재풀이</li></ul></article>
-          <article class="process-card"><b>5</b><h3>재테스트</h3><ul><li>단원 테스트</li><li>누적 테스트</li><li>학교 시험 대비 테스트</li></ul></article>
-        </div>
+      <span class="phone-number" data-phone-number>031-522-5431</span>
+      <p class="note">상담 가능 시간 13:00 ~ 22:00</p>
+      <div class="actions">
+        <button id="phoneCopyButton" class="button" type="button">전화번호 복사</button>
+        <a
+          class="button light"
+          href="http://pf.kakao.com/_yWFTn/chat"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          카카오 상담 ↗
+        </a>
       </div>
-    </section>
-
-    <section class="why"><div class="wrap why-grid"><div class="quote-panel"><div class="quote-mark">“</div><p>시험에서 점수를 결정하는 것은 강의를 몇 번 들었는가가 아니라, 문제를 얼마나 정확하게 풀 수 있는가입니다.</p></div><div class="info-card"><span class="label">WHY FLIPPED LEARNING</span><h2 class="section-title">왜 플립러닝인가요?</h2><div class="advantages"><div class="advantage">학생별 속도에 맞춘 학습</div><div class="advantage">질문과 피드백 시간 증가</div><div class="advantage">자기주도 학습 습관 형성</div><div class="advantage">학교 시험 대비에 유리</div><div class="advantage">개념 이해를 문제 해결력으로 연결</div><div class="advantage">오답과 재테스트까지 관리</div></div></div></div></section>
-
-    <section class="recommend"><div class="wrap"><div class="section-head"><div><span class="label">RECOMMENDED</span><h2 class="section-title">이런 학생에게 추천합니다</h2></div><p class="section-copy">수업을 듣는 것에서 끝나지 않고, 실제로 풀고 질문하고 고치는 과정이 필요한 학생에게 맞습니다.</p></div><div class="recommend-grid"><article class="recommend-card"><h3>학습 습관이 필요한 학생</h3><ul class="check-list"><li>수업 시간에는 이해한 것 같은데 혼자 풀면 막히는 학생</li><li>질문하는 습관이 부족한 학생</li><li>오답 정리가 잘 안 되는 학생</li></ul></article><article class="recommend-card"><h3>시험 점수로 연결이 필요한 학생</h3><ul class="check-list"><li>개념은 아는데 시험 점수로 연결되지 않는 학생</li><li>학교 시험 대비를 체계적으로 하고 싶은 학생</li><li>자기주도 학습 습관이 필요한 학생</li></ul></article></div></div></section>
-
-    <section class="middle-high" id="math-standard-secondary"><div class="wrap"><div class="section-head"><div><span class="label">MIDDLE · HIGH</span><h2 class="section-title">중고등 수학의 기준,<br>개념을 시험 점수로 연결합니다</h2></div><p class="section-copy">중고등 수학은 개념 이해만으로 끝나지 않습니다. 학교 시험에서 점수로 연결되려면 대표 유형 풀이, 오답 첨삭, 서술형 훈련, 재테스트가 필요합니다.</p></div><div class="mh-grid"><article class="mh-card"><img src="assets/math-standard-name.jpg" alt="수학의 기준 로고"><h3>수학의 기준 진접본원</h3><p>영상으로 개념을 미리 익힌 뒤 학원에서는 문제를 직접 풀고, 막히는 지점을 질문하고, 오답을 첨삭하며, 재테스트로 실제 실력까지 확인합니다.</p></article><div class="tag-grid"><div class="tag-card">학교별 시험 유형 대비</div><div class="tag-card">대표 유형 풀이</div><div class="tag-card">서술형 풀이 훈련</div><div class="tag-card">오답 첨삭</div><div class="tag-card">재풀이 및 재테스트</div><div class="tag-card">개념을 문제에 적용하는 훈련</div></div></div></div></section>
-
-    <section class="faq-section" id="faq"><div class="wrap"><div class="section-head"><div><span class="label">FAQ</span><h2 class="section-title">학부모님이 자주 묻는 질문</h2></div><p class="section-copy">영상 학습이 낯설 수 있어, 실제 수업 흐름과 관리 방식에서 가장 많이 묻는 질문을 정리했습니다.</p></div><div class="faq-list"><details open><summary>플립러닝 수업은 정확히 어떤 방식인가요?</summary><p>개념 강의는 집에서 영상으로 먼저 보고, 학원에서는 문제 풀이, 개별 질문, 오답 첨삭, 재풀이, 재테스트를 진행하는 방식입니다.</p></details><details><summary>집에서 영상을 꼭 보고 와야 하나요?</summary><p>기본적으로 수업 전 영상을 보고 오는 것을 권장합니다. 그래야 학원에서 바로 문제 풀이와 질문으로 들어갈 수 있습니다.</p></details><details><summary>영상을 못 보고 오면 어떻게 하나요?</summary><p>학원에 준비된 태블릿으로 해당 개념 영상을 먼저 시청한 뒤 필요한 문제 풀이와 질의응답을 진행합니다. 다만 영상 시청 시간이 수업 시간 안에 포함되므로 문제 풀이와 첨삭 시간이 줄어들 수 있습니다.</p></details><details><summary>영상 시청 여부를 확인할 수 있나요?</summary><p>관리자 페이지에서 학생별 로그인 시간, 영상 시청 여부, 영상 시청 시간, 학습 기록을 확인할 수 있습니다. 실제 수업 중 문제 풀이 상태도 함께 확인합니다.</p></details><details><summary>영상으로만 배우는 건 아닌가요?</summary><p>아닙니다. 영상은 개념을 익히고 반복 복습하기 위한 도구입니다. 수업의 핵심은 학원에서 진행되는 문제 풀이, 개별 질문, 오답 첨삭, 재풀이 과정입니다.</p></details><details><summary>학교 시험 대비도 가능한가요?</summary><p>가능합니다. 학교별 시험 유형, 대표 유형 풀이, 서술형 풀이, 오답 첨삭, 재테스트를 통해 개념이 시험 점수로 연결되도록 관리합니다.</p></details><details><summary>학부모는 무엇을 도와주면 좋을까요?</summary><p>영상 시청을 미리 할 수 있는 시간을 확보해 주시고, 어려웠던 부분을 질문으로 가져올 수 있도록 격려해 주시면 좋습니다.</p></details><details><summary>딱풀리는수학은 어떤 초등학생에게 잘 맞나요?</summary><p>계산은 되지만 설명이 어려운 학생, 서술형을 부담스러워하는 학생, 오답을 반복하는 학생, 배운 내용을 자기 말로 정리하는 습관이 필요한 학생에게 잘 맞습니다.</p></details></div></div></section>
-
-    <section class="elementary" id="ddak-elementary">
-      <div class="wrap">
-        <img class="program-logo" src="assets/ddak-logo-name.png" alt="딱풀리는수학 로고">
-        <div class="section-head">
-          <div>
-            <span class="label">ELEMENTARY</span>
-            <h2 class="section-title">딱풀리는수학 진접점,<br>초등 수학의 핵심은 설명하는 힘입니다</h2>
-          </div>
-          <p class="section-copy">초등 수학은 계산을 빠르게 하는 것만으로 충분하지 않습니다. 앞으로의 수학에서는 왜 그렇게 풀었는지 설명하는 힘, 풀이 과정을 글로 남기는 힘, 틀린 이유를 스스로 점검하는 힘이 중요합니다.</p>
-        </div>
-        <p class="elementary-lead">딱풀리는수학 진접점은 초등 학생이 정답만 맞히고 끝나는 공부를 넘어, 말하고 쓰고 고치는 수학 습관을 만들도록 돕습니다.</p>
-
-        <div class="elementary-block">
-          <div class="elementary-block-head">
-            <h3>왜 초등부터 설명하는 수학이 필요할까요?</h3>
-            <p>초등 시기에는 계산력뿐 아니라 문제를 읽고, 식을 세우고, 풀이 과정을 설명하는 힘이 함께 자라야 합니다. 이 습관이 잡히지 않으면 중등 이후 서술형, 응용문제, 학교 수행평가에서 어려움을 겪기 쉽습니다.</p>
-          </div>
-          <div class="elementary-point-grid">
-            <article class="elementary-point-card">계산은 되지만 설명이 안 되는 아이</article>
-            <article class="elementary-point-card">서술형 문제에서 손이 멈추는 아이</article>
-            <article class="elementary-point-card">틀린 문제를 다시 풀어도 같은 실수를 반복하는 아이</article>
-            <article class="elementary-point-card">문제를 많이 풀어도 개념이 정리되지 않는 아이</article>
-          </div>
-        </div>
-
-        <div class="elementary-block">
-          <div class="elementary-block-head">
-            <h3>딱풀리는수학은 5단계로 배운 내용을 자기 것으로 만듭니다</h3>
-          </div>
-          <div class="elementary-step-grid">
-            <article class="elementary-step-card"><b>1단계</b><h4>기억하기</h4><p>이전에 배운 내용을 떠올리며 오늘 배울 개념과 연결합니다.</p></article>
-            <article class="elementary-step-card"><b>2단계</b><h4>배우기</h4><p>새로운 개념을 이해하고, 문제를 풀기 위한 기본 원리를 익힙니다.</p></article>
-            <article class="elementary-step-card"><b>3단계</b><h4>연습하기</h4><p>개념을 문제에 적용하며 계산력과 문제 해결력을 함께 기릅니다.</p></article>
-            <article class="elementary-step-card"><b>4단계</b><h4>확인하기</h4><p>학습한 내용을 제대로 이해했는지 확인하고 부족한 부분을 점검합니다.</p></article>
-            <article class="elementary-step-card"><b>5단계</b><h4>말하기</h4><p>배운 내용을 자기 말로 설명하며 진짜 이해했는지 확인합니다.</p></article>
-          </div>
-          <p class="elementary-highlight">딱풀리는수학의 핵심은 문제를 풀고 끝나는 것이 아니라, 아이가 배운 내용을 자기 말로 설명할 수 있게 만드는 것입니다.</p>
-        </div>
-
-        <div class="elementary-block">
-          <div class="elementary-detail-grid">
-            <article class="elementary-detail-card">
-              <b>서술형 풀이</b>
-              <h4>평소 학습 안에서 자연스럽게 훈련합니다</h4>
-              <p>많은 초등학생이 서술형을 어려워하는 이유는 개념을 몰라서가 아니라 풀이 과정을 쓰는 습관이 부족하기 때문입니다. 딱풀리는수학은 문제를 풀고 끝내지 않고, 풀이 과정을 정리하고 설명하는 연습을 함께 진행합니다.</p>
-              <ul><li>식을 세우는 이유를 설명</li><li>풀이 과정을 순서대로 정리</li><li>답만 쓰는 습관에서 벗어나 과정 중심으로 학습</li><li>학교 서술형과 수행평가 대비에 도움</li></ul>
-            </article>
-            <article class="elementary-detail-card">
-              <b>오답 점검</b>
-              <h4>왜 틀렸는지 아는 것이 중요합니다</h4>
-              <p>틀린 문제를 단순히 다시 푸는 것만으로는 같은 실수를 반복하기 쉽습니다. 딱풀리는수학은 오답 원인을 확인하고, 아이가 스스로 고칠 수 있도록 점검하는 과정을 중요하게 생각합니다.</p>
-              <ul><li>개념 이해 부족</li><li>개념 적용 어려움</li><li>계산 실수</li><li>문제 조건 확인 부족</li><li>풀이 과정 누락</li></ul>
-            </article>
-            <article class="elementary-detail-card">
-              <b>스마트 노트</b>
-              <h4>배운 내용을 자기 언어로 정리합니다</h4>
-              <p>아이가 배운 개념을 자기 말로 정리해보면 무엇을 알고 있고, 어디에서 헷갈리는지가 분명해집니다. 딱풀리는수학은 학습 내용을 그냥 지나치지 않고, 아이가 스스로 정리하고 표현하는 힘을 기르도록 돕습니다.</p>
-              <ul><li>오늘 배운 개념 정리</li><li>헷갈린 부분 표시</li><li>풀이 과정 다시 확인</li><li>설명하는 습관 형성</li></ul>
-            </article>
-            <article class="elementary-detail-card">
-              <b>학습 보고서</b>
-              <h4>학부모님도 방향을 확인할 수 있습니다</h4>
-              <p>초등 학부모님들이 가장 궁금해하는 것은 “우리 아이가 정확히 어디가 약한가”입니다. 딱풀리는수학은 학습 결과를 기록으로 확인하며, 아이의 현재 상태와 보완 방향을 파악할 수 있도록 돕습니다.</p>
-              <ul><li>중간평가 보고서</li><li>단원평가 보고서</li><li>교재 마무리 보고서</li><li>메타인지 이해보고서</li><li>학습 현황과 보완점 확인</li></ul>
-            </article>
-          </div>
-          <p class="elementary-highlight">오답을 통해 아이가 자신의 약점을 발견하고, 다음 문제에서 같은 실수를 줄이는 것이 목표입니다.</p>
-        </div>
-
-        <div class="elementary-block">
-          <div class="elementary-ib-panel">
-            <h3>화봉초 IB형 수학 준비에도 필요한 학습 방향입니다</h3>
-            <p>IB형 수학에서는 정답을 맞히는 것만큼 왜 그렇게 풀었는지 설명하고, 풀이 과정을 표현하고, 자신의 생각을 점검하는 힘이 중요합니다. 딱풀리는수학은 초등 단계에서부터 말하기, 쓰기, 오답 점검 루틴을 자연스럽게 훈련할 수 있도록 돕습니다.</p>
-            <strong>선행 속도보다 중요한 것은 아이가 배운 내용을 이해하고 설명할 수 있는가입니다.</strong>
-          </div>
-        </div>
-
-        <div class="elementary-block">
-          <div class="elementary-block-head">
-            <h3>이런 초등학생에게 특히 추천합니다</h3>
-          </div>
-          <div class="elementary-check-grid">
-            <article class="elementary-check-card">계산은 빠르지만 풀이 설명이 부족한 학생</article>
-            <article class="elementary-check-card">서술형 문제를 어려워하는 학생</article>
-            <article class="elementary-check-card">문제를 읽고 식을 세우는 데 어려움이 있는 학생</article>
-            <article class="elementary-check-card">틀린 문제를 다시 풀어도 같은 실수를 반복하는 학생</article>
-            <article class="elementary-check-card">수학을 감으로 풀고 풀이 과정을 남기지 않는 학생</article>
-            <article class="elementary-check-card">중등 수학으로 넘어가기 전 학습 습관을 잡고 싶은 학생</article>
-            <article class="elementary-check-card">화봉초 IB형 수학에 맞춰 말하고 쓰는 수학을 준비하고 싶은 학생</article>
-          </div>
-        </div>
-
-        <div class="elementary-block elementary-cta">
-          <div>
-            <h3>초등 수학은 습관이 먼저입니다.</h3>
-            <p>아이가 어디에서 막히는지 확인하고, 설명하는 힘과 오답 점검 습관부터 잡아보세요.</p>
-          </div>
-          <a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">초등 상담하기</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="apply" id="apply"><div class="wrap apply-grid"><div><span class="label">CONSULTING</span><h2 class="section-title">아이 학년과 현재 고민만 남겨주세요</h2><p>어떤 부분을 먼저 잡아야 할지 상담해 드리겠습니다. 신청 내용은 자동 저장되지 않으니 카카오톡 상담창에서 한 번 더 남겨주세요.</p><div class="contact-list"><a href="tel:031-522-5431"><span>전화 상담</span><strong>031-522-5431</strong></a><a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer"><span>카카오 채널 상담</span><strong>채팅하기</strong></a><a href="https://blog.naver.com/perfect-math1" target="_blank" rel="noopener noreferrer"><span>초등 딱풀리는수학 블로그</span><strong>바로가기</strong></a><a href="https://blog.naver.com/standrad-of-math" target="_blank" rel="noopener noreferrer"><span>중·고등 수학의 기준 블로그</span><strong>바로가기</strong></a><a href="https://naver.me/Gn0DQWNs" target="_blank" rel="noopener noreferrer"><span>위치</span><strong>진접 우체국 옆 화성프라자 5층</strong></a></div></div><form id="consultForm"><label>학생 이름<input name="student" placeholder="홍길동" required></label><label>학년<input name="grade" placeholder="초4 / 중2 / 고1" required></label><label>학교명<input name="school" placeholder="화봉초 / 풍양중 / 진접고"></label><label>연락처<input name="phone" placeholder="학부모 연락처" required></label><label>관심 과정<select name="program"><option>딱풀리는수학 진접점</option><option>수학의 기준 진접본원</option><option>상담 후 결정</option></select></label><label>상담 방식<select name="contact"><option>카카오톡 상담</option><option>전화 상담</option><option>방문 상담</option></select></label><textarea name="message" placeholder="현재 고민을 적어주세요. 예: 개념은 아는데 문제 적용이 어려움, 서술형 약함, 오답 반복, 학교 시험 대비"></textarea><p class="form-note" id="consultFormNote">버튼을 누르면 입력 내용이 상담 문장으로 복사되고 카카오톡 상담창이 열립니다. 카카오톡 입력창에 붙여넣어 전송해 주세요.</p><button class="submit" type="submit">상담 내용 복사하고 카카오톡 열기</button></form></div></section>
-  </main>
-
-  <footer><div class="wrap footer-grid"><div><div class="footer-brand"><img src="assets/math-standard-name.jpg" alt="수학의 기준 로고"><span>수학의 기준 진접본원 · 딱풀리는수학 진접점</span></div><p>경기도 남양주시 진접읍 해밀예당1로 40, 진접 우체국 옆 화성프라자 5층</p></div><div><p>상담전화 031-522-5431</p><p>대상 초등 · 중등 · 고등 / 관리형 플립러닝 수학학원</p></div></div></footer>
-
-  <nav class="mobile-cta" aria-label="빠른 상담"><a href="tel:031-522-5431">전화상담</a><a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오상담</a><a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">체험문의</a></nav>
-
-  <div class="phone-modal-backdrop" id="phoneModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="phoneModalTitle" hidden><div class="phone-modal"><button class="phone-modal-close" type="button" aria-label="닫기" data-phone-modal-close>&times;</button><h2 class="phone-modal-title" id="phoneModalTitle">전화 상담</h2><strong class="phone-modal-number">031-522-5431</strong><p class="phone-modal-time"><span>상담 가능 시간</span>13:00 ~ 22:00</p><div class="phone-modal-actions"><button class="phone-copy-button" type="button" id="phoneCopyButton">전화번호 복사</button><a class="phone-kakao-link" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오 채널 상담</a></div><p class="phone-copy-feedback" id="phoneCopyFeedback" aria-live="polite"></p></div></div>
-
-  <div class="exit-offer-backdrop" id="exitOfferBackdrop" role="dialog" aria-modal="true" aria-labelledby="exitOfferTitle" hidden><div class="exit-offer-modal"><button class="exit-offer-close" type="button" aria-label="닫기" data-exit-offer-close>&times;</button><p class="exit-offer-eyebrow">나가기 전 10초 체크</p><h2 class="exit-offer-title" id="exitOfferTitle">잠깐만요, 우리 아이가 막히는 지점을 먼저 확인해보세요</h2><p class="exit-offer-copy">등록을 바로 결정하지 않아도 괜찮습니다. 학년과 현재 고민만 남겨주시면 플립러닝 수업과 초등 설명식 학습 중 어떤 관리가 필요한지 안내드리겠습니다.</p><div class="exit-offer-actions"><a class="exit-offer-primary" href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer" data-exit-offer-action>카카오톡으로 상담하기</a><a class="exit-offer-phone" href="tel:031-522-5431" data-exit-offer-action>전화상담</a><button class="exit-offer-later" type="button" data-exit-offer-close>괜찮아요, 나중에 볼게요</button></div></div></div>
-
-  <aside class="faq-chatbot" id="faqChatbot" aria-label="학원 FAQ 챗봇"><div class="faq-chatbot-panel" id="faqChatbotPanel" hidden><div class="faq-chatbot-head"><strong>학원 수업 방식이 궁금하신가요?</strong><span>자주 묻는 질문을 누르면 바로 답변이 표시됩니다.</span></div><div class="faq-chatbot-body"><button class="faq-question is-active" type="button" data-answer="flip">플립러닝은 어떻게 진행되나요?</button><button class="faq-question" type="button" data-answer="video">영상을 못 보고 오면요?</button><button class="faq-question" type="button" data-answer="elementary">초등은 무엇을 중점으로 하나요?</button><button class="faq-question" type="button" data-answer="test">학교 시험 대비도 가능한가요?</button><div class="faq-answer" id="faqAnswer">개념은 집에서 영상으로 먼저 익히고, 학원에서는 문제 풀이, 질문, 오답 첨삭, 재테스트에 집중합니다.</div></div><div class="faq-chatbot-actions"><a href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오상담</a><a href="tel:031-522-5431">전화상담</a></div></div><button class="faq-chatbot-toggle" type="button" id="faqChatbotToggle" aria-expanded="false" aria-controls="faqChatbotPanel"><span class="faq-chatbot-dot" aria-hidden="true"></span>학원 문의</button></aside>
-
-  <script>
-    (function () {
-      var form = document.getElementById("consultForm");
-      var note = document.getElementById("consultFormNote");
-      var kakaoUrl = "http://pf.kakao.com/_yWFTn/chat";
-      if (!form) return;
-      function valueOf(name) {
-        var field = form.elements[name];
-        return field && field.value ? field.value.trim() : "";
-      }
-      function buildConsultMessage() {
-        return [
-          "[수학의 기준/딱풀리는수학 상담 신청]",
-          "학생 이름: " + valueOf("student"),
-          "학년: " + valueOf("grade"),
-          "학교명: " + (valueOf("school") || "미입력"),
-          "연락처: " + valueOf("phone"),
-          "관심 과정: " + valueOf("program"),
-          "상담 방식: " + valueOf("contact"),
-          "현재 고민: " + (valueOf("message") || "미입력")
-        ].join("\n");
-      }
-      function fallbackCopy(text) {
-        var textarea = document.createElement("textarea");
-        textarea.value = text;
-        textarea.setAttribute("readonly", "");
-        textarea.style.position = "fixed";
-        textarea.style.top = "-9999px";
-        document.body.appendChild(textarea);
-        textarea.select();
-        textarea.setSelectionRange(0, textarea.value.length);
-        var copied = false;
-        try { copied = document.execCommand("copy"); } catch (error) {}
-        document.body.removeChild(textarea);
-        return copied;
-      }
-      async function copyText(text) {
-        if (navigator.clipboard && window.isSecureContext) {
-          try { await navigator.clipboard.writeText(text); return true; } catch (error) {}
-        }
-        return fallbackCopy(text);
-      }
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        var message = buildConsultMessage();
-        var copyResult = copyText(message);
-        window.open(kakaoUrl, "_blank", "noopener,noreferrer");
-        copyResult.then(function (copied) {
-          if (!note) return;
-          note.textContent = copied
-            ? "상담 내용이 복사되었습니다. 카카오톡 상담창이 열리면 입력창에 붙여넣고 전송해 주세요."
-            : "자동 복사가 제한되었습니다. 입력하신 내용을 직접 복사해 카카오톡 상담창에 남겨주세요.";
-        });
-      });
-    })();
-    (function () {
-      var backdrop = document.getElementById("phoneModalBackdrop");
-      var copyButton = document.getElementById("phoneCopyButton");
-      var feedback = document.getElementById("phoneCopyFeedback");
-      var phoneNumber = "031-522-5431";
-      var mobileMedia = window.matchMedia ? window.matchMedia("(max-width: 768px)") : null;
-      if (!backdrop) return;
-      function isMobilePhone() {
-        return mobileMedia ? mobileMedia.matches : window.innerWidth <= 768;
-      }
-      function showPhoneModal() {
-        backdrop.hidden = false;
-        backdrop.classList.add("is-visible");
-        if (feedback) feedback.textContent = "";
-      }
-      function closePhoneModal() {
-        backdrop.classList.remove("is-visible");
-        backdrop.hidden = true;
-      }
-      function fallbackCopy(text) {
-        var textarea = document.createElement("textarea");
-        textarea.value = text;
-        textarea.setAttribute("readonly", "");
-        textarea.style.position = "fixed";
-        textarea.style.top = "-9999px";
-        document.body.appendChild(textarea);
-        textarea.select();
-        textarea.setSelectionRange(0, textarea.value.length);
-        var copied = false;
-        try { copied = document.execCommand("copy"); } catch (error) {}
-        document.body.removeChild(textarea);
-        return copied;
-      }
-      async function copyPhoneNumber() {
-        var copied = false;
-        if (navigator.clipboard && window.isSecureContext) {
-          try {
-            await navigator.clipboard.writeText(phoneNumber);
-            copied = true;
-          } catch (error) {}
-        }
-        if (!copied) copied = fallbackCopy(phoneNumber);
-        if (feedback) feedback.textContent = copied ? "전화번호가 복사되었습니다." : "복사가 제한되었습니다. 번호를 직접 선택해 복사해 주세요.";
-      }
-      document.querySelectorAll('a[href="tel:031-522-5431"]').forEach(function (link) {
-        link.addEventListener("click", function (event) {
-          if (isMobilePhone()) return;
-          event.preventDefault();
-          showPhoneModal();
-        });
-      });
-      if (copyButton) copyButton.addEventListener("click", copyPhoneNumber);
-      backdrop.addEventListener("click", function (event) {
-        if (event.target === backdrop || event.target.hasAttribute("data-phone-modal-close")) closePhoneModal();
-      });
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") closePhoneModal();
-      });
-    })();
-    (function () {
-      var backdrop = document.getElementById("exitOfferBackdrop");
-      if (!backdrop) return;
-      var shown = false;
-      var mobileBackGuardArmed = false;
-      function isMobileViewport() { return window.matchMedia ? window.matchMedia("(max-width: 768px)").matches : window.innerWidth <= 768; }
-      function isOfferVisible() { return !backdrop.hidden && backdrop.classList.contains("is-visible"); }
-      function showOffer() { if (shown || isOfferVisible()) return false; shown = true; backdrop.hidden = false; backdrop.classList.add("is-visible"); return true; }
-      function closeOffer() { backdrop.classList.remove("is-visible"); backdrop.hidden = true; }
-      function handleDesktopExitIntent(event) {
-        if (isMobileViewport()) return;
-        if (event.clientY <= 8) showOffer();
-      }
-      function armMobileBackGuard() {
-        if (!isMobileViewport() || mobileBackGuardArmed || shown || !window.history || !window.history.pushState) return;
-        try {
-          if (!window.history.state || !window.history.state.exitOfferPage) {
-            window.history.replaceState({ exitOfferPage: true }, "", window.location.href);
-          }
-          window.history.pushState({ exitOfferGuard: true }, "", window.location.href);
-          mobileBackGuardArmed = true;
-        } catch (error) {}
-      }
-      document.addEventListener("mouseout", function (event) { if (event.relatedTarget === null) handleDesktopExitIntent(event); });
-      document.addEventListener("pointerout", function (event) { if (event.relatedTarget === null) handleDesktopExitIntent(event); });
-      document.documentElement.addEventListener("mouseleave", handleDesktopExitIntent);
-      window.addEventListener("popstate", function () {
-        if (!isMobileViewport() || !mobileBackGuardArmed) return;
-        if (showOffer()) { mobileBackGuardArmed = false; armMobileBackGuard(); return; }
-        mobileBackGuardArmed = false;
-        window.history.back();
-      });
-      armMobileBackGuard();
-      window.addEventListener("pageshow", armMobileBackGuard);
-      window.addEventListener("resize", armMobileBackGuard);
-      document.addEventListener("touchstart", armMobileBackGuard, { once: true, passive: true });
-      backdrop.addEventListener("click", function (event) { if (event.target === backdrop || event.target.hasAttribute("data-exit-offer-close") || event.target.hasAttribute("data-exit-offer-action")) closeOffer(); });
-      document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeOffer(); });
-    })();
-    (function () {
-      var chatbot = document.getElementById("faqChatbot");
-      var toggle = document.getElementById("faqChatbotToggle");
-      var panel = document.getElementById("faqChatbotPanel");
-      var answerBox = document.getElementById("faqAnswer");
-      if (!chatbot || !toggle || !panel || !answerBox) return;
-      var hero = document.querySelector(".hero");
-      var mobileMedia = window.matchMedia("(max-width: 900px)");
-      var answers = { flip: "개념은 집에서 영상으로 먼저 익히고, 학원에서는 문제 풀이, 질문, 오답 첨삭, 재테스트에 집중합니다.", video: "영상을 못 보고 온 경우 학원 태블릿으로 먼저 시청한 뒤 수업에 참여할 수 있습니다. 다만 문제 풀이와 첨삭 시간이 줄어들 수 있어 미리 보고 오는 것을 권장합니다.", elementary: "딱풀리는수학은 설명하는 힘, 서술형 풀이, 오답 원인 점검, 스마트 노트 정리를 중심으로 초등 수학 습관을 만듭니다.", test: "학교별 시험 유형, 대표 유형 풀이, 서술형 훈련, 오답 첨삭, 재테스트를 통해 시험 대비까지 관리합니다." };
-      function syncHeroVisibility() {
-        if (!hero) return;
-        var hideInHero = mobileMedia.matches && window.scrollY < hero.offsetTop + hero.offsetHeight - 120;
-        chatbot.classList.toggle("is-hero-hidden", hideInHero);
-      }
-      function setOpen(open) { chatbot.classList.toggle("is-open", open); panel.hidden = !open; toggle.setAttribute("aria-expanded", String(open)); }
-      toggle.addEventListener("click", function () { setOpen(!chatbot.classList.contains("is-open")); });
-      chatbot.addEventListener("click", function (event) { var question = event.target.closest("[data-answer]"); if (!question) return; chatbot.querySelectorAll(".faq-question").forEach(function (button) { button.classList.toggle("is-active", button === question); }); answerBox.textContent = answers[question.getAttribute("data-answer")]; });
-      document.addEventListener("keydown", function (event) { if (event.key === "Escape") setOpen(false); });
-      window.addEventListener("scroll", syncHeroVisibility, { passive: true });
-      window.addEventListener("resize", syncHeroVisibility);
-      if (mobileMedia.addEventListener) mobileMedia.addEventListener("change", syncHeroVisibility);
-      syncHeroVisibility();
-    })();
-  </script>
-</body>
+      <p id="phoneCopyFeedback" class="note" role="status" aria-live="polite"></p>
+    </dialog>
+  <dialog id="exitOfferDialog" class="exit-offer" aria-labelledby="exitOfferTitle" aria-describedby="exitOfferCopy"><div class="dialog-head"><span class="tag">가시기 전, 잠깐만요</span><button type="button" data-exit-close aria-label="상담 안내 닫기" autofocus>×</button></div><h2 id="exitOfferTitle">우리 아이가 막히는 지점, 함께 찾아볼까요?</h2><p id="exitOfferCopy" class="exit-offer-copy">초등 개별 맞춤 수학부터 중·고등 내신까지. 학년과 지금의 고민을 알려주시면 아이에게 맞는 학습 방향을 안내하겠습니다.</p><p class="note">바로 등록하지 않으셔도 괜찮습니다.<br>진단 상담과 1주 체험부터 문의해 주세요.</p><div class="actions"><a class="button yellow" data-exit-consult href="#apply">우리 아이 상담·1주 체험 문의 →</a><a class="button light" data-exit-chat href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener noreferrer">카카오톡으로 바로 상담하기 ↗</a></div><button type="button" class="exit-later" data-exit-close>괜찮아요, 더 둘러볼게요</button></dialog>
+  </body>
 </html>

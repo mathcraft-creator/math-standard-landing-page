@@ -1,0 +1,44 @@
+body {
+  --accent: #866000;
+  --tint: #fff7d9;
+}
+.page-hero {
+  background: linear-gradient(130deg, #fff7da, #fffdf5);
+}
+.page-hero h1 em {
+  color: #927000;
+  font-style: normal;
+}
+.hero-aside {
+  border-color: #eddda9;
+}
+.hero-aside .tag {
+  background: #ffec9d;
+}
+.level-panel {
+  border-top: 4px solid #e8ba35;
+}
+.level-panel:nth-child(2) {
+  border-top-color: #c88f17;
+}
+.level-panel:nth-child(3) {
+  border-top-color: #866000;
+}
+.level-panel .level-en {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.level-panel h3 {
+  font-size: 28px;
+}
+.elementary-band {
+  background: #fff9e9;
+}
+.elementary-band .callout {
+  background: #ffefaf;
+}
+.report-grid strong {
+  color: #795500;
+}
