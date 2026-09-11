@@ -129,3 +129,13 @@
 - 포함: 3페이지, 사진·공통 자산, 이탈 팝업, Vercel 설정, 계획·작업 기록, 테스트·검수 이미지.
 - 제외: .vercel 로컬 연결 정보 및 환경 파일. main 병합 없이 작업 브랜치를 푸시한다.
 - 커밋 전 Node 검사 12/12 PASS 및 git diff --check 통과.
+
+## 2026-09-11 커밋·푸시 확인
+
+- 사용자 요청: GitHub에 커밋 및 푸시.
+- 시작 시 작업 트리는 깨끗했으며, 로컬과 GitHub의 feat/three-page-landing은 모두 6317079로 일치했습니다.
+- 변경 파일: WORKLOG.md에 이번 확인 결과를 추가했습니다.
+- 기본 검사: node --test tests/*.test.cjs, 12/12 PASS.
+- 상위 공통 품질 검사: 종료 코드 0. school_exam_webapp_v2_4 부재 SKIP, somclass 소스·doGet PASS, 구조 문자 균형 WARN. 사이트 동작 검사 결과와는 별개입니다.
+- 사이트 소스 변경이 없어 브라우저 검수는 다시 실행하지 않았습니다.
+- 이 기록을 작업 브랜치에 커밋하고 origin/feat/three-page-landing으로 푸시합니다. 남은 구현 작업은 추가하지 않았습니다.
