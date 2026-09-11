@@ -1,0 +1,7 @@
+# Only website files are uploaded. Keep plans, reviews and work copies local.
+/*
+!index.html
+!elementary.html
+!secondary.html
+!assets
+!vercel.json

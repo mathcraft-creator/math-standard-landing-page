@@ -1,0 +1,82 @@
+body {
+  --accent: #1455d9;
+  --tint: #edf3ff;
+}
+.page-hero {
+  background: linear-gradient(125deg, #071b42, #12376e);
+  color: #fff;
+}
+.page-hero .eyebrow {
+  color: #aac8ff;
+}
+.page-hero .lead,
+.page-hero .breadcrumb {
+  color: #d0ddf0;
+}
+.page-hero h1 em {
+  font-style: normal;
+  color: #ffdb5b;
+}
+.page-hero .hero-aside {
+  background: #ffffff0e;
+  border-color: #ffffff30;
+  color: #fff;
+}
+.page-hero .hero-aside dt {
+  color: #b8cbe6;
+}
+.page-hero .hero-aside dl div {
+  border-color: #ffffff30;
+}
+.page-hero .hero-aside .tag {
+  background: #ffffff1c;
+  color: #dae7ff;
+}
+.page-hero .note {
+  color: #c4d3ea;
+}
+.learning-home {
+  background: #f5f7fb;
+}
+.learning-academy {
+  background: #0a2455;
+  color: #fff;
+  border-color: #0a2455;
+}
+.learning-academy p,
+.learning-academy .bullets li {
+  color: #d2def1;
+}
+.learning-academy .tag {
+  background: #ffda52;
+  color: #13243e;
+}
+.learning-academy .bullets li:before {
+  background: #ffda52;
+}
+.school-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--blue);
+  margin-top: 14px;
+}
+.case-flow {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.case-flow div {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.case-flow strong {
+  display: block;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.secondary-band {
+  background: #f1f5fc;
+}
