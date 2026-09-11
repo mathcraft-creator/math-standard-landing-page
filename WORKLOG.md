@@ -148,3 +148,12 @@
 - node --test tests/*.test.cjs: 12/12 PASS. git diff --check origin/main...HEAD 통과.
 - 브라우저 검수는 재실행하지 않았으며 기존 구현 검수 기록을 PR에 구분해 기재합니다. 상위 공통 품질 검사는 같은 세션의 직전 실행 결과(종료 코드 0, 기존 SKIP/WARN)를 참고합니다.
 - PR 범위: 메인·초등·중고등 페이지 분리, 공통 상담·FAQ와 이탈 안내, 자산·테스트·배포 설정 및 문서. 병합은 수행하지 않습니다.
+
+## 2026-09-11 PR 병합 및 검색 노출 점검
+
+- 사용자 요청에 따라 PR #1을 main에 병합했습니다. 병합 커밋: 5bc9f4f4b583dd8414062e54ae07e678ee4789bd. 로컬 main도 origin/main으로 fast-forward했습니다.
+- 변경 파일: WORKLOG.md에 병합 결과와 검색 점검을 기록했습니다. 사이트 기능·검색 설정·Vercel 재배포는 이번 요청에서 변경하지 않았습니다.
+- 공개 URL 점검: 메인·초등·중고등 모두 HTTP 200, 응답 X-Robots-Tag 및 HTML noindex 미발견. robots.txt와 sitemap.xml은 HTTP 404입니다. 실제 검색엔진 색인 여부는 확인하지 않았습니다.
+- 소스에는 페이지별 제목·설명·canonical이 있습니다. 향후 robots.txt와 sitemap.xml을 추가한다면 .vercelignore 허용 목록에도 포함해야 합니다.
+- 남은 제안: 검색 파일 준비 및 배포, Google Search Console·네이버 서치어드바이저 소유 확인과 사이트맵 제출, 검색 수집 상태 확인. 검색 노출을 보장하거나 완료로 기록하지 않습니다.
+- 검증 근거: 같은 세션 PR 준비 시 Node 검사 12/12 PASS 및 diff 검사 통과. 이번 병합 후 브라우저 검수는 재실행하지 않았습니다. 상위 공통 품질 검사는 직전 실행 결과(종료 코드 0, 기존 SKIP/WARN)를 참고합니다.
