@@ -1,5 +1,52 @@
 # 작업 기록 및 인계
 
+## 2026-09-11 검색 설정 커밋·푸시
+
+- 사용자 요청으로 배포된 검색 설정과 관련 문서를 main에 커밋하고 origin/main으로 푸시합니다.
+- 포함 파일: index.html의 Google·최신 네이버 인증 태그, robots.txt, sitemap.xml, .vercelignore, README.md, docs/search-registration.md, docs/2026-09-07-content-and-pages-plan.md, WORKLOG.md.
+- 커밋 전 Node 12/12 PASS, git diff --check 통과. 상위 공통 품질 검사는 종료 코드 0, 기존 SKIP/WARN 동일.
+- 앞선 기록의 미커밋 상태는 이 작업으로 정리합니다. 남은 작업은 사용자 계정에서 소유 확인·사이트맵 제출 및 색인 확인입니다.
+
+## 2026-09-11 네이버 인증 태그 교체
+
+- 사용자 요청에 따라 index.html의 네이버 인증값을 171a5a6dcfe42518d66f36ee407638acb8c02e42로 교체했습니다. 변경 파일은 index.html과 WORKLOG.md입니다.
+- Vercel production 배포 완료: dpl_D3B8hRqUV6PjmU2pcBz3gtNrmAG7 (READY), https://math-standard-landing-page.vercel.app.
+- 검증: Node 12/12 PASS, git diff --check 통과. 공개 메인 200, head의 새 네이버 태그·이전 값 제거·기존 Google 태그 보존 확인 PASS.
+- 상위 공통 품질 검사 종료 코드 0, 기존 SKIP/WARN 동일. 화면·동작 변경이 없어 브라우저 검수는 재실행하지 않았습니다.
+- 남은 작업: 사용자 네이버 소유 확인 및 사이트맵 제출. 이번 변경은 CLI로 배포했으며 Git 커밋·푸시는 수행하지 않았습니다.
+
+## 2026-09-11 네이버 소유 확인 태그 배포
+
+- 사용자 제공 네이버 메타태그를 index.html의 head에 추가했습니다. 기존 Google 태그를 유지했습니다.
+- 변경 파일: index.html, README.md, docs/search-registration.md, docs/2026-09-07-content-and-pages-plan.md, WORKLOG.md.
+- 기존 팀을 명시한 Vercel CLI 명령으로 production 배포 완료: dpl_64wGtNb2oqDT923bB3dmsdz9fGGn (READY), https://math-standard-landing-page.vercel.app.
+- 검증: Node 12/12 PASS, git diff --check 통과. 공개 홈페이지 HTTP 200 및 head 내 정확한 네이버·Google 인증 태그 확인 PASS. robots.txt·sitemap.xml HTTP 200.
+- 상위 공통 품질 검사 종료 코드 0: 기존 school_exam_webapp_v2_4 부재 SKIP, somclass 소스·doGet PASS, 구조 문자 균형 WARN. 화면·동작 변경이 없어 브라우저 검수는 재실행하지 않았습니다.
+- 남은 작업: 사용자 계정에서 양쪽 소유 확인·사이트맵 제출 및 색인 상태 확인. 이번 변경의 Git 커밋·푸시는 수행하지 않았습니다.
+
+## 2026-09-11 Google 소유 확인 태그 및 검색 파일 배포
+
+- 사용자 제공 Google 메타태그를 index.html의 head에 적용했습니다. 채팅의 마크다운 이스케이프 역슬래시를 제외하고 실제 값의 밑줄을 보존했습니다.
+- 기존 로컬 robots.txt, sitemap.xml, .vercelignore 변경을 함께 production에 배포했습니다. README, 검색 등록 안내, 계획서와 이 기록에 현재 상태를 반영했습니다.
+- 최초 배포는 Not authorized로 실패했으나 로그인 및 기존 팀·프로젝트 조회 확인 후 `npx --yes vercel@59.11.7 deploy --prod --yes --scope standard-of-math-s-projects`로 성공했습니다.
+- Deployment: dpl_2soLPzp4EE4F5v8cgdHghwDCZDeU, READY/production. 공개 주소: https://math-standard-landing-page.vercel.app.
+- 검증: Node 12/12 PASS, git diff --check 통과. 공개 메인 200 및 head 내 정확한 Google 태그 확인 PASS, robots.txt·sitemap.xml·초등·중고등 200. 공개 사이트맵 XML 파싱·URL 3개 및 robots의 사이트맵 참조 확인 PASS.
+- 공개 검증 첫 시도는 PowerShell HOME 읽기 전용 변수명 충돌로 실행 오류가 났으며, 전용 변수명으로 변경해 재실행한 위 결과를 최종 근거로 사용했습니다.
+- 상위 공통 품질 검사 종료 코드 0, 기존 SKIP/WARN 동일. 화면·상담 동작 변경이 없어 브라우저 검수는 재실행하지 않았습니다.
+- 남은 작업: 사용자 Google 소유 확인 및 사이트맵 제출, 네이버 인증 태그 전달·적용·배포 및 네이버 계정 확인·제출. 검색 색인 완료를 의미하지 않습니다. 이번 변경은 CLI로 배포했으며 Git 커밋·푸시는 수행하지 않았습니다.
+
+## 2026-09-11 검색 노출 로컬 준비 완료
+
+- 사용자 요청: 현재 로컬에서 가능한 검색 준비를 먼저 적용하고 직접 해야 할 일 안내.
+- 변경 파일: robots.txt, sitemap.xml, .vercelignore, README.md, docs/search-registration.md, docs/2026-09-07-content-and-pages-plan.md, WORKLOG.md.
+- robots.txt는 전체 수집 허용 및 사이트맵 위치를 안내합니다. 사이트맵에는 기존 canonical과 같은 메인·초등·중고등 3개 URL만 포함하며, 두 파일을 Vercel 업로드 허용 목록에 추가했습니다.
+- README의 병합 전 브랜치 설명을 갱신하고, 검색 등록 안내에 Google URL 접두어·HTML 태그와 네이버 HTML 태그 발급, 배포, 소유 확인, 사이트맵 및 개별 URL 제출 순서를 기록했습니다.
+- 검증: node --test tests/*.test.cjs 12/12 PASS. .NET XML 파싱, 3개 URL과 HTML canonical 일치, 두 검색 파일의 배포 목록 포함, robots의 사이트맵 주소 확인 PASS. git diff --check 통과.
+- 상위 공통 품질 검사 종료 코드 0: school_exam_webapp_v2_4 부재 SKIP, somclass 소스·doGet PASS, 기존 구조 문자 균형 WARN.
+- HTML/CSS/JS와 상담·이동 동작을 변경하지 않아 브라우저 검수는 재실행하지 않았습니다. 검색 파일은 로컬 검증이며 공개 배포 결과를 의미하지 않습니다.
+- 이번 변경은 로컬에만 준비했습니다. 커밋·푸시·재배포·검색엔진 제출은 수행하지 않았습니다.
+- 남은 작업: 사용자가 Google·네이버에서 발급한 실제 인증 태그 전달 → index.html에 태그 적용 및 배포 → 공개 파일 확인 → 사용자 계정에서 소유 확인·사이트맵 제출·색인 상태 확인.
+
 ## 현재 상태 — 2026-09-07
 
 ### 이탈 상담 안내 복원

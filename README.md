@@ -61,6 +61,15 @@ node tests/browser-check.cjs
 
 위 경로는 이번 작업 환경의 도구 위치입니다. 다른 환경에서는 설치한 Playwright 모듈 경로로 바꾸거나, 모듈이 검색 가능한 경우 환경변수 없이 실행합니다. 검사 스크립트는 임시 로컬 서버를 열고 종료하며 상담 전송을 가로채 실제 메시지를 보내지 않습니다.
 
-현재 작업 브랜치는 `feat/three-page-landing`입니다. Vercel production 배포 완료: https://math-standard-landing-page.vercel.app
+PR #1은 `main`에 병합했습니다. 기존 Vercel production 주소: https://math-standard-landing-page.vercel.app
 
-각 페이지의 canonical·공유 URL을 설정했습니다. Vercel에는 로컬 파일을 CLI로 배포했습니다. GitHub 작업 브랜치는 `feat/three-page-landing`입니다. 재배포: `npx --yes vercel@59.11.7 deploy --prod --yes`. `.vercelignore`가 사이트 파일만 업로드하도록 제한합니다.
+각 페이지의 canonical·공유 URL을 설정했습니다. Vercel에는 로컬 파일을 CLI로 배포했습니다. 재배포: `npx --yes vercel@59.11.7 deploy --prod --yes`. `.vercelignore`가 사이트 파일과 검색 파일만 업로드하도록 제한합니다.
+
+## 검색 노출 준비
+
+2026-09-11 `robots.txt`, `sitemap.xml`, Google·네이버 소유 확인 태그를 production에 배포하고 공개 응답을 확인했습니다. 사용자 계정에서 양쪽 소유 확인·사이트맵 제출을 진행해야 합니다. 자세한 순서는 [검색엔진 등록 안내](docs/search-registration.md)를 참고합니다. 배포 시 팀 권한 오류가 나면 기존 명령에 `--scope standard-of-math-s-projects`를 명시합니다.
+
+- 사이트맵은 기존 canonical과 같은 메인·초등·중고등 3개 주소만 포함합니다.
+- robots.txt는 검색로봇의 접근을 허용하고 사이트맵 위치를 안내합니다. 특정 AI 학습 로봇에 대한 별도 차단 정책은 추가하지 않았습니다.
+- `.vercelignore`에 두 파일을 포함했습니다. 소유 확인은 HTML 메타태그 방식을 사용하면 별도 인증 파일의 배포 누락을 피할 수 있습니다.
+- 도메인을 바꾸면 3페이지의 canonical·og:url, robots.txt의 사이트맵 주소, sitemap.xml의 주소를 함께 수정합니다.
