@@ -139,3 +139,12 @@
 - 상위 공통 품질 검사: 종료 코드 0. school_exam_webapp_v2_4 부재 SKIP, somclass 소스·doGet PASS, 구조 문자 균형 WARN. 사이트 동작 검사 결과와는 별개입니다.
 - 사이트 소스 변경이 없어 브라우저 검수는 다시 실행하지 않았습니다.
 - 이 기록을 작업 브랜치에 커밋하고 origin/feat/three-page-landing으로 푸시합니다. 남은 구현 작업은 추가하지 않았습니다.
+
+## 2026-09-11 main 대상 PR 준비
+
+- 사용자 요청: feat/three-page-landing에서 main으로 PR 생성.
+- 기존 열린 PR이 없음을 GitHub에서 확인했습니다.
+- 변경 파일: WORKLOG.md에 PR 준비 및 검증 결과를 기록했습니다.
+- node --test tests/*.test.cjs: 12/12 PASS. git diff --check origin/main...HEAD 통과.
+- 브라우저 검수는 재실행하지 않았으며 기존 구현 검수 기록을 PR에 구분해 기재합니다. 상위 공통 품질 검사는 같은 세션의 직전 실행 결과(종료 코드 0, 기존 SKIP/WARN)를 참고합니다.
+- PR 범위: 메인·초등·중고등 페이지 분리, 공통 상담·FAQ와 이탈 안내, 자산·테스트·배포 설정 및 문서. 병합은 수행하지 않습니다.
