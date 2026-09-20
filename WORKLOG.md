@@ -1,5 +1,16 @@
 # 작업 기록 및 인계
 
+## 2026-09-20 SEO/AEO 구조화 데이터 보강
+
+- 원격 main과 로컬 기준을 비교해 기존 정적 HTML 본문, 페이지별 title·description·canonical, robots.txt, sitemap.xml, 검색엔진 소유 확인 태그가 유지되고 있음을 확인했습니다.
+- 메인·초등·중고등 페이지에 한국어 공유 메타(og:locale, og:site_name, Twitter 카드)와 JSON-LD를 추가했습니다. 공통 교육기관·지역·연락처 정보, 페이지별 WebPage, 실제 본문과 일치하는 FAQPage, 상세 페이지 BreadcrumbList를 포함합니다.
+- 허위 평점·리뷰·성적·가격·운영시간은 구조화 데이터에 넣지 않았습니다. 공통 학원은 모든 페이지에서 동일한 `/#academy` @id와 주소·전화번호를 사용하고, 초등·중고등 브랜드는 parentOrganization으로 연결했습니다. 학교명은 제휴로 오해될 수 있는 areaServed에서 제외하고 실제 본문에만 유지했습니다.
+- llms.txt에 주요 공개 페이지와 확인 가능한 학원 정보를 정리하고 .vercelignore 배포 허용 목록에 추가했습니다. llms.txt는 AI 검색 순위를 보장하는 요소가 아니라 공개 콘텐츠 탐색을 돕는 보조 안내 파일입니다.
+- tests/seo-structure.test.cjs를 추가해 canonical, 공유 메타, JSON-LD 파싱·타입, 화면 FAQ와 구조화 FAQ의 일치, robots·sitemap·llms.txt URL 및 배포 포함 여부를 검사합니다.
+- 검증: 새 테스트 RED 4건을 확인한 뒤 구현했고, 전체 Node 테스트 16/16 PASS 및 git diff --check 통과를 확인했습니다. 화면 본문·CSS·JavaScript를 변경하지 않아 브라우저 시각 회귀 검사는 생략했습니다.
+- 이번 작업은 로컬 변경만 수행했습니다. 커밋·GitHub 푸시·Vercel 배포·검색엔진 제출은 수행하지 않았습니다.
+- 남은 운영 작업: 변경 검토 후 커밋·푸시·배포, 공개 URL의 JSON-LD·llms.txt 응답 확인, Google Search Console·네이버 서치어드바이저에서 사이트맵 제출과 수집·색인 상태 확인.
+
 ## 2026-09-11 검색 설정 커밋·푸시
 
 - 사용자 요청으로 배포된 검색 설정과 관련 문서를 main에 커밋하고 origin/main으로 푸시합니다.
