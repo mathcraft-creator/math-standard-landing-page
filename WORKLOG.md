@@ -1,5 +1,20 @@
 # 작업 기록 및 인계
 
+## 2026-09-21 SEO/GEO 커밋·푸시·Production 검증
+
+- 사이트 변경 커밋: `4e1b29542b485cbb1a5afbf7abb91f24886a3a1a` (`feat: add structured SEO and AI discovery metadata`). 요청된 7개 파일, 455 insertions를 포함했습니다.
+- `origin/main`을 `47d9858`에서 `4e1b295`로 일반 fast-forward push했습니다. force push·amend·기존 이력 변경은 수행하지 않았습니다.
+- GitHub push 후 자동배포가 생성되지 않아 기존 `standard-of-math-s-projects/math-standard-landing-page` 연결을 확인하고 Vercel CLI로 Production 배포했습니다.
+- Vercel deployment: `dpl_J6C91ZtDWSyj8DaHBoFZ7nn2URwe`, READY. 배포 URL `https://math-standard-landing-page-4iero4c6v.vercel.app`을 고정 Production URL `https://math-standard-landing-page.vercel.app`에 alias한 상태를 확인했습니다.
+- 실제 HTTP 검증: 메인·초등·중고등·llms.txt·robots.txt·sitemap.xml 모두 200. 세 HTML의 title, description, canonical, Open Graph, Twitter, H1, noindex 부재, JSON-LD를 확인했습니다.
+- JSON-LD는 각 페이지 1개 블록 모두 파싱 성공했습니다. 공통 `/#academy` 엔터티와 초등·중고등 브랜드의 parentOrganization 연결도 Production 응답에서 확인했습니다.
+- llms.txt는 `text/plain; charset=utf-8`의 실제 파일이며 HTML fallback이 아닙니다. robots.txt와 충돌하지 않고 canonical URL 3개를 포함합니다.
+- 존재하지 않는 `/__seo-validation-not-found-20260920`은 실제 HTTP 404를 반환해 soft 404가 아님을 확인했습니다.
+- 검증: Node 17/17 PASS, SEO 구조 테스트 5/5 PASS, `git diff --check` 통과.
+- P0/P1 문제 없음. P2: GitHub push 자동배포가 생성되지 않아 이번에는 수동 CLI 배포가 필요했습니다. 설정은 변경하지 않았습니다.
+- 상세 보고서: `.seo/reports/production-validation.md`.
+- 남은 외부 확인: Google Search Console, 네이버 서치어드바이저, Google Rich Results Test, Schema.org Validator, 실제 검색·AI 검색 노출 상태.
+
 ## 2026-09-20 SEO/AEO 구조화 데이터 보강
 
 - 원격 main과 로컬 기준을 비교해 기존 정적 HTML 본문, 페이지별 title·description·canonical, robots.txt, sitemap.xml, 검색엔진 소유 확인 태그가 유지되고 있음을 확인했습니다.
