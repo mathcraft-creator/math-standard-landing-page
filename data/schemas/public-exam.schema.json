@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://math-standard-landing-page.vercel.app/data/schemas/public-exam.schema.json",
+  "title": "Public exam analysis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "examId",
+    "school",
+    "academicYear",
+    "grade",
+    "semester",
+    "examType",
+    "subject",
+    "summary",
+    "questionFormat",
+    "units",
+    "difficulty",
+    "calculatedMetrics",
+    "analysis",
+    "recommendations",
+    "provenance"
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0" },
+    "examId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "school": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string", "minLength": 1 }
+      }
+    },
+    "academicYear": { "type": "integer", "minimum": 2000 },
+    "grade": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "semester": { "type": "integer", "enum": [1, 2] },
+    "examType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "sourceLabel"],
+      "properties": {
+        "id": { "type": "string", "enum": ["midterm", "final"] },
+        "name": { "type": "string", "minLength": 1 },
+        "sourceLabel": { "type": "string", "minLength": 1 }
+      }
+    },
+    "subject": { "type": "string", "const": "수학" },
+    "summary": { "$ref": "#/$defs/observedSummary" },
+    "questionFormat": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "$ref": "#/$defs/countAndScore" }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/unitMetric" }
+    },
+    "difficulty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "disclosure", "method", "criteria", "levels"],
+      "properties": {
+        "classification": { "const": "Academy Analysis" },
+        "disclosure": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "minLength": 1 },
+        "criteria": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/difficultyCriterion" }
+        },
+        "levels": {
+          "type": "array",
+          "minItems": 3,
+          "items": { "$ref": "#/$defs/difficultyMetric" }
+        }
+      }
+    },
+    "calculatedMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "questionPercentageDecimals",
+        "scorePercentageDecimals",
+        "roundingPolicy"
+      ],
+      "properties": {
+        "classification": { "const": "Structured / Calculated Data" },
+        "questionPercentageDecimals": { "type": "integer", "const": 1 },
+        "scorePercentageDecimals": { "type": "integer", "const": 0 },
+        "roundingPolicy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "analysis": { "$ref": "#/$defs/textCollection" },
+    "recommendations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "items"],
+      "properties": {
+        "classification": { "const": "Recommendation" },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "analysisMethod",
+        "analysisDate",
+        "publicDataGeneratedAt",
+        "reviewedAt",
+        "reviewedBy",
+        "humanReviewed",
+        "sourceVerification"
+      ],
+      "properties": {
+        "analysisMethod": { "type": "string", "minLength": 1 },
+        "analysisDate": { "type": "string", "format": "date" },
+        "publicDataGeneratedAt": { "type": "string", "format": "date" },
+        "reviewedAt": { "type": "string", "format": "date" },
+        "reviewedBy": { "type": "string", "minLength": 1 },
+        "humanReviewed": { "const": true },
+        "sourceVerification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "structuredDataReviewed",
+            "reportReviewed",
+            "originalExamPdfReviewed",
+            "originalExamPdfSha256"
+          ],
+          "properties": {
+            "structuredDataReviewed": { "type": "boolean" },
+            "reportReviewed": { "type": "boolean" },
+            "originalExamPdfReviewed": { "const": true },
+            "originalExamPdfSha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "observedSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalQuestions", "totalScore", "classification"],
+      "properties": {
+        "totalQuestions": { "type": "integer", "minimum": 1 },
+        "totalScore": { "type": "integer", "minimum": 1 },
+        "classification": { "const": "Observed Fact" }
+      }
+    },
+    "countAndScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "questions", "score", "classification"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "questions": { "type": "integer", "minimum": 0 },
+        "score": { "type": "integer", "minimum": 0 },
+        "classification": { "const": "Observed Fact" }
+      }
+    },
+    "unitMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "questions",
+        "questionPercentage",
+        "score",
+        "scorePercentage",
+        "classification"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+        "name": { "type": "string", "minLength": 1 },
+        "questions": { "type": "integer", "minimum": 0 },
+        "questionPercentage": { "type": "number", "minimum": 0, "maximum": 100 },
+        "score": { "type": "integer", "minimum": 0 },
+        "scorePercentage": { "type": "number", "minimum": 0, "maximum": 100 },
+        "classification": { "const": "Structured / Calculated Data" }
+      }
+    },
+    "difficultyMetric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "questions", "questionPercentage"],
+      "properties": {
+        "id": { "type": "string", "enum": ["high", "medium", "low"] },
+        "name": { "type": "string", "enum": ["상", "중", "하"] },
+        "questions": { "type": "integer", "minimum": 0 },
+        "questionPercentage": { "type": "number", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "difficultyCriterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "definition"],
+      "properties": {
+        "id": { "type": "string", "enum": ["high", "medium", "low"] },
+        "name": { "type": "string", "enum": ["상", "중", "하"] },
+        "definition": { "type": "string", "minLength": 1 }
+      }
+    },
+    "textCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["classification", "summary"],
+      "properties": {
+        "classification": { "const": "Academy Analysis" },
+        "summary": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

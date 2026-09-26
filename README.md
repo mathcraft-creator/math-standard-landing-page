@@ -30,6 +30,9 @@ Start-Process (Join-Path (Get-Location) 'index.html')
 - `assets/site.css`, `assets/site.js`: 공통 스타일·상담·전화·FAQ 기능.
 - `assets/elementary.css`, `assets/secondary.css`: 과정별 스타일.
 - `assets/elementary-portrait.png`, `assets/secondary-portrait.png`: 사용자가 제공한 첫 번째·두 번째 사진의 원본 복사본.
+- `schools/pungyang-middle/index.html`: 풍양중 수학 시험·내신 정보 School Hub.
+- `exams/pungyang-middle/2026-g3-s1-final/index.html`: 2026학년도 풍양중 3학년 1학기 기말고사 분석.
+- `data/exams/pungyang-middle/2026-g3-s1-final.json`: 원본 대조를 마친 공개 시험 집계 데이터.
 - `outputs/`: 별도 출력 사본. 현재 소스와 구분하고 배포 경로 확인 없이 동시 수정하지 않습니다.
 - `work/`: 기존 작업용 자산.
 - `docs/2026-09-07-content-and-pages-plan.md`: 이후 수정의 기준이 되는 프로젝트 내부 계획서.
@@ -69,7 +72,7 @@ PR #1은 `main`에 병합했습니다. 기존 Vercel production 주소: https://
 
 2026-09-11 `robots.txt`, `sitemap.xml`, Google·네이버 소유 확인 태그를 production에 배포하고 공개 응답을 확인했습니다. 사용자 계정에서 양쪽 소유 확인·사이트맵 제출을 진행해야 합니다. 자세한 순서는 [검색엔진 등록 안내](docs/search-registration.md)를 참고합니다. 배포 시 팀 권한 오류가 나면 기존 명령에 `--scope standard-of-math-s-projects`를 명시합니다.
 
-- 사이트맵은 기존 canonical과 같은 메인·초등·중고등 3개 주소만 포함합니다.
+- 사이트맵은 메인·초등·중고등과 풍양중 School Hub·시험 분석의 canonical 5개 주소를 포함합니다.
 - robots.txt는 검색로봇의 접근을 허용하고 사이트맵 위치를 안내합니다. 특정 AI 학습 로봇에 대한 별도 차단 정책은 추가하지 않았습니다.
 - `.vercelignore`에 두 파일을 포함했습니다. 소유 확인은 HTML 메타태그 방식을 사용하면 별도 인증 파일의 배포 누락을 피할 수 있습니다.
 - 도메인을 바꾸면 3페이지의 canonical·og:url, robots.txt의 사이트맵 주소, sitemap.xml의 주소를 함께 수정합니다.

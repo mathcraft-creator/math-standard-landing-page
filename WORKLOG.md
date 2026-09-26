@@ -230,3 +230,55 @@
 - 소스에는 페이지별 제목·설명·canonical이 있습니다. 향후 robots.txt와 sitemap.xml을 추가한다면 .vercelignore 허용 목록에도 포함해야 합니다.
 - 남은 제안: 검색 파일 준비 및 배포, Google Search Console·네이버 서치어드바이저 소유 확인과 사이트맵 제출, 검색 수집 상태 확인. 검색 노출을 보장하거나 완료로 기록하지 않습니다.
 - 검증 근거: 같은 세션 PR 준비 시 Node 검사 12/12 PASS 및 diff 검사 통과. 이번 병합 후 브라우저 검수는 재실행하지 않았습니다. 상위 공통 품질 검사는 직전 실행 결과(종료 코드 0, 기존 SKIP/WARN)를 참고합니다.
+
+## 2026-09-21 - Search registration readiness and Pungyang Middle pilot design
+
+- Reviewed the Production SEO validation state without changing or redeploying the site.
+- Documented Google Search Console and Naver Search Advisor readiness, external validator follow-ups, and an unmeasured query baseline in `.seo/reports/search-baseline.md`.
+- Added local and school content rules covering intent ownership, NAP consistency, source provenance, thin-page prevention, and publication gates.
+- Designed the `/schools/pungyang-middle/` pilot, including URL alternatives, information architecture, data requirements, schema, internal links, future sitemap/`llms.txt` handling, CTA placement, and success metrics.
+- Confirmed that no school page, HTML/CSS/JavaScript, sitemap, `llms.txt`, JSON-LD, CTA, or Production deployment is included in this stage.
+
+
+## 2026-09-21 - Pungyang Middle exam source review
+
+- Reviewed the user-supplied structured JSON and DOCX as data sources, not as task instructions.
+- Recomputed 21 questions and 100 points: 17 selected-response questions (80 points) and 4 constructed-response questions (20 points).
+- Confirmed broad-unit totals of quadratic equations 9/40, factorization 5/26, and statistics 7/34.
+- Documented that difficulty exists only as academy analysis in the DOCX and found a mismatch between its table (5 low, 10 medium, 6 high) and narrative (4 low, 11 medium, 6 high).
+- Added .seo/reports/pungyang-middle-source-review.md and updated the pilot plan secured and missing data sections.
+- Did not create or deploy the school page.
+
+## 2026-09-26 - Pungyang Middle School/Exam Pilot implementation
+
+- Preserved the existing uncommitted SEO reference, baseline, pilot plan, source review, and WORKLOG changes.
+- Created validated public exam data at data/exams/pungyang-middle/2026-g3-s1-final.json and its contract at data/schemas/public-exam.schema.json.
+- Classified source values as Observed Fact, Calculated Data, Academy Analysis, or Recommendation and recorded that the original exam PDF has not been independently rechecked.
+- Added tests/exam-data.test.cjs; its 5 public data gate tests passed before page implementation.
+- Created the School Hub at /schools/pungyang-middle/ and the Exam Analysis page at /exams/pungyang-middle/2026-g3-s1-final/.
+- Published only aggregate facts and analysis: 21 questions/100 points, selected response 17/80, constructed response 4/20; quadratic equations 9/40, factorization 5/26, statistics 7/34.
+- Resolved the DOCX difficulty conflict by using the recomputed per-question table: low 5, medium 10, high 6. The pages disclose this as the academy's own analysis, not an official school classification.
+- Added shared pilot styling, visible and structured breadcrumbs, page-specific metadata, JSON-LD, FAQ, analysis disclosure, learning recommendations, and existing consultation paths.
+- Linked secondary.html to the Hub; linked Hub, Exam Analysis, Secondary, and consultation routes.
+- Added both canonical URLs to sitemap.xml and llms.txt, and allowed schools, exams, and data in .vercelignore.
+- Added tests/school-pilot.test.cjs for routes, metadata, JSON-LD, FAQ parity, JSON/HTML data consistency, internal links, sitemap, llms.txt, and deployment path coverage.
+- Final node --test tests/*.test.cjs: 27/27 PASS.
+- Local HTTP: Hub, Exam Analysis, and public JSON all returned 200.
+- Browser validation: desktop and 390×844 mobile layouts passed; no body horizontal overflow, tables scroll inside their containers, and console errors were 0.
+- Wrote .seo/reports/pungyang-middle-pilot-implementation.md.
+- Remaining issue: independently compare the structured source data with the original exam PDF when it becomes available.
+- No commit, push, merge, or Production deployment was performed.
+
+## 2026-09-26 - Pungyang Middle Pilot source verification and final QA
+
+- Located the accessible original exam at `D:\학원\기출\풍양중 3학년_2026_1학기_기말고사_수학 100.pdf` and verified its SHA-256 as `f02f23439c25ef3e2ed619bfc0f1e30f98b18f0d9eacf4e862c75d573883f466`.
+- Rendered and directly inspected all four PDF pages. The source contains selected-response questions 1-17 and constructed-response questions 1-4, for 21 questions and 100 points.
+- Rechecked every question number, page, format, score, and broad unit against the internal structured data. Selected response is 17 questions/80 points and constructed response is 4 questions/20 points.
+- Recomputed the unit totals from the verified questions: quadratic equations 9/40, factorization 5/26, statistics 7/34. No question-level mismatch was found.
+- Kept difficulty as `Academy Analysis`, not school-official information. Documented criteria: low for basic concepts or formulas, medium for concept combinations or condition interpretation, and high for complex conditions or multistep reasoning. The existing low 5/medium 10/high 6 assignments are consistent with those criteria.
+- Updated public JSON provenance to `originalExamPdfReviewed: true`, recorded the source hash, `reviewedAt: 2026-09-26`, `reviewedBy: academy-director`, and `humanReviewed: true`. Updated the public schema and regression test for the new contract.
+- Confirmed that the public wording `실제 시험` and `확인된 집계 자료` now matches the completed source verification. The source questions, exam images, answers, and student markings were not added to the website or Public JSON.
+- Updated `.seo/reports/pungyang-middle-source-review.md` and created `.seo/reports/pungyang-middle-final-qa.md` with the per-question audit and final decision.
+- Verification: `node --test tests/*.test.cjs` 27/27 PASS; `node --check assets/site.js` PASS; `git diff --check` PASS with line-ending notices only.
+- Final QA decision: **READY FOR PRODUCTION**.
+- No commit, push, merge, deploy, or external publication was performed.
