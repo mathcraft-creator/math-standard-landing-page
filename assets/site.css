@@ -364,6 +364,10 @@ select:focus-visible {
   transform: translateY(-4px);
   box-shadow: 0 22px 44px #112e5724;
 }
+.course-card:focus-visible {
+  outline: 4px solid #176bff;
+  outline-offset: 4px;
+}
 .course-card.elementary {
   background: #fff0b6;
   border: 1px solid #efd993;
@@ -441,20 +445,62 @@ select:focus-visible {
 }
 .course-button {
   margin-top: auto;
-  padding-top: 26px;
-  display: flex;
+  min-height: 52px;
+  padding: 9px 10px 9px 18px;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
+  align-self: flex-start;
+  gap: 12px;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px #071a3c2e;
+  font-size: 15px;
   font-weight: 900;
+  line-height: 1.25;
+  white-space: nowrap;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+.course-card.elementary .course-button {
+  background: #102e69;
+  color: #fff;
+}
+.course-card.secondary .course-button {
+  background: #ffd65a;
+  color: #071a3c;
 }
 .course-button .arrow {
-  width: 32px;
-  height: 32px;
-  border: 1px solid currentColor;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border: 1px solid #ffffff70;
   border-radius: 50%;
   display: grid;
   place-items: center;
+  background: #ffffff18;
+  font-size: 17px;
+  transition:
+    transform 0.2s,
+    background 0.2s;
+}
+.course-card.secondary .course-button .arrow {
+  border-color: #071a3c38;
+  background: #071a3c0d;
+}
+.course-card:hover .course-button,
+.course-card:focus-visible .course-button {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 28px #071a3c40;
+}
+.course-card:hover .course-button .arrow,
+.course-card:focus-visible .course-button .arrow {
+  transform: translate(3px, -3px);
+  background: #ffffff30;
+}
+.course-card.secondary:hover .course-button .arrow,
+.course-card.secondary:focus-visible .course-button .arrow {
+  background: #071a3c1a;
 }
 .course-portrait {
   position: absolute;
@@ -1114,13 +1160,27 @@ dialog::backdrop {
   .course-logo img {
     width: 132px;
   }
+  .course-button {
+    min-height: 48px;
+    max-width: calc(100vw - 88px);
+    padding: 8px 9px 8px 14px;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .course-button .arrow {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    font-size: 15px;
+  }
   .course-portrait {
     width: 47%;
-    height: 86%;
+    height: calc(86% - 72px);
+    bottom: 72px;
   }
   .course-card.secondary .course-portrait {
     width: 47%;
-    height: 85%;
+    height: calc(85% - 72px);
   }
   .home-under {
     gap: 14px;
@@ -1357,5 +1417,13 @@ dialog::backdrop {
   *:after {
     transition: none !important;
     animation: none !important;
+  }
+  .course-card:hover,
+  .course-card:focus-visible,
+  .course-card:hover .course-button,
+  .course-card:focus-visible .course-button,
+  .course-card:hover .course-button .arrow,
+  .course-card:focus-visible .course-button .arrow {
+    transform: none;
   }
 }

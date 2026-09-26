@@ -37,3 +37,14 @@ test('home course links contain the correctly assigned portraits', () => {
     assert.ok(!card[0].includes('target="_blank"'));
   }
 });
+
+test('home course CTAs have prominent and accessible visual states', () => {
+  const css = fs.readFileSync(path.join(root, 'assets/site.css'), 'utf8');
+  assert.match(css, /\.course-card\.elementary \.course-button\s*{[^}]*background:\s*#102e69;[^}]*color:\s*#fff;/s);
+  assert.match(css, /\.course-card\.secondary \.course-button\s*{[^}]*background:\s*#ffd65a;[^}]*color:\s*#071a3c;/s);
+  assert.match(css, /\.course-card:focus-visible\s*{[^}]*outline:/s);
+  assert.match(css, /\.course-card:(?:hover|focus-visible) \.course-button \.arrow\s*{[^}]*transform:/s);
+  assert.match(css, /@media \(max-width: 767px\)[\s\S]*?\.course-button\s*{[^}]*font-size:/s);
+  assert.match(css, /@media \(max-width: 767px\)[\s\S]*?\.course-portrait\s*{[^}]*bottom:\s*72px;/s);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\)[\s\S]*?\.course-button/s);
+});

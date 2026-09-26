@@ -298,3 +298,14 @@
 - Verified eight unique internal targets from secondary.html, the School Hub, and Exam Analysis; all returned HTTP 200.
 - Confirmed that problem text, OCR text, exam images, and representative raw-question phrases are absent from the Production HTML and public JSON.
 - This deployment record is committed separately as documentation; the release commit was not amended.
+
+## 2026-09-27 - 메인 과정 카드 CTA 강조
+
+- 메인 페이지의 `초등 수업 자세히 보기`, `중·고등 수업 자세히 보기`를 카드 배경과 대비되는 채움형 버튼으로 강화했습니다.
+- 초등 CTA는 남색 배경과 흰색 글자, 중·고등 CTA는 노란색 배경과 남색 글자를 적용하고 크기, 안쪽 여백, 그림자를 확대했습니다.
+- 카드 hover 및 키보드 focus에서 버튼과 화살표가 반응하도록 했으며, 명확한 focus outline과 `prefers-reduced-motion` 처리를 추가했습니다.
+- 767px 이하에서 버튼 크기와 글자 크기를 조정하고 인물 이미지 하단을 CTA 위로 정렬했습니다. 실제 브라우저에서 데스크톱, 390×844, 320×720 화면을 확인했으며 가로 넘침이나 CTA·인물 겹침 없이 표시됩니다.
+- 기존 카드 전체 링크, CTA 문구, 링크 목적지, 인물 이미지와 다른 페이지의 버튼은 변경하지 않았습니다.
+- `tests/site-structure.test.cjs`에 CTA 색상, focus, interaction, mobile, reduced-motion 스타일 계약 테스트를 추가했습니다. 구현 전 예상 실패와 구현 후 5/5 PASS를 확인했습니다.
+- 변경 파일: `assets/site.css`, `tests/site-structure.test.cjs`, `docs/superpowers/plans/2026-09-27-home-course-cta-emphasis.md`, `WORKLOG.md`.
+- 검증: `node --test tests/*.test.cjs` 28/28 PASS, `node --check assets/site.js` PASS, `git diff --check` PASS.
