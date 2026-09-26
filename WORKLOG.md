@@ -282,3 +282,19 @@
 - Verification: `node --test tests/*.test.cjs` 27/27 PASS; `node --check assets/site.js` PASS; `git diff --check` PASS with line-ending notices only.
 - Final QA decision: **READY FOR PRODUCTION**.
 - No commit, push, merge, deploy, or external publication was performed.
+
+## 2026-09-26 - Pungyang Middle Pilot Production deployment
+
+- Release commit: `a56a9ff09aa379f0db20807eb5045a8a9b61f365` (`feat: publish Pungyang Middle School exam analysis pilot`), 20 files and 2,370 insertions/1 deletion.
+- Pushed local `main` to `origin/main` by normal fast-forward from `09b8812` to `a56a9ff`. No force push, amend, rebase, or history rewrite was used.
+- Checked the existing Vercel project after the GitHub push. No automatic deployment was created, so the previously verified CLI method was used without changing the Git connection.
+- Vercel Production deployment: `dpl_3ZaZTZPWdzA1SM98QbyqxKtJgauM`, READY. Deployment URL: `https://math-standard-landing-page-bj2xl3w6c.vercel.app`; fixed Production alias: `https://math-standard-landing-page.vercel.app`.
+- Production HTTP 200: School Hub, Exam Analysis, public JSON, sitemap.xml, llms.txt, and secondary.html.
+- School Hub metadata: title, description, canonical, noindex absence, visible Breadcrumb, FAQ 5개, and JSON-LD `WebPage`, `Thing`, `EducationalOrganization`, `LocalBusiness`, `BreadcrumbList`, `FAQPage` all verified.
+- Exam Analysis metadata: title, description, canonical, noindex absence, visible Breadcrumb, and JSON-LD `WebPage`, `Article`, `EducationalOrganization`, `LocalBusiness`, `BreadcrumbList` all verified. The Article publisher and both pages reference the stable `/#academy` entity.
+- Production HTML and public JSON match: total 21/100; selected response 17/80; constructed response 4/20; quadratic equations 9/40; factorization 5/26; statistics 7/34; difficulty low 5, medium 10, high 6.
+- Difficulty remains `Academy Analysis`. Production HTML and JSON both state that it is the academy's own analysis and not the school's official classification.
+- sitemap.xml contains the five unique canonical URLs, including the School Hub and Exam Analysis. llms.txt contains both Pilot URLs and responds as `text/plain`.
+- Verified eight unique internal targets from secondary.html, the School Hub, and Exam Analysis; all returned HTTP 200.
+- Confirmed that problem text, OCR text, exam images, and representative raw-question phrases are absent from the Production HTML and public JSON.
+- This deployment record is committed separately as documentation; the release commit was not amended.
