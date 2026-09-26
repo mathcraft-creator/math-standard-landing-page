@@ -309,3 +309,11 @@
 - `tests/site-structure.test.cjs`에 CTA 색상, focus, interaction, mobile, reduced-motion 스타일 계약 테스트를 추가했습니다. 구현 전 예상 실패와 구현 후 5/5 PASS를 확인했습니다.
 - 변경 파일: `assets/site.css`, `tests/site-structure.test.cjs`, `docs/superpowers/plans/2026-09-27-home-course-cta-emphasis.md`, `WORKLOG.md`.
 - 검증: `node --test tests/*.test.cjs` 28/28 PASS, `node --check assets/site.js` PASS, `git diff --check` PASS.
+- 디자인 문서 커밋: `57a976d7c9beb8ea0b1ddff7c5ab3725e132a524` (`docs: define home course CTA emphasis`). 구현 커밋: `0d25d73a54d8114b0c91dac6c91cb8a9ff52f7c4` (`feat: emphasize home course detail links`).
+- 로컬 `main`의 두 커밋을 `origin/main`에 일반 push했습니다. force push, amend, rebase, history rewrite는 사용하지 않았습니다.
+- GitHub push 후 새 Vercel 자동 배포가 생성되지 않아 Git 연결을 변경하지 않고 기존 검증된 CLI 방식으로 Production 배포했습니다.
+- Vercel Production deployment: `dpl_GMhmNh2qfm35qpeTLkAv1PwnPrbA`, READY. Deployment URL: `https://math-standard-landing-page-8a6cyrhyq.vercel.app`; fixed Production alias: `https://math-standard-landing-page.vercel.app`.
+- Production에서 메인, `assets/site.css`, 초등, 중·고등 URL이 모두 HTTP 200이고 CTA 문구와 링크 목적지가 정확한 것을 확인했습니다.
+- Production 계산 스타일은 데스크톱에서 초등 CTA 남색/흰색, 중·고등 CTA 노란색/남색, 높이 54px입니다. 390px 모바일에서는 두 CTA 모두 13px/48px이며 가로 넘침과 인물 이미지 겹침이 없습니다.
+- Production CSS의 keyboard focus, hover arrow, mobile sizing, portrait separation, reduced-motion 규칙을 확인했습니다.
+- 이 배포 기록은 release commit을 amend하지 않고 별도 documentation commit으로 남깁니다.
