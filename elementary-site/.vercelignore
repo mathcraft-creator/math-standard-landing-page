@@ -1,0 +1,8 @@
+# Independent elementary deployment root. Templates/config are local instructions.
+/*
+!index.html
+!assets
+!robots.txt
+!sitemap.xml
+!llms.txt
+!vercel.json

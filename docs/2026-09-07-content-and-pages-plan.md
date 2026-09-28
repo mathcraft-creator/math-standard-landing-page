@@ -225,3 +225,16 @@ index.html — 메인
 - [x] 실제 네이버 인증 태그 수령·적용 및 배포, 공개 태그 확인.
 - [ ] 계정에서 Google·네이버 소유 확인·사이트맵 제출.
 - [ ] 각 검색엔진 보고서에서 수집·색인 상태 확인.
+
+## 16. 사용자 후속 요청: 두 브랜드 독립 사이트 PHASE 1 (2026-09-29)
+
+이전의 통합 메인 + 2개 상세 페이지 방향은 이번 요청으로 변경한다. 기존 Production URL과 풍양중 Pilot을 보호하면서, 로컬 루트는 중·고등 메인으로, `elementary-site/`는 독립 초등 document root로 준비했다. 기존 elementary/secondary URL은 유지하며 301은 적용하지 않았다.
+
+- [x] 중·고등 루트 전환, 기존 인증·stable entity ID 유지.
+- [x] 초등 독립 자산·상담·검색 파일 준비. 실제 URL은 PENDING PRODUCTION URL.
+- [x] 기존 테스트 목적 유지, 분리 회귀검사 및 두 독립 서버 브라우저 검증.
+- [x] 기존 Production·Pilot 원본 보호, PHASE 1 보고서 및 WORKLOG 기록.
+- [ ] 사용자 PHASE 2 승인 및 초등 실제 URL 확정.
+- [ ] 신규 프로젝트/검색 등록·legacy 중복 처리·배포. 이 항목은 이번 작업에서 실행하지 않는다.
+
+세부 사항은 [이번 계획](2026-09-29-site-split-phase1-plan.md) 및 [검증 보고서](../.seo/reports/site-split-phase1.md)에 기록한다.

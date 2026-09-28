@@ -8,7 +8,7 @@ const baseUrl = 'https://math-standard-landing-page.vercel.app';
 const pages = [
   ['index.html', `${baseUrl}/`],
   ['elementary.html', `${baseUrl}/elementary.html`],
-  ['secondary.html', `${baseUrl}/secondary.html`],
+  ['secondary.html', `${baseUrl}/`],
 ];
 
 function read(file) {
@@ -45,7 +45,9 @@ for (const [page, canonical] of pages) {
     const html = read(page);
     assert.match(html, new RegExp(`<link rel="canonical" href="${canonical.replaceAll('.', '\\.') }"`));
     assert.match(html, /<meta property="og:locale" content="ko_KR"/);
-    assert.match(html, /<meta property="og:site_name" content="딱풀리는수학 진접점 · 수학의 기준 진접본원"/);
+    const siteName = page === 'elementary.html' ? '딱풀리는수학 진접점 · 수학의 기준 진접본원' : '수학의 기준 진접본원';
+    assert.ok(html.includes(`<meta property="og:site_name" content="${siteName}"`));
+    assert.ok(html.includes(`<meta property="og:url" content="${canonical}"`));
     assert.match(html, /<meta name="twitter:card" content="summary"/);
     assert.match(html, /<meta name="twitter:title" content="[^"]+"/);
     assert.match(html, /name="twitter:description"\s+content="[^"]+"/);
@@ -90,7 +92,12 @@ test('academy entities use one stable parent and explicit brand relationships', 
     const parent = items.find((item) => item['@id'] === academyId);
     assert.ok(parent, `${page}: stable academy entity is required`);
     for (const [key, value] of Object.entries(expectedParent)) {
-      assert.deepEqual(parent[key], value, `${page}: academy ${key} must stay consistent`);
+      const expected = key === 'name' && page !== 'elementary.html' ? '수학의 기준 진접본원' : value;
+      assert.deepEqual(parent[key], expected, `${page}: academy ${key} must stay consistent`);
+    }
+    if (page !== 'elementary.html') {
+      assert.equal(parent.alternateName, expectedParent.name, 'preserve the historic umbrella identity');
+      assert.deepEqual(parent.sameAs, ['https://blog.naver.com/standrad-of-math']);
     }
   }
 
@@ -113,11 +120,14 @@ test('crawler discovery files match deployed canonical URLs', () => {
   const vercelIgnore = read('.vercelignore');
 
   assert.match(robots, new RegExp(`Sitemap: ${baseUrl.replaceAll('.', '\\.')}/sitemap\\.xml`));
-  for (const [, canonical] of pages) {
+  const canonicals = [`${baseUrl}/`, `${baseUrl}/schools/pungyang-middle/`, `${baseUrl}/exams/pungyang-middle/2026-g3-s1-final/`];
+  for (const canonical of canonicals) {
     assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), canonical);
     assert.ok(llms.includes(canonical), canonical);
   }
-  assert.match(llms, /딱풀리는수학 진접점/);
+  const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  assert.deepEqual(sitemapUrls, canonicals);
+  assert.doesNotMatch(llms, /딱풀리는수학 진접점|elementary\.html|secondary\.html/);
   assert.match(llms, /수학의 기준 진접본원/);
   assert.match(vercelIgnore, /!llms\.txt/);
 });

@@ -317,3 +317,34 @@
 - Production 계산 스타일은 데스크톱에서 초등 CTA 남색/흰색, 중·고등 CTA 노란색/남색, 높이 54px입니다. 390px 모바일에서는 두 CTA 모두 13px/48px이며 가로 넘침과 인물 이미지 겹침이 없습니다.
 - Production CSS의 keyboard focus, hover arrow, mobile sizing, portrait separation, reduced-motion 규칙을 확인했습니다.
 - 이 배포 기록은 release commit을 amend하지 않고 별도 documentation commit으로 남깁니다.
+
+## 2026-09-29 - 두 브랜드 독립 사이트 PHASE 1 로컬 구현·검증
+
+- 사용자 요청 범위: PHASE 1만 수행. 기존 Production 주소·풍양중 Pilot·Google/Naver 인증 보호. commit/push/merge, 프로젝트 생성, Preview/Production 배포, redirect, 계정 설정 변경은 수행하지 않았습니다.
+- 시작 상태: `main`, clean working tree. HEAD/main/origin/main=`db4ea58d4ac7413b066ed7891285675ef37b7cda`. 실제 원격 main도 read-only `git ls-remote`로 동일함을 확인했습니다. 로컬 작업 branch는 `site-split-phase1`이며 HEAD는 그대로입니다.
+- `index.html`을 기존 secondary 콘텐츠 기반의 수학의 기준 진접본원 중·고등 메인으로 전환했습니다. 학교별 내신·상담·풍양중 Hub 링크를 유지하고 통합 과정 선택을 제거했습니다.
+- `secondary.html`은 삭제하지 않고 canonical/OG를 기존 대표 루트로 통일했습니다. `elementary.html`은 바이트 그대로 유지했습니다. 초등 전환 링크는 신규 URL 확정 전까지 실제 기존 elementary 주소를 사용합니다.
+- `elementary-site/`에 초등 HTML, 필요한 CSS/JS/로고 복사본, 별도 robots/llms/SEO 설정 및 sitemap template을 만들었습니다. 초등→중·고등 링크는 기존 Production 루트입니다. 상위 root asset 의존성은 없습니다.
+- 초등 실제 주소는 **PENDING PRODUCTION URL**입니다. canonical/og:url 및 절대 entity URL을 추측하지 않았고 임시 noindex/robots 차단을 넣었습니다. 신규 인증 태그도 만들지 않았습니다.
+- 중·고등 sitemap은 로컬에서 root+두 Pilot의 3개 대표 URL로 정리했고 llms에서 초등 primary 안내를 분리했습니다. 기존 robots.txt 및 vercel.json/.vercel 연결은 변경하지 않았습니다.
+- `.vercelignore`에 초등 폴더 명시 제외를 추가하고 초등에는 별도 allowlist를 두었습니다. gitignore 해석 라이브러리로 기존 root 21개/초등 root 9개 런타임 파일 포함과 상위/내부 파일 제외를 검증했습니다. Vercel 실제 업로드/HTTP 비노출 확인은 PHASE 2 항목입니다.
+- 보호 대상 26개 파일(schools/exams/data/schema, 기존 assets, elementary legacy, 기존 Pilot/data/interaction 테스트 및 기존 .seo 보고서 등)의 SHA-256이 전부 일치합니다. 풍양중 공개 Hub/시험분석/JSON은 HTTP 200이며 현재 로컬 보호 원본과도 바이트 일치합니다. 공개 메인은 여전히 기존 통합 메인입니다.
+- baseline은 요청서 예상 27개가 아닌 실제 28/28 PASS였습니다. 기존 검증 목적을 유지하며 통합 메인/SEO 기대값을 분리 구조에 맞춰 갱신했고, 초등 standalone 검사 1개와 분리 검사 8개를 추가해 **37/37 PASS**입니다. Pilot/data/interaction 테스트 파일은 수정하지 않았습니다.
+- Playwright/Edge: 두 독립 HTTP document root에서 6개 경로 × 360/390/768/1440px, 이미지/링크/가로 넘침/새로고침/뒤로가기/FAQ/전화/상담 복사 성공·실패/no-JS/이탈 팝업/상대 경로 검수 PASS. page/console error 0, 실패 응답 0. 실제 상담 전송은 가로챘습니다. hero와 모바일 브랜드 링크 화면을 직접 확인했습니다.
+- 작업 도중 PowerShell ASCII pipe로 새 한글 문자열이 손상된 것을 UTF-8 전달로 수정하고 회귀 검사를 추가했습니다. 가상 clock과 scroll 이벤트 타이밍 차이는 브라우저 QA의 이벤트 대기로 해결했으며 사이트 JS 원본은 수정하지 않았습니다.
+- `node --check`(기존/초등 JS 및 QA), 양쪽 sitemap XML/template 파싱, 6개 HTML JSON-LD 파싱, `git diff --check` PASS. 상위 `.hermes/scripts/run_quality_checks.ps1`은 이 작업공간에 없어 SKIP이며 PASS로 기록하지 않았습니다.
+- 변경 파일: `index.html`, `secondary.html`, `sitemap.xml`, `llms.txt`, `.vercelignore`, `elementary-site/` 12개 파일, `tests/seo-structure.test.cjs`, `tests/site-structure.test.cjs`, `tests/site-split.test.cjs`, `tests/browser-check.cjs`, `tests/browser-site-split.cjs`, `tests/vercelignore-check.cjs`, `README.md`, 이 WORKLOG, 기존 콘텐츠 계획서, 새 PHASE 1 계획서, `.seo/reports/site-split-*` 보고서/검증 JSON/스크린샷. 정확한 개별 경로 전체 목록은 아래 보고서에 기록했습니다.
+- 상세 보고서: [.seo/reports/site-split-phase1.md](.seo/reports/site-split-phase1.md). 구현 계획: [docs/2026-09-29-site-split-phase1-plan.md](docs/2026-09-29-site-split-phase1-plan.md).
+- 남은 작업: 사용자 PHASE 2 승인, 신규 프로젝트/실제 도메인 확인, 초등 SEO 실제 URL 확정·임시 수집 차단 해제, 양방향 링크 확정, legacy 중복 처리 결정, 승인된 commit/push/deploy 및 신규 검색 등록. 301은 별도 명시적 승인 후에만 검토합니다.
+- 최종 판정: **READY FOR PHASE 2**. 모든 변경은 로컬 unstaged/untracked 상태이며 Production 배포 완료 기록이 아닙니다.
+
+## 2026-09-29 - PHASE 2 GATE A 준비
+
+- 사용자가 신규 초등 프로젝트 생성·Production 배포, GATE A 검증 후 기존 중·고등 전환, normal commit/push를 승인했습니다. 검색/광고 계정 변경 및 301은 이번 범위에서 제외합니다.
+- PHASE 1 변경 상태를 그대로 확인하고 baseline 37/37, JS syntax 및 diff 검사를 재실행했습니다.
+- 기존 프로젝트 API 확인: `prj_AlwQYATNVr6n7Pb9s9wWCtgCUgaa`, Git 연결 `null`, Production target `dpl_GMhmNh2qfm35qpeTLkAv1PwnPrbA`. 기존 주요 URL 7개는 HTTP 200이며 배포 전 hash를 `.seo/reports/site-split-phase2-before.json`에 저장했습니다.
+- 신규 프로젝트 `ddaksoojj`, ID `prj_UsZLFQh0vkNN7ZUeJh4BgXwak0oc`를 생성했습니다. Root Directory=`elementary-site`, framework null, 별도 build/install 없음, Output Directory=`.`입니다.
+- Vercel domains API가 `ddaksoojj.vercel.app`을 이 신규 프로젝트의 verified domain으로 반환했습니다. 추측 주소가 아닌 이 응답을 기준으로 초등 canonical/OG/Twitter URL/JSON-LD/sitemap/robots/llms/seo-config를 확정했습니다. HTML index와 robots Allow를 함께 적용했습니다.
+- 기존 Production에는 아직 배포하지 않았습니다. root `.vercel/project.json`도 그대로입니다.
+- 신규 프로젝트 배포 입력은 외부 임시 staging에 초등 runtime 파일만 복사하고 프로젝트 ID를 명시하는 방식으로 준비했습니다. 신규 프로젝트의 Root Directory 설정을 유지하기 위해 staging 안에 `elementary-site/` 구조를 유지합니다. CLI `deploy --dry --json`은 초등 파일 10개만 포함함을 확인했습니다.
+- 초등 SEO 확정 후 Node 37/37, 두 독립 서버 브라우저 검수, allowlist 검증 PASS. 실 Production 검수는 배포 뒤 Gate별로 기록합니다.

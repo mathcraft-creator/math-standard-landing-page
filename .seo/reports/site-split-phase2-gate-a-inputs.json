@@ -1,0 +1,143 @@
+{
+  "framework": {
+    "name": "Other",
+    "slug": null
+  },
+  "fileCount": 10,
+  "totalSize": 150806,
+  "ignoredCount": 1,
+  "ignored": [
+    ".vercelignore"
+  ],
+  "directories": [
+    {
+      "path": "elementary-site",
+      "fileCount": 10,
+      "size": 150806
+    }
+  ],
+  "largestFiles": [
+    {
+      "path": "elementary-site/assets/ddak-logo-name.png",
+      "size": 78067,
+      "mode": 33206,
+      "sha": "9068956651b92ba483ca72c172ad52eda3b9f432"
+    },
+    {
+      "path": "elementary-site/index.html",
+      "size": 31733,
+      "mode": 33206,
+      "sha": "3dbf03902ca8d100bbc7d1cf682635167c4d698d"
+    },
+    {
+      "path": "elementary-site/assets/site.css",
+      "size": 26471,
+      "mode": 33206,
+      "sha": "2502571630cdf6bc3632275a4493d190646c8610"
+    },
+    {
+      "path": "elementary-site/assets/site.js",
+      "size": 9148,
+      "mode": 33206,
+      "sha": "f9c707e69875aa27269e3d7b5d30ddae64e1ac74"
+    },
+    {
+      "path": "elementary-site/assets/exit-offer.js",
+      "size": 3341,
+      "mode": 33206,
+      "sha": "9b73056df791bb8b8a3943499bd98d02110c8212"
+    },
+    {
+      "path": "elementary-site/llms.txt",
+      "size": 867,
+      "mode": 33206,
+      "sha": "c826b55896f5b6226e67b180c5b0de2069d81c56"
+    },
+    {
+      "path": "elementary-site/assets/elementary.css",
+      "size": 776,
+      "mode": 33206,
+      "sha": "77e9929b81e875497a4018f2f4ebc69d6b364465"
+    },
+    {
+      "path": "elementary-site/sitemap.xml",
+      "size": 168,
+      "mode": 33206,
+      "sha": "5de88a478dc400764ee7e1556618d04f09e8d743"
+    },
+    {
+      "path": "elementary-site/vercel.json",
+      "size": 157,
+      "mode": 33206,
+      "sha": "637cdb295f8a8a1487b62a45bba400bed22f1ce0"
+    },
+    {
+      "path": "elementary-site/robots.txt",
+      "size": 78,
+      "mode": 33206,
+      "sha": "eb3e572ac137f900fd44bf9ac2c03370296e3bb7"
+    }
+  ],
+  "files": [
+    {
+      "path": "elementary-site/assets/ddak-logo-name.png",
+      "size": 78067,
+      "mode": 33206,
+      "sha": "9068956651b92ba483ca72c172ad52eda3b9f432"
+    },
+    {
+      "path": "elementary-site/assets/elementary.css",
+      "size": 776,
+      "mode": 33206,
+      "sha": "77e9929b81e875497a4018f2f4ebc69d6b364465"
+    },
+    {
+      "path": "elementary-site/assets/exit-offer.js",
+      "size": 3341,
+      "mode": 33206,
+      "sha": "9b73056df791bb8b8a3943499bd98d02110c8212"
+    },
+    {
+      "path": "elementary-site/assets/site.css",
+      "size": 26471,
+      "mode": 33206,
+      "sha": "2502571630cdf6bc3632275a4493d190646c8610"
+    },
+    {
+      "path": "elementary-site/assets/site.js",
+      "size": 9148,
+      "mode": 33206,
+      "sha": "f9c707e69875aa27269e3d7b5d30ddae64e1ac74"
+    },
+    {
+      "path": "elementary-site/index.html",
+      "size": 31733,
+      "mode": 33206,
+      "sha": "3dbf03902ca8d100bbc7d1cf682635167c4d698d"
+    },
+    {
+      "path": "elementary-site/llms.txt",
+      "size": 867,
+      "mode": 33206,
+      "sha": "c826b55896f5b6226e67b180c5b0de2069d81c56"
+    },
+    {
+      "path": "elementary-site/robots.txt",
+      "size": 78,
+      "mode": 33206,
+      "sha": "eb3e572ac137f900fd44bf9ac2c03370296e3bb7"
+    },
+    {
+      "path": "elementary-site/sitemap.xml",
+      "size": 168,
+      "mode": 33206,
+      "sha": "5de88a478dc400764ee7e1556618d04f09e8d743"
+    },
+    {
+      "path": "elementary-site/vercel.json",
+      "size": 157,
+      "mode": 33206,
+      "sha": "637cdb295f8a8a1487b62a45bba400bed22f1ce0"
+    }
+  ]
+}

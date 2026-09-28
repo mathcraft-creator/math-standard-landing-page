@@ -1,0 +1,31 @@
+{
+  "baselineCommit": "db4ea58d4ac7413b066ed7891285675ef37b7cda",
+  "sha256": {
+    ".seo/reports/production-validation.md": "06732f15d9738aed2692fa927586cb114cdfc3ab03b13311ba8cb6741fe19edc",
+    ".seo/reports/pungyang-middle-final-qa.md": "8cbde4dce0fbc9d807fea125dae9faa2ef0624c2d53ad8173f64408742cb8f8e",
+    ".seo/reports/pungyang-middle-pilot-implementation.md": "3f6664f3aecc899638a60ee99b9d70e0b1f9d8f9c11763e50f322987d5d2136f",
+    ".seo/reports/pungyang-middle-pilot-plan.md": "d2e015b38d7055ce1f287c5fbd630e294dad399fe7baf7180261a539b1276ab6",
+    ".seo/reports/pungyang-middle-source-review.md": "6416d6ed82e8a2c3601d39ad46e2f8f7c2537b38933979fc056e590964a36ed5",
+    ".seo/reports/search-baseline.md": "7302aa75deca4a2261b6ebe675fe4e5f80186e8bf595749ec27b987f4d2f82c2",
+    "assets/ddak-logo-name.png": "3d9a5a80fcba19e5f746fe1d20d589a7e656967557be9d111f85f45bbe3e3505",
+    "assets/elementary-portrait.png": "68e15c3581e9427f0ac9949de7e6b9e2ab2085c939eaf4ee3e1fbe039b379472",
+    "assets/elementary.css": "296fef5849c122147eabb9af77c20e21e9dc1fe399e11e04c0ab8ae1e83bdc47",
+    "assets/exit-offer.js": "86a67123c8bd7b2fffb01164e00578c1536780bbb1be1dba38a8b29e499bf7a0",
+    "assets/math-standard-name.jpg": "4f9e8b5b339d603a15cba7ad8cddb7a50b9c8e71fb0559901423fe24be99ca88",
+    "assets/school-pilot.css": "07ebe279ae1613c637f181b795c19492e2468fc8d4abdeb60e4d591ecaf41893",
+    "assets/secondary-portrait.png": "b69b332ef29f7b6b8ce9bbe1a483c05566a689f8c7c5decfa97c5f0b618ca63f",
+    "assets/secondary.css": "fcbab47cd10c661949fe9480a53e7ddd3897f274e652c4c865568739c9ba1240",
+    "assets/site.css": "6f7f43967f07818aaca8ed8d85c82026087f86c596b0c4229136e407963c7072",
+    "assets/site.js": "f20f99e1feea363ae20d077c3f1b80097f09bb1251f28741aac1cff403ed5b58",
+    "data/exams/pungyang-middle/2026-g3-s1-final.json": "6ee117fc2d24897e981966757229919646e67fbca32ad99eb8f89757789c2792",
+    "data/schemas/public-exam.schema.json": "b4401d6bd3cc264529d70fec87f5bc4baf0d5fbdc1daa2b7ae0e6551efe86bcf",
+    "elementary.html": "2d59e910cb0f23607cee649795d4a048237435ea877c07a1b0a903bd404e1d2f",
+    "exams/pungyang-middle/2026-g3-s1-final/index.html": "7de7f9ce953986419608a19839067390ee3979ebbb2f66e5aa65c02a80f11edb",
+    "robots.txt": "bace976ba070a2cbe690054a118118e0bce53c954a2da7e36c5bfa4c6c8aa1d8",
+    "schools/pungyang-middle/index.html": "c28a2ce8b517e2a99e52fa433a242c0616bf0cb404186e8a564c1dd045b9de87",
+    "tests/exam-data.test.cjs": "b87558e3096af54a96b49bd7f88ce6a9b6a493ec46a71b53b6c87dd319caa722",
+    "tests/school-pilot.test.cjs": "8b2d842b47d4945e32713b281c371c426f602b23120bc3088db8b947961fe57d",
+    "tests/site-interactions.test.cjs": "fb35b55692c3c792d27dcc3cddca6905e29a6c46702c0b287a01c60c8e162824",
+    "vercel.json": "2a3dd65aa302462c618c855780a444a575f5853b3903dac60cf9c1ccd2ff3e6c"
+  }
+}

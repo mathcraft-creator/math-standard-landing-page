@@ -1,0 +1,44 @@
+[
+  {
+    "path": "",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "sha256": "bd9db6f05800a0d80dc6af166c40795cbf4976537ae6efa20f1d78954c7bd113"
+  },
+  {
+    "path": "schools/pungyang-middle/",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "sha256": "c28a2ce8b517e2a99e52fa433a242c0616bf0cb404186e8a564c1dd045b9de87"
+  },
+  {
+    "path": "exams/pungyang-middle/2026-g3-s1-final/",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "sha256": "7de7f9ce953986419608a19839067390ee3979ebbb2f66e5aa65c02a80f11edb"
+  },
+  {
+    "path": "data/exams/pungyang-middle/2026-g3-s1-final.json",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "sha256": "6ee117fc2d24897e981966757229919646e67fbca32ad99eb8f89757789c2792"
+  },
+  {
+    "path": "robots.txt",
+    "status": 200,
+    "contentType": "text/plain; charset=utf-8",
+    "sha256": "bace976ba070a2cbe690054a118118e0bce53c954a2da7e36c5bfa4c6c8aa1d8"
+  },
+  {
+    "path": "sitemap.xml",
+    "status": 200,
+    "contentType": "application/xml",
+    "sha256": "5ba520b37a9f8e860fb827674be7cd0c28b732fc332ca785298700cd4c792328"
+  },
+  {
+    "path": "llms.txt",
+    "status": 200,
+    "contentType": "text/plain; charset=utf-8",
+    "sha256": "742067c00be7ad5fb69f7528749dddd8fc32638efda52e4c0cf718111ccef12e"
+  }
+]

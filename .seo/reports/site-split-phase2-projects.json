@@ -1,0 +1,33 @@
+{
+  "existing": {
+    "id": "prj_AlwQYATNVr6n7Pb9s9wWCtgCUgaa",
+    "name": "math-standard-landing-page",
+    "rootDirectory": null,
+    "framework": null,
+    "buildCommand": null,
+    "installCommand": null,
+    "outputDirectory": null
+  },
+  "existingGitLink": null,
+  "existingDeploymentBefore": "dpl_GMhmNh2qfm35qpeTLkAv1PwnPrbA",
+  "elementary": {
+    "id": "prj_UsZLFQh0vkNN7ZUeJh4BgXwak0oc",
+    "name": "ddaksoojj",
+    "rootDirectory": "elementary-site",
+    "framework": null,
+    "buildCommand": null,
+    "installCommand": null,
+    "outputDirectory": "."
+  },
+  "verifiedElementaryDomain": {
+    "name": "ddaksoojj.vercel.app",
+    "apexName": "vercel.app",
+    "projectId": "prj_UsZLFQh0vkNN7ZUeJh4BgXwak0oc",
+    "redirect": null,
+    "gitBranch": null,
+    "customEnvironmentId": null,
+    "updatedAt": 1790620882399,
+    "createdAt": 1790620882399,
+    "verified": true
+  }
+}

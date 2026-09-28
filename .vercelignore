@@ -11,3 +11,6 @@
 !robots.txt
 !sitemap.xml
 !llms.txt
+
+# Keep the independent elementary project out of the existing root deployment.
+/elementary-site/

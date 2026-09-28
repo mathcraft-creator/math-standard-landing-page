@@ -1,12 +1,10 @@
-# 딱풀리는수학 진접점 · 수학의 기준 진접본원
+# 수학의 기준 진접본원
 
-> 경기도 남양주시 진접읍의 초등·중고등 수학 학원 안내 사이트입니다. 이 파일은 주요 공개 페이지를 안내하며, 수업과 상담의 최신 세부 내용은 각 HTML 페이지를 기준으로 합니다.
+> 경기도 남양주시 진접읍의 중·고등 수학 학원 안내 사이트입니다. 이 파일은 주요 공개 페이지를 안내하며, 수업과 상담의 최신 세부 내용은 각 HTML 페이지를 기준으로 합니다.
 
 ## 주요 페이지
 
-- [메인](https://math-standard-landing-page.vercel.app/): 두 과정의 공통 학습 기준, 과정 선택, 상담, 위치 안내
-- [초등 · 딱풀리는수학 진접점](https://math-standard-landing-page.vercel.app/elementary.html): 초3~초6 개별 진도, 홉·스텝·점프, 5단계 학습, C-AT 오답관리, 설명하기, 귀가보고서
-- [중·고등 · 수학의 기준 진접본원](https://math-standard-landing-page.vercel.app/secondary.html): 플립러닝, 메타인지 오답노트, 재테스트, 학교별 내신 대비, 시험 전후 관리
+- [메인](https://math-standard-landing-page.vercel.app/): 중·고등 플립러닝, 메타인지 오답노트와 재테스트, 학교별 내신 대비, 상담과 위치 안내
 - [풍양중 수학 시험·내신 정보](https://math-standard-landing-page.vercel.app/schools/pungyang-middle/): 풍양중 실제 시험 분석과 학교별 수학 내신 대비 방법
 - [2026 풍양중 3학년 1학기 기말고사 수학 분석](https://math-standard-landing-page.vercel.app/exams/pungyang-middle/2026-g3-s1-final/): 21문항의 형식, 단원별 배점과 수학의 기준 자체 난이도 분석
 
@@ -19,5 +17,4 @@
 
 ## 공식 소식
 
-- [딱풀리는수학 진접점 네이버 블로그](https://blog.naver.com/perfect-math1)
 - [수학의 기준 진접본원 네이버 블로그](https://blog.naver.com/standrad-of-math)

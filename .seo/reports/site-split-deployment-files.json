@@ -1,0 +1,36 @@
+{
+  ".": [
+    "assets/ddak-logo-name.png",
+    "assets/elementary-portrait.png",
+    "assets/elementary.css",
+    "assets/exit-offer.js",
+    "assets/math-standard-name.jpg",
+    "assets/school-pilot.css",
+    "assets/secondary-portrait.png",
+    "assets/secondary.css",
+    "assets/site.css",
+    "assets/site.js",
+    "data/exams/pungyang-middle/2026-g3-s1-final.json",
+    "data/schemas/public-exam.schema.json",
+    "elementary.html",
+    "exams/pungyang-middle/2026-g3-s1-final/index.html",
+    "index.html",
+    "llms.txt",
+    "robots.txt",
+    "schools/pungyang-middle/index.html",
+    "secondary.html",
+    "sitemap.xml",
+    "vercel.json"
+  ],
+  "elementary-site": [
+    "assets/ddak-logo-name.png",
+    "assets/elementary.css",
+    "assets/exit-offer.js",
+    "assets/site.css",
+    "assets/site.js",
+    "index.html",
+    "llms.txt",
+    "robots.txt",
+    "vercel.json"
+  ]
+}

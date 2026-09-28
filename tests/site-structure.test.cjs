@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'elementary.html', 'secondary.html'];
+const pages = ['index.html', 'elementary.html', 'secondary.html', 'elementary-site/index.html'];
 for (const page of pages) {
   test(`${page}: standalone document, unique anchors and working local resources`, () => {
     const html = fs.readFileSync(path.join(root, page), 'utf8');
@@ -15,9 +15,10 @@ for (const page of pages) {
     for (const [, value] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
       if (/^(?:https?:|tel:|data:)/.test(value)) continue;
       const [file, hash] = value.split('#');
-      const target = path.resolve(root, file || page);
-      assert.ok(target.startsWith(root + path.sep), value);
+      let target = file ? path.resolve(root, path.dirname(page), file) : path.join(root, page);
+      assert.ok(target === root || target.startsWith(root + path.sep), value);
       assert.ok(fs.existsSync(target), `${page} missing ${value}`);
+      if (fs.statSync(target).isDirectory()) target = path.join(target, 'index.html');
       if (hash) assert.ok(fs.readFileSync(target, 'utf8').includes(`id="${hash}"`), `missing anchor ${value}`);
     }
     assert.match(html, /id="consultMessage"[^>]*readonly/);
@@ -27,14 +28,19 @@ for (const page of pages) {
     assert.match(html, /data-phone-number/);
   });
 }
-test('home course links contain the correctly assigned portraits', () => {
-  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  for (const name of ['elementary', 'secondary']) {
-    const card = html.match(new RegExp(`<a[^>]*class="course-card ${name}"[\\s\\S]*?</a>`));
-    assert.ok(card, name);
-    assert.ok(card[0].includes(`href="./${name}.html"`));
-    assert.ok(card[0].includes(`src="./assets/${name}-portrait.png"`));
-    assert.ok(!card[0].includes('target="_blank"'));
+test('independent home links use the correct brand assets and primary course CTAs', () => {
+  for (const [file, logo, course] of [
+    ['index.html', 'math-standard-name.jpg', '중·고등'],
+    ['elementary-site/index.html', 'ddak-logo-name.png', '초등'],
+  ]) {
+    const html = fs.readFileSync(path.join(root, file), 'utf8');
+    const brand = html.match(/<a class="brand"[\s\S]*?<\/a>/);
+    assert.ok(brand, file);
+    assert.ok(brand[0].includes('href="./"'));
+    assert.ok(brand[0].includes(`src="./assets/${logo}"`));
+    assert.ok(!brand[0].includes('target="_blank"'));
+    assert.ok(html.includes(`<a class="button yellow" href="#apply">${course} 진단·1주 체험 문의 →</a>`));
+    assert.doesNotMatch(html, /class="course-card /, 'course choice must not gate either independent home');
   }
 });
 
