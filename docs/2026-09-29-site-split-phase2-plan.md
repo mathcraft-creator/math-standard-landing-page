@@ -20,11 +20,11 @@
 ## GATE B (A 통과 뒤에만)
 
 - [x] index/secondary의 초등 브랜드 링크를 확인된 신규 Production root로 변경한다. elementary legacy는 self canonical과 기존 본문을 그대로 유지한다.
-- [ ] root 메타데이터/인증/3 URL sitemap/robots/llms 및 초등 제외 allowlist 최종 검사.
-- [ ] normal commit/push를 허용된 범위에서 수행한다. Git 연결로 기존 프로젝트가 자동 배포될 수 있으면 A 검증 전에는 push하지 않는다. 기존 main 이력을 보존한다.
-- [ ] 기존 프로젝트/도메인을 그대로 사용하여 root 배포. 신규/기존 deployment ID를 기록한다.
-- [ ] 기존 root/legacy/Pilot/public JSON/discovery 파일 회귀, 보호 수치, noindex 부재, 양방향 브랜드 클릭, `/elementary-site/` 비노출 확인.
-- [ ] `.seo/reports/site-split-phase2.md`, WORKLOG 및 사용자가 직접 할 Google/Naver/Powerlink 등록 주소를 기록하고 별도 documentation commit/push. 최종 Git 상태 확인.
+- [x] root 메타데이터/인증/3 URL sitemap/robots/llms 및 초등 제외 allowlist 최종 검사.
+- [x] normal commit/push를 허용된 범위에서 수행한다. Git 연결로 기존 프로젝트가 자동 배포될 수 있으면 A 검증 전에는 push하지 않는다. 기존 main 이력을 보존한다.
+- [x] 기존 프로젝트/도메인을 그대로 사용하여 root 배포. 신규/기존 deployment ID를 기록한다.
+- [x] 기존 root/legacy/Pilot/public JSON/discovery 파일 회귀, 보호 수치, noindex 부재, 양방향 브랜드 클릭, `/elementary-site/` 비노출 확인.
+- [x] `.seo/reports/site-split-phase2.md`, WORKLOG 및 사용자가 직접 할 Google/Naver/Powerlink 등록 주소를 기록하고 별도 documentation commit/push. 최종 Git 상태 확인.
 
 ## 완료 기준
 

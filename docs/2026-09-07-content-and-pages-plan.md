@@ -238,3 +238,17 @@ index.html — 메인
 - [ ] 신규 프로젝트/검색 등록·legacy 중복 처리·배포. 이 항목은 이번 작업에서 실행하지 않는다.
 
 세부 사항은 [이번 계획](2026-09-29-site-split-phase1-plan.md) 및 [검증 보고서](../.seo/reports/site-split-phase1.md)에 기록한다.
+
+## 17. 사용자 후속 요청: 사이트 분리 PHASE 2 완료 (2026-09-29)
+
+16절의 PHASE 1 보류 항목 중 승인·신규 프로젝트 생성·실제 URL 확정·배포를 완료했다. 검색 계정 등록과 legacy 이전 결정은 별도 후속 작업이다.
+
+- [x] 초등 `https://ddaksoojj.vercel.app/` 독립 Production 및 SEO 확정, GATE A 통과.
+- [x] 기존 `https://math-standard-landing-page.vercel.app/` 주소로 중·고등 전환, GATE B 통과.
+- [x] 풍양중 Pilot·인증·기존 프로젝트 보호, 양방향 브랜드 링크 및 실제 모바일/데스크톱 검증.
+- [x] 정상 commit/push, 배포 및 검증 보고서 기록.
+- [ ] 신규 초등 Google/Naver 소유 확인·사이트맵 제출·색인 확인 (사용자 계정 작업).
+- [ ] 신규 초등 파워링크 별도 비즈채널 등록 (사용자 계정 작업).
+- [ ] 위 확인 후 legacy elementary 301 또는 cross-domain canonical을 별도 결정.
+
+세부 결과: [PHASE 2 보고서](../.seo/reports/site-split-phase2.md).

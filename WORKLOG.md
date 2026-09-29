@@ -359,3 +359,14 @@
 - Production QA 초기에 모바일 이탈 안내 검사가 실패했습니다. 최소 재현으로 Edge 153에서 full-page screenshot 이후 touch emulation이 해제되는 것을 확인했고, 스크린샷을 동작 검사 뒤에 저장하도록 QA 순서를 수정했습니다. 실제 체류 타이머로 재검증해 PASS이며 사이트 JS는 원본 그대로입니다.
 - 기존 중·고등 Production의 주요 7 URL 응답 hash는 배포 전과 모두 동일합니다. GATE A 판정: **ELEMENTARY READY**. 증거: `.seo/reports/site-split-phase2-gate-a/`, `site-split-phase2-gate-a-deployment.json`.
 - A 통과 후 GATE B 준비를 시작했습니다. root index/secondary의 작은 초등 링크를 `https://ddaksoojj.vercel.app/`로 확정하고 관련 회귀 기대값을 갱신했습니다. 기존 elementary.html은 self canonical과 본문을 그대로 유지합니다. 301은 적용하지 않습니다.
+
+## 2026-09-29 - PHASE 2 GATE B Production 완료
+
+- 재개 시 Gate A 배포·검증 완료와 Gate B 미커밋 변경을 확인했습니다. Node 37/37, JS syntax, diff 검사 및 기존 연결 파일 hash를 다시 확인했습니다.
+- release `9b5fa17e296674736298584ff43fb0b868d6194e`를 normal commit하고 main에 fast-forward 후 normal push했습니다. 기존 이력 보존, force/amend 없음.
+- 기존 프로젝트 `math-standard-landing-page` / `prj_AlwQYATNVr6n7Pb9s9wWCtgCUgaa`에 배포했습니다. 기존 URL `https://math-standard-landing-page.vercel.app/` 유지. deployment `dpl_Hy4BNLqNkH26pJ8JQpQsyqZozdxn`, READY.
+- 실제 Production 두 사이트 HTTP/SEO/정확한 source bytes/404 및 Desktop/390×844 동작 검증 PASS. 양방향 클릭·native back·상담 복사·FAQ·전화·이탈 팝업 정상, console/page/resource 오류 0. 실제 상담 전송 없음.
+- 풍양중 21/100, 선택17/80, 논술4/20, 이차9/40, 인수5/26, 통계7/34, 난이도 하5/중10/상6 및 Academy Analysis를 live JSON에서 재확인했습니다. Pilot HTML/JSON·schema·provenance 원본과 기존 Google/Naver 인증 유지.
+- `/elementary-site/`는 기존 Production에서 404. 두 legacy는 200, secondary root canonical, elementary self canonical 및 원본 유지. 301 없음.
+- 변경 기록 파일: README.md, WORKLOG.md, docs/search-registration.md, 기존 콘텐츠 계획 및 PHASE 2 계획, `.seo/reports/site-split-phase2.md`, Gate B deployment JSON과 HTTP/browser JSON·스크린샷. 문서·검증 자료는 별도 normal commit/push합니다.
+- 최종 판정 **SITE SPLIT COMPLETE**. 사용자 후속 작업은 신규 초등 Google/Naver 인증·sitemap 제출·색인 확인과 파워링크 별도 비즈채널 등록입니다. 해당 준비 후 legacy 이전을 별도로 결정합니다.
