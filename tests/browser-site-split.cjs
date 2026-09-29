@@ -90,7 +90,9 @@ function makeServer(documentRoot) {
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(main);
-    await page.locator('[data-brand-switch="elementary"]').click();
+    assert.equal(await page.locator('[data-brand-switch="elementary"]').getAttribute('href'), 'https://ddaksoojj.vercel.app/');
+    // Cross-origin clicks are exercised by production-site-split-check.cjs; legacy remains directly accessible.
+    await page.goto(main + 'elementary.html');
     assert.equal(page.url(), main + 'elementary.html');
     await page.goBack();
     assert.equal(page.url(), main);

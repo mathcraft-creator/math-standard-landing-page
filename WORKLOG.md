@@ -348,3 +348,14 @@
 - 기존 Production에는 아직 배포하지 않았습니다. root `.vercel/project.json`도 그대로입니다.
 - 신규 프로젝트 배포 입력은 외부 임시 staging에 초등 runtime 파일만 복사하고 프로젝트 ID를 명시하는 방식으로 준비했습니다. 신규 프로젝트의 Root Directory 설정을 유지하기 위해 staging 안에 `elementary-site/` 구조를 유지합니다. CLI `deploy --dry --json`은 초등 파일 10개만 포함함을 확인했습니다.
 - 초등 SEO 확정 후 Node 37/37, 두 독립 서버 브라우저 검수, allowlist 검증 PASS. 실 Production 검수는 배포 뒤 Gate별로 기록합니다.
+
+## 2026-09-29 - PHASE 2 GATE A Production 완료 / GATE B 준비
+
+- GATE A release commit: `9305ca6` (`feat: prepare standalone elementary site deployment`). PHASE 1 코드 분리와 초등 실제 SEO 확정 변경을 normal commit으로 묶었습니다. 이 시점에는 push하지 않았습니다.
+- 신규 초등 Production: `https://ddaksoojj.vercel.app/`, 프로젝트 `ddaksoojj` / `prj_UsZLFQh0vkNN7ZUeJh4BgXwak0oc`.
+- 신규 deployment: `dpl_9EEdfzvqLsqyS1rwk2iPg1MTsDeh`, READY. 배포 URL `https://ddaksoojj-et5a8ubnf-standard-of-math-s-projects.vercel.app`. Root Directory는 배포 후에도 `elementary-site`입니다.
+- 실제 초등 `/`, robots/sitemap/llms 및 assets는 HTTP 200, local source와 SHA-256 일치. canonical/OG/Twitter URL/JSON-LD는 신규 origin이며 noindex 및 crawl 차단 없음. live XML/JSON-LD parsing PASS. 임의 경로와 seo-config/template/연결 파일은 404.
+- 실제 Desktop/390×844: Hero·이미지·CSS·JS·FAQ·전화 안내·상담 복사 성공/실패·이탈 팝업·브랜드 링크 클릭·뒤로가기 PASS. page/console/resource 오류 0. 상담 메시지는 테스트에서 가로채 실제 전송하지 않았습니다.
+- Production QA 초기에 모바일 이탈 안내 검사가 실패했습니다. 최소 재현으로 Edge 153에서 full-page screenshot 이후 touch emulation이 해제되는 것을 확인했고, 스크린샷을 동작 검사 뒤에 저장하도록 QA 순서를 수정했습니다. 실제 체류 타이머로 재검증해 PASS이며 사이트 JS는 원본 그대로입니다.
+- 기존 중·고등 Production의 주요 7 URL 응답 hash는 배포 전과 모두 동일합니다. GATE A 판정: **ELEMENTARY READY**. 증거: `.seo/reports/site-split-phase2-gate-a/`, `site-split-phase2-gate-a-deployment.json`.
+- A 통과 후 GATE B 준비를 시작했습니다. root index/secondary의 작은 초등 링크를 `https://ddaksoojj.vercel.app/`로 확정하고 관련 회귀 기대값을 갱신했습니다. 기존 elementary.html은 self canonical과 본문을 그대로 유지합니다. 301은 적용하지 않습니다.

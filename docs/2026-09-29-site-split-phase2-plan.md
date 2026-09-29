@@ -9,17 +9,17 @@
 ## GATE A
 
 - [x] PHASE 1 uncommitted 변경 확인. branch `site-split-phase1`, HEAD/main/origin/main=`db4ea58`; baseline 37/37 및 JS/diff PASS.
-- [ ] 기존 Vercel 연결·Git 자동 배포 상태를 읽기 전용으로 확인하고 기존 Production/Pilot 응답 hash를 기록한다. GATE A 종료 전 기존 프로젝트 배포나 main push를 하지 않는다.
-- [ ] 별도 신규 프로젝트 생성: `ddaksoojj` 우선, root `elementary-site`, framework null, build/install 없음, output `.`. 기존 root 연결 파일을 바꾸거나 복사하지 않는다.
-- [ ] Vercel이 실제 배정한 Production 도메인을 조회한다. 도메인이 최초 배포 후에만 결정된다면 초등의 차단 상태로 최초 배포하여 실제 alias를 확보한 뒤 최종 SEO를 적용한다. 이는 기존 프로젝트를 변경하지 않는다.
-- [ ] 실제 origin을 canonical/OG/Twitter URL/JSON-LD/sitemap/robots/llms/seo-config에 반영하고 HTML noindex와 robots 차단을 함께 해제한다. 화면에 없는 Schema 정보를 추가하지 않는다.
-- [ ] 테스트를 draft→확정 상태의 강한 계약으로 갱신하고 Node·독립 로컬 서버·배포 파일 목록 검사. 기존 검증 목적과 보호 hash를 유지한다.
-- [ ] 필요한 변경을 normal release commit으로 기록한다. 신규 프로젝트만 배포한다.
-- [ ] 실제 초등 HTTP/SEO/404/Desktop/390×844/상담·FAQ·이탈팝업·기존 브랜드 링크 검증. 기존 Production hash가 그대로인지 확인하고 **ELEMENTARY READY** 판정.
+- [x] 기존 Vercel 연결·Git 자동 배포 상태를 읽기 전용으로 확인하고 기존 Production/Pilot 응답 hash를 기록한다. GATE A 종료 전 기존 프로젝트 배포나 main push를 하지 않는다.
+- [x] 별도 신규 프로젝트 생성: `ddaksoojj` 우선, root `elementary-site`, framework null, build/install 없음, output `.`. 기존 root 연결 파일을 바꾸거나 복사하지 않는다.
+- [x] Vercel이 실제 배정한 Production 도메인을 조회한다. 신규 프로젝트 생성 직후 domains API에서 verified `ddaksoojj.vercel.app`을 확보하여 임시 배포 없이 SEO를 확정했다.
+- [x] 실제 origin을 canonical/OG/Twitter URL/JSON-LD/sitemap/robots/llms/seo-config에 반영하고 HTML noindex와 robots 차단을 함께 해제한다. 화면에 없는 Schema 정보를 추가하지 않는다.
+- [x] 테스트를 draft→확정 상태의 강한 계약으로 갱신하고 Node·독립 로컬 서버·배포 파일 목록 검사. 기존 검증 목적과 보호 hash를 유지한다.
+- [x] 필요한 변경을 normal release commit으로 기록한다. 신규 프로젝트만 배포한다.
+- [x] 실제 초등 HTTP/SEO/404/Desktop/390×844/상담·FAQ·이탈팝업·기존 브랜드 링크 검증. 기존 Production hash가 그대로인지 확인하고 **ELEMENTARY READY** 판정.
 
 ## GATE B (A 통과 뒤에만)
 
-- [ ] index/secondary의 초등 브랜드 링크를 확인된 신규 Production root로 변경한다. elementary legacy는 self canonical과 기존 본문을 그대로 유지한다.
+- [x] index/secondary의 초등 브랜드 링크를 확인된 신규 Production root로 변경한다. elementary legacy는 self canonical과 기존 본문을 그대로 유지한다.
 - [ ] root 메타데이터/인증/3 URL sitemap/robots/llms 및 초등 제외 allowlist 최종 검사.
 - [ ] normal commit/push를 허용된 범위에서 수행한다. Git 연결로 기존 프로젝트가 자동 배포될 수 있으면 A 검증 전에는 push하지 않는다. 기존 main 이력을 보존한다.
 - [ ] 기존 프로젝트/도메인을 그대로 사용하여 root 배포. 신규/기존 deployment ID를 기록한다.

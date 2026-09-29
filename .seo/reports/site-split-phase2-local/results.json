@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "checks": [
+    "middle-high 360: HTTP 200, one H1, assets loaded, no overflow",
+    "elementary 360: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-secondary 360: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-elementary 360: HTTP 200, one H1, assets loaded, no overflow",
+    "school 360: HTTP 200, one H1, assets loaded, no overflow",
+    "exam 360: HTTP 200, one H1, assets loaded, no overflow",
+    "middle-high 390: HTTP 200, one H1, assets loaded, no overflow",
+    "elementary 390: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-secondary 390: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-elementary 390: HTTP 200, one H1, assets loaded, no overflow",
+    "school 390: HTTP 200, one H1, assets loaded, no overflow",
+    "exam 390: HTTP 200, one H1, assets loaded, no overflow",
+    "middle-high 768: HTTP 200, one H1, assets loaded, no overflow",
+    "elementary 768: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-secondary 768: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-elementary 768: HTTP 200, one H1, assets loaded, no overflow",
+    "school 768: HTTP 200, one H1, assets loaded, no overflow",
+    "exam 768: HTTP 200, one H1, assets loaded, no overflow",
+    "middle-high 1440: HTTP 200, one H1, assets loaded, no overflow",
+    "elementary 1440: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-secondary 1440: HTTP 200, one H1, assets loaded, no overflow",
+    "legacy-elementary 1440: HTTP 200, one H1, assets loaded, no overflow",
+    "school 1440: HTTP 200, one H1, assets loaded, no overflow",
+    "exam 1440: HTTP 200, one H1, assets loaded, no overflow"
+  ],
+  "testedRoutes": [
+    "middle-high",
+    "elementary",
+    "legacy-secondary",
+    "legacy-elementary",
+    "school",
+    "exam"
+  ],
+  "widths": [
+    360,
+    390,
+    768,
+    1440
+  ],
+  "independentDocumentRoots": true,
+  "consultationTransmitted": false,
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedResponses": []
+}

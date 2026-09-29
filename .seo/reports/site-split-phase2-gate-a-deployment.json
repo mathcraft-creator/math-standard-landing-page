@@ -1,0 +1,20 @@
+{
+    "deployment":  {
+                       "id":  "dpl_9EEdfzvqLsqyS1rwk2iPg1MTsDeh",
+                       "url":  "https://ddaksoojj-et5a8ubnf-standard-of-math-s-projects.vercel.app",
+                       "inspectorUrl":  "https://vercel.com/standard-of-math-s-projects/ddaksoojj/9EEdfzvqLsqyS1rwk2iPg1MTsDeh",
+                       "readyState":  "READY",
+                       "target":  "production",
+                       "deploymentApiUrl":  "https://api.vercel.com/v13/deployments/dpl_9EEdfzvqLsqyS1rwk2iPg1MTsDeh"
+                   },
+    "projectId":  "prj_UsZLFQh0vkNN7ZUeJh4BgXwak0oc",
+    "projectName":  "ddaksoojj",
+    "rootDirectory":  "elementary-site",
+    "productionAlias":  "https://ddaksoojj.vercel.app/",
+    "aliases":  [
+                    "ddaksoojj.vercel.app",
+                    "ddaksoojj-standard-of-math-s-projects.vercel.app"
+                ],
+    "releaseCommit":  "9305ca6e0ca2af2ee832ad9282a9f7ad9b595a0f",
+    "existingProductionChanged":  false
+}

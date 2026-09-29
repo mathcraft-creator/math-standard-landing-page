@@ -1,0 +1,274 @@
+{
+  "framework": {
+    "name": "Other",
+    "slug": null
+  },
+  "fileCount": 21,
+  "totalSize": 2658502,
+  "ignoredCount": 16,
+  "ignored": [
+    ".env.local",
+    ".git",
+    ".gitignore",
+    ".nojekyll",
+    ".seo",
+    ".vercel",
+    ".vercelignore",
+    "AGENTS.md",
+    "README.md",
+    "WORKLOG.md",
+    "docs",
+    "elementary-site",
+    "outputs",
+    "tests",
+    "tmp",
+    "work"
+  ],
+  "directories": [
+    {
+      "path": "assets",
+      "fileCount": 10,
+      "size": 2507109
+    },
+    {
+      "path": "index.html",
+      "fileCount": 1,
+      "size": 37844
+    },
+    {
+      "path": "secondary.html",
+      "fileCount": 1,
+      "size": 37648
+    },
+    {
+      "path": "elementary.html",
+      "fileCount": 1,
+      "size": 33800
+    },
+    {
+      "path": "schools",
+      "fileCount": 1,
+      "size": 13901
+    },
+    {
+      "path": "exams",
+      "fileCount": 1,
+      "size": 13774
+    },
+    {
+      "path": "data",
+      "fileCount": 2,
+      "size": 12354
+    },
+    {
+      "path": "llms.txt",
+      "fileCount": 1,
+      "size": 1398
+    },
+    {
+      "path": "sitemap.xml",
+      "fileCount": 1,
+      "size": 422
+    },
+    {
+      "path": "vercel.json",
+      "fileCount": 1,
+      "size": 157
+    },
+    {
+      "path": "robots.txt",
+      "fileCount": 1,
+      "size": 95
+    }
+  ],
+  "largestFiles": [
+    {
+      "path": "assets/elementary-portrait.png",
+      "size": 1563795,
+      "mode": 33206,
+      "sha": "5ed2242b10722fd3d2687821c9543cdca73ce61e"
+    },
+    {
+      "path": "assets/secondary-portrait.png",
+      "size": 698912,
+      "mode": 33206,
+      "sha": "4aa77b25ee376533b3c97976553d00581225e8a3"
+    },
+    {
+      "path": "assets/math-standard-name.jpg",
+      "size": 121753,
+      "mode": 33206,
+      "sha": "4d2cd278d8fcb87828fe977ab0337e03dbcdd0b4"
+    },
+    {
+      "path": "assets/ddak-logo-name.png",
+      "size": 78067,
+      "mode": 33206,
+      "sha": "9068956651b92ba483ca72c172ad52eda3b9f432"
+    },
+    {
+      "path": "index.html",
+      "size": 37844,
+      "mode": 33206,
+      "sha": "6c65d48cd8eec7133ea72c64b592d23069ed33a1"
+    },
+    {
+      "path": "secondary.html",
+      "size": 37648,
+      "mode": 33206,
+      "sha": "37eb36a90feaa00b3740890ed742e6f76e02a0d2"
+    },
+    {
+      "path": "elementary.html",
+      "size": 33800,
+      "mode": 33206,
+      "sha": "0ec0641f4fbc6a7b45182bb6f27a5742cc9349eb"
+    },
+    {
+      "path": "assets/site.css",
+      "size": 26471,
+      "mode": 33206,
+      "sha": "2502571630cdf6bc3632275a4493d190646c8610"
+    },
+    {
+      "path": "schools/pungyang-middle/index.html",
+      "size": 13901,
+      "mode": 33206,
+      "sha": "f6d0cfa2e7343e2edc28bcc261595a7afaa190a5"
+    },
+    {
+      "path": "exams/pungyang-middle/2026-g3-s1-final/index.html",
+      "size": 13774,
+      "mode": 33206,
+      "sha": "3f24321e2b7060139788892ed42337f3c7b8bade"
+    }
+  ],
+  "files": [
+    {
+      "path": "assets/ddak-logo-name.png",
+      "size": 78067,
+      "mode": 33206,
+      "sha": "9068956651b92ba483ca72c172ad52eda3b9f432"
+    },
+    {
+      "path": "assets/elementary-portrait.png",
+      "size": 1563795,
+      "mode": 33206,
+      "sha": "5ed2242b10722fd3d2687821c9543cdca73ce61e"
+    },
+    {
+      "path": "assets/elementary.css",
+      "size": 776,
+      "mode": 33206,
+      "sha": "77e9929b81e875497a4018f2f4ebc69d6b364465"
+    },
+    {
+      "path": "assets/exit-offer.js",
+      "size": 3341,
+      "mode": 33206,
+      "sha": "9b73056df791bb8b8a3943499bd98d02110c8212"
+    },
+    {
+      "path": "assets/math-standard-name.jpg",
+      "size": 121753,
+      "mode": 33206,
+      "sha": "4d2cd278d8fcb87828fe977ab0337e03dbcdd0b4"
+    },
+    {
+      "path": "assets/school-pilot.css",
+      "size": 3386,
+      "mode": 33206,
+      "sha": "32b7fd4e75fd671f519b04169588b2ded60f5f16"
+    },
+    {
+      "path": "assets/secondary-portrait.png",
+      "size": 698912,
+      "mode": 33206,
+      "sha": "4aa77b25ee376533b3c97976553d00581225e8a3"
+    },
+    {
+      "path": "assets/secondary.css",
+      "size": 1460,
+      "mode": 33206,
+      "sha": "4d3aa9a9480fa5702aedb08290b6a15c163e4eeb"
+    },
+    {
+      "path": "assets/site.css",
+      "size": 26471,
+      "mode": 33206,
+      "sha": "2502571630cdf6bc3632275a4493d190646c8610"
+    },
+    {
+      "path": "assets/site.js",
+      "size": 9148,
+      "mode": 33206,
+      "sha": "f9c707e69875aa27269e3d7b5d30ddae64e1ac74"
+    },
+    {
+      "path": "data/exams/pungyang-middle/2026-g3-s1-final.json",
+      "size": 4704,
+      "mode": 33206,
+      "sha": "1be36bbab6cec62fd781764af646f587eb44afcc"
+    },
+    {
+      "path": "data/schemas/public-exam.schema.json",
+      "size": 7650,
+      "mode": 33206,
+      "sha": "0e011529c4fddc4018ace8e8a69de5932eda1cb9"
+    },
+    {
+      "path": "elementary.html",
+      "size": 33800,
+      "mode": 33206,
+      "sha": "0ec0641f4fbc6a7b45182bb6f27a5742cc9349eb"
+    },
+    {
+      "path": "exams/pungyang-middle/2026-g3-s1-final/index.html",
+      "size": 13774,
+      "mode": 33206,
+      "sha": "3f24321e2b7060139788892ed42337f3c7b8bade"
+    },
+    {
+      "path": "index.html",
+      "size": 37844,
+      "mode": 33206,
+      "sha": "6c65d48cd8eec7133ea72c64b592d23069ed33a1"
+    },
+    {
+      "path": "llms.txt",
+      "size": 1398,
+      "mode": 33206,
+      "sha": "c99f22227149b4c21bfdd3109aef6b4dc4daeab4"
+    },
+    {
+      "path": "robots.txt",
+      "size": 95,
+      "mode": 33206,
+      "sha": "9287610a7eb35e292902b922e4ce7067f2ded1a5"
+    },
+    {
+      "path": "schools/pungyang-middle/index.html",
+      "size": 13901,
+      "mode": 33206,
+      "sha": "f6d0cfa2e7343e2edc28bcc261595a7afaa190a5"
+    },
+    {
+      "path": "secondary.html",
+      "size": 37648,
+      "mode": 33206,
+      "sha": "37eb36a90feaa00b3740890ed742e6f76e02a0d2"
+    },
+    {
+      "path": "sitemap.xml",
+      "size": 422,
+      "mode": 33206,
+      "sha": "25ddbeaa08ec52d17f90626f14de98f56dbc155f"
+    },
+    {
+      "path": "vercel.json",
+      "size": 157,
+      "mode": 33206,
+      "sha": "637cdb295f8a8a1487b62a45bba400bed22f1ce0"
+    }
+  ]
+}

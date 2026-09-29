@@ -97,29 +97,28 @@ const jsonLd = html => [...html.matchAll(/<script type="application\/ld\+json">(
         page.on('pageerror', e => errors.push(e.message));
         page.on('console', m => { if (m.type() === 'error') consoleErrors.push(m.text()); });
         page.on('response', r => { if (r.status() >= 400) failedResources.push(`${r.status()} ${r.url()}`); });
-        await page.clock.install();
         await page.goto(base);
         await page.locator('img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         assert.ok(await page.locator('img').evaluateAll(images => images.every(img => img.naturalWidth > 0)));
-        await page.screenshot({ path: path.join(output, `${name}-${width}.png`), fullPage: true });
-        // Deterministic clock, and wait for the actual browser scroll events.
+        if (width === 390) assert.ok(await page.evaluate(() => matchMedia('(pointer: coarse)').matches));
+        // Production uses the real dwell timer; mocked clocks can race native scroll delivery.
         const historyLength = await page.evaluate(() => history.length);
-        await page.clock.fastForward(9000);
+        await page.waitForTimeout(8500);
         if (width === 390) {
           await page.evaluate(() => { window.qaScrolls = []; addEventListener('scroll', () => window.qaScrolls.push(scrollY)); scrollTo({ top: 1200, behavior: 'instant' }); });
-          await page.clock.runFor(100);
           await page.waitForFunction(() => window.qaScrolls.includes(1200));
           await page.evaluate(() => scrollTo({ top: 700, behavior: 'instant' }));
-          await page.clock.runFor(100);
           await page.waitForFunction(() => window.qaScrolls.includes(700));
         } else {
           await page.evaluate(() => document.dispatchEvent(new MouseEvent('mouseout', { clientY: 0, relatedTarget: null })));
         }
-        assert.ok(await page.locator('#exitOfferDialog').evaluate(el => el.open), `${name}/${width}: exit offer`);
+        assert.ok(await page.locator('#exitOfferDialog').evaluate(el => el.open), JSON.stringify(await page.evaluate(() => ({
+          url: location.href, scroll: scrollY, touch: matchMedia('(hover: none), (pointer: coarse)').matches,
+          visibility: document.visibilityState, active: document.activeElement.tagName, scrolls: window.qaScrolls
+        }))));
         assert.equal(await page.evaluate(() => history.length), historyLength);
         await page.locator('[data-exit-close]').first().click();
-        await page.clock.resume();
         await page.locator('#faqChatbotToggle').click();
         const question = page.locator('#faqChatbotPanel a').first();
         const target = await question.getAttribute('href');
@@ -162,6 +161,8 @@ const jsonLd = html => [...html.matchAll(/<script type="application\/ld\+json">(
         assert.equal(page.url(), destination);
         await page.goBack();
         assert.ok(page.url().startsWith(base));
+        // Edge 153 resets touch emulation after a full-page screenshot: capture only after interactions.
+        await page.screenshot({ path: path.join(output, `${name}-${width}.png`), fullPage: true });
         interactions.push({ name, width, destination, status: 'PASS' });
         await context.close();
       }

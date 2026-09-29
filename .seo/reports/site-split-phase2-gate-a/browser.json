@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "interactions": [
+    {
+      "name": "elementary",
+      "width": 1440,
+      "destination": "https://math-standard-landing-page.vercel.app/",
+      "status": "PASS"
+    },
+    {
+      "name": "elementary",
+      "width": 390,
+      "destination": "https://math-standard-landing-page.vercel.app/",
+      "status": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "failedResources": [],
+  "consultationSent": false
+}

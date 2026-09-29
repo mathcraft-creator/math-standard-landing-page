@@ -93,7 +93,7 @@ test('split: elementary resources and every relative link stay inside its own do
 test('split: brand switches are real low-priority links and consultation stays brand-specific', () => {
   for (const file of ['index.html', 'secondary.html']) {
     const html = read(file);
-    assert.match(html, /class="text-link" data-brand-switch="elementary" href="\.\/elementary.html"/);
+    assert.match(html, /class="text-link" data-brand-switch="elementary" href="https:\/\/ddaksoojj\.vercel\.app\/"/);
     assert.match(html, /초등 \| 딱풀리는수학 진접점 ↗/);
     assert.match(html, /id="ddak-elementary"/);
     assert.match(html, /<option selected>수학의 기준 진접본원<\/option>/);
