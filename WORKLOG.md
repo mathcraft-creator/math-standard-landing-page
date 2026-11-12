@@ -317,3 +317,16 @@
 - Production 계산 스타일은 데스크톱에서 초등 CTA 남색/흰색, 중·고등 CTA 노란색/남색, 높이 54px입니다. 390px 모바일에서는 두 CTA 모두 13px/48px이며 가로 넘침과 인물 이미지 겹침이 없습니다.
 - Production CSS의 keyboard focus, hover arrow, mobile sizing, portrait separation, reduced-motion 규칙을 확인했습니다.
 - 이 배포 기록은 release commit을 amend하지 않고 별도 documentation commit으로 남깁니다.
+
+## 2026-11-12 - 독립 사이트 분리 되돌리기
+
+- 사용자 요청으로 초등·중고등 독립 사이트 분리를 `db4ea58`(`docs: record home CTA production deployment`) 시점으로 되돌렸습니다. index/elementary/secondary 3페이지 구조는 유지합니다.
+- 분리 관련 커밋 3개를 각각 revert 커밋으로 남겼습니다(이력 삭제 없음). `971ec6b` → `62360c0`, `9b5fa17` → `e0187a8`, `9305ca6` → `88a4e41`.
+- 제거된 항목: `elementary-site/`, 분리용 테스트(`tests/site-split.test.cjs`, `tests/browser-site-split.cjs`, `tests/production-site-split-check.cjs`, `tests/vercelignore-check.cjs`), `.seo/reports/site-split-phase2*` 보고서, 분리 관련 README·WORKLOG 기록. `git diff db4ea58 HEAD`가 비어 있어 트리가 분리 이전과 같습니다.
+- 이 저장소에는 git 사용자 정보가 없어 revert 커밋에 기존 커밋과 같은 작성자 정보를 명령 단위로만 적용했습니다(설정 변경 없음).
+- 검증: `node --test tests/*.test.cjs` 28/28 PASS.
+- `origin/main`에 일반 push했습니다(`971ec6b..88a4e41`). force push는 사용하지 않았습니다. push 후 Vercel 자동 배포는 생성되지 않았습니다.
+- 에이전트 환경의 Vercel CLI는 로그아웃 상태라 배포하지 못했고, 사용자가 로그인 후 직접 Production 배포했습니다.
+- Production 확인(공개 응답만): 홈 HTML이 로컬 `index.html`과 동일(줄바꿈 제외 해시 일치), `elementary.html`·`secondary.html` HTTP 200, 홈의 두 상세 링크 존재, `elementary-site/` 404.
+- 미수행: 모바일 표시, 상담 복사, FAQ, 뒤로가기 등 브라우저 검수. Vercel deployment ID는 확인하지 않았습니다.
+- 변경 파일: `WORKLOG.md`(이 기록). 남은 작업: 필요 시 브라우저 검수.
