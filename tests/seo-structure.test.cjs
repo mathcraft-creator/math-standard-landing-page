@@ -7,8 +7,8 @@ const root = path.resolve(__dirname, '..');
 const baseUrl = 'https://math-standard-landing-page.vercel.app';
 const pages = [
   ['index.html', `${baseUrl}/`],
-  ['elementary.html', `${baseUrl}/elementary.html`],
-  ['secondary.html', `${baseUrl}/secondary.html`],
+  ['elementary/index.html', `${baseUrl}/elementary/`],
+  ['middle/index.html', `${baseUrl}/middle/`],
 ];
 
 function read(file) {
@@ -55,11 +55,13 @@ for (const [page, canonical] of pages) {
     const types = graphTypes(documents);
     assert.ok(types.includes('WebPage'), 'WebPage structured data is required');
     assert.ok(types.includes('EducationalOrganization'), 'EducationalOrganization structured data is required');
-    assert.ok(types.includes('FAQPage'), 'FAQPage structured data is required');
+    // 고르는 화면(index)에는 FAQ가 없다. FAQ 구조화 데이터는 과정 페이지에만 필수이고, 있으면 화면과 같아야 한다.
+    if (page !== 'index.html') assert.ok(types.includes('FAQPage'), 'FAQPage structured data is required');
 
     const faq = documents
       .flatMap((document) => document['@graph'] || [document])
       .find((item) => item['@type'] === 'FAQPage');
+    if (!faq) return;
     assert.ok(faq.mainEntity.length >= 3);
     const text = visibleText(html);
     for (const item of faq.mainEntity) {
@@ -95,8 +97,8 @@ test('academy entities use one stable parent and explicit brand relationships', 
   }
 
   for (const [page, brandId, brandName] of [
-    ['elementary.html', `${baseUrl}/#elementary-academy`, '딱풀리는수학 진접점'],
-    ['secondary.html', `${baseUrl}/#secondary-academy`, '수학의 기준 진접본원'],
+    ['elementary/index.html', `${baseUrl}/#elementary-academy`, '딱풀리는수학 진접점'],
+    ['middle/index.html', `${baseUrl}/#secondary-academy`, '수학의 기준 진접본원'],
   ]) {
     const items = graphItems(jsonLd(read(page)));
     const brand = items.find((item) => item['@id'] === brandId);
@@ -120,4 +122,15 @@ test('crawler discovery files match deployed canonical URLs', () => {
   assert.match(llms, /딱풀리는수학 진접점/);
   assert.match(llms, /수학의 기준 진접본원/);
   assert.match(vercelIgnore, /!llms\.txt/);
+  assert.match(vercelIgnore, /^!middle$/m);
+  assert.match(vercelIgnore, /^!elementary$/m);
+});
+
+test('legacy course URLs redirect to the new course pages', () => {
+  for (const [legacy, target] of [['elementary.html', 'elementary/'], ['secondary.html', 'middle/']]) {
+    const html = read(legacy);
+    assert.match(html, new RegExp(`<meta http-equiv="refresh" content="0; url=${target}">`), legacy);
+    assert.match(html, new RegExp(`<link rel="canonical" href="${baseUrl.replaceAll('.', '\\.')}/${target}">`), legacy);
+    assert.ok(html.includes(`location.replace('${target}'`), legacy);
+  }
 });
