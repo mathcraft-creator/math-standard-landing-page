@@ -44,6 +44,9 @@ test('course pages put kakao next to phone and link to each other', () => {
     assert.match(dock[0], /href="tel:0315225431"/);
     assert.ok(dock[0].includes(`href="${kakao}"`));
     assert.ok(dock[0].indexOf('tel:') < dock[0].indexOf(kakao), 'kakao sits after phone');
+    // 관리 단계 칸은 저절로 돌고, 스크롤을 붙잡지 않는다(2026-11-17)
+    assert.match(html, /autoCycle/, `${page}: steps advance on their own`);
+    assert.doesNotMatch(html, /pin\s*:\s*true/, `${page}: scroll is never pinned`);
   }
 });
 

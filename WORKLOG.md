@@ -356,3 +356,11 @@
 - `vercel link`가 `.env.local`을 만들고 `.gitignore`에 추가했습니다(.vercelignore로 업로드 제외).
 - Production 확인(공개 응답만): `/`, `/middle/`, `/elementary/`, `/secondary.html`, `/elementary.html`, School Hub, 시험 분석, 사진·로고, `sitemap.xml` 모두 HTTP 200. 홈 제목이 새 고르는 화면이고 네이버 사이트 인증 태그가 있습니다. `secondary.html`은 `middle/`로 넘깁니다. `/.env.local`, `/WORKLOG.md`는 404입니다.
 - 미수행: 실제 브라우저에서 뒤로가기·모바일 표시 검수.
+
+### 2026-11-17 - 관리 단계 칸 자동 순환
+
+- 사용자 요청: 관리 시스템(STEP 1~5) 칸이 PC에서 스크롤을 붙잡아(pin) 처음 온 사람이 멈춘 줄 알 수 있음 → 붙잡지 않고 저절로 돌게.
+- `middle/index.html`, `elementary/index.html`: ScrollTrigger pin을 빼고, 칸이 화면에 보이면 2.4초마다 다음 단계로 넘어가고 끝나면 처음부터 도는 `autoCycle`로 바꿈. 카드를 누르면 그 단계로, PC에서 마우스를 올리면 멈춤. 스크롤은 그대로 내려감.
+- `tests/site-structure.test.cjs`: 과정 페이지에 `autoCycle`이 있고 `pin: true`가 없는지 검사 추가.
+- 검증: `node --test tests/*.test.cjs` 30/30 PASS, 모양 점검 390·1440px 실패 0, 로컬 브라우저에서 5초 동안 단계가 저절로 넘어가고 스크롤이 막히지 않으며(pin-spacer 없음) 콘솔 오류 없음.
+- 사용자 지시("바로 올려줘")로 main에 push하고 Production 배포.

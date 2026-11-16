@@ -708,7 +708,7 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
   gsap.fromTo(good, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut', scrollTrigger: { trigger: '#stakes', start: 'top 70%' } })
   gsap.to('#sameRing', { rotation: 360, transformOrigin: '50% 50%', duration: 6, repeat: -1, ease: 'none' })
 
-  // 관리 시스템 — 순환 그림. PC는 칸을 붙잡고 스크롤로 한 칸씩, 휴대폰은 붙잡지 않고 단계만 바뀐다
+  // 관리 시스템 — 순환 그림. 칸이 보이면 단계가 저절로 돈다(붙잡지 않음)
   const steps = $$('#flow li'), N = steps.length, C = 220, R = 160
   const g = $('#orbitNodes'), NS = 'http://www.w3.org/2000/svg'
   const names = steps.map((li) => li.querySelector('h3').textContent)
@@ -728,14 +728,16 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
     $('#orbitNum').textContent = `${k + 1} / ${N}`
     gsap.to(prog, { strokeDashoffset: circ * (1 - (k + 1) / N), duration: 0.5, ease: 'power2.out' })
   }
-  const mm = gsap.matchMedia()
-  mm.add('(min-width: 961px)', () => {
-    ScrollTrigger.create({ trigger: '#system', start: 'top top', end: '+=' + (N * 70) + '%', pin: true, scrub: true,
-      onUpdate: (st) => show(Math.min(N - 1, Math.floor(st.progress * N))) })
-  })
-  mm.add('(max-width: 960px)', () => {
-    steps.forEach((li, k) => ScrollTrigger.create({ trigger: li, start: 'top 65%', end: 'bottom 65%', onToggle: (st) => st.isActive && show(k) }))
-  })
+  // 자동 순환(autoCycle) — 칸을 붙잡지 않는다. 칸이 화면에 보이면 2.4초마다 다음 단계로, 끝나면 처음부터.
+  // 스크롤은 그대로 내려간다(2026-11-17 원장님: 붙잡으면 처음 온 학부모가 멈춘 줄 안다). 카드를 누르면 그 단계로.
+  const autoCycle = { timer: null, on: false }
+  const tick = () => show((cur + 1) % N)
+  const play = () => { if (!autoCycle.timer && autoCycle.on) autoCycle.timer = setInterval(tick, 2400) }
+  const stop = () => { clearInterval(autoCycle.timer); autoCycle.timer = null }
+  ScrollTrigger.create({ trigger: '#system', start: 'top 70%', end: 'bottom 30%', onToggle: (st) => { autoCycle.on = st.isActive; st.isActive ? play() : stop() } })
+  steps.forEach((li, k) => { li.style.cursor = 'pointer'; li.addEventListener('click', () => { stop(); show(k); play() }) })
+  const box = document.querySelector('#system .wrap')
+  box.addEventListener('mouseenter', stop); box.addEventListener('mouseleave', play)
 })()
 </script>
 <script type="module">
