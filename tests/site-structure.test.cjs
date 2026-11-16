@@ -32,6 +32,13 @@ for (const page of pages) {
     assert.match(html, /href="tel:0315225431"/, 'phone consultation link');
     assert.ok(html.includes(`href="${kakao}"`), 'kakao consultation link');
     assert.match(html, /prefers-reduced-motion/, 'motion must stop for reduced-motion users');
+    // 이탈 방지 상담 안내(2026-11-17) — 공통 assets/exit-offer.js, 닫기 · 카톡 버튼
+    const dialog = html.match(/<dialog id="exitOfferDialog"[\s\S]*?<\/dialog>/);
+    assert.ok(dialog, `${page}: exit offer dialog`);
+    assert.match(dialog[0], /id="exitOfferTitle"/);
+    assert.match(dialog[0], /data-exit-close/);
+    assert.ok(dialog[0].includes(`href="${kakao}"`), 'exit offer has kakao');
+    assert.match(html, /<script src="(?:\.\.\/)?assets\/exit-offer\.js" defer><\/script>/);
   });
 }
 

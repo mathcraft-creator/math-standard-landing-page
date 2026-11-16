@@ -8,7 +8,7 @@ const pageUrl = file => process.env.EXIT_TEST_ORIGIN
 (async () => {
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
   try {
-    for (const file of ['index.html', 'elementary.html', 'secondary.html']) {
+    for (const file of ['index.html', 'middle/index.html', 'elementary/index.html']) {
       const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
       await page.clock.install();
       await page.goto(pageUrl(file));
@@ -16,15 +16,18 @@ const pageUrl = file => process.env.EXIT_TEST_ORIGIN
       await exit();
       assert.equal(await page.locator('#exitOfferDialog').evaluate(el => el.open), false, 'no immediate popup');
       await page.clock.fastForward(9000);
-      await page.locator('.menu a').first().focus();
+      await page.locator('a[href]').first().focus();
       await exit();
       assert.ok(await page.locator('#exitOfferDialog').evaluate(el => el.open));
       assert.ok((await page.locator('#exitOfferTitle').textContent()).length > 5);
       if (file === 'index.html') await page.screenshot({ path: path.join(root, 'docs/previews/exit-offer-desktop.png') });
-      await page.locator('[data-exit-consult]').click();
-      await page.clock.runFor(100);
-      assert.ok(page.url().endsWith('#apply'));
-      assert.ok(await page.locator('[name="student"]').evaluate(el => el === document.activeElement), 'consultation keeps focus');
+      // 과정 페이지: 상담 버튼이 상담 칸(#contact)으로. 고르는 화면: 상담 칸이 없어 전화·카톡 버튼만 — 닫기로 확인
+      if (file === 'index.html') await page.locator('.exit-later').click();
+      else {
+        await page.locator('[data-exit-consult]').click();
+        await page.clock.runFor(100);
+        assert.ok(page.url().endsWith('#contact'));
+      }
       assert.equal(await page.locator('#exitOfferDialog').evaluate(el => el.open), false);
       await exit();
       assert.equal(await page.locator('#exitOfferDialog').evaluate(el => el.open), false, 'once per page visit');

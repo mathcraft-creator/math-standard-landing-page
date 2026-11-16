@@ -252,6 +252,20 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
 @media (max-width: 960px) { .dock { display: flex; } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* 이탈 방지 상담 안내 — 2026-11-17 (예전 랜딩의 exit-offer를 새 디자인에 맞춤) */
+.exit-offer { width: min(480px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; padding: 30px 28px 22px; border: 0; border-radius: var(--radius-card); background: #fff; color: var(--ink); box-shadow: 0 24px 60px rgba(10, 20, 40, .28); }
+.exit-offer::backdrop { background: rgba(10, 20, 40, .55); }
+.exit-offer .exit-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.exit-offer .exit-tag { display: inline-block; padding: 5px 12px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-ink); font-weight: 800; font-size: 13px; }
+.exit-offer .exit-x { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--surface); color: var(--ink); font-size: 22px; line-height: 1; cursor: pointer; }
+.exit-offer h2 { margin: 18px 0 0; font-size: clamp(22px, 4.4vw, 28px); line-height: 1.35; word-break: keep-all; }
+.exit-offer .exit-copy { margin: 14px 0 0; color: var(--muted); font-size: 16px; line-height: 1.65; word-break: keep-all; }
+.exit-offer .exit-note { margin: 14px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--surface); font-size: 14px; line-height: 1.6; word-break: keep-all; }
+.exit-offer .exit-actions { display: grid; gap: 10px; margin-top: 20px; }
+.exit-offer .exit-actions .btn { justify-content: center; width: 100%; }
+.exit-offer .exit-later { display: block; margin: 12px auto 0; padding: 10px; border: 0; background: transparent; color: var(--muted); font-size: 14px; text-decoration: underline; cursor: pointer; }
+@media (max-width: 390px) { .exit-offer { padding: 24px 20px 18px; } }
 </style>
 <!-- 검색 · 공유 정보: 이전 elementary.html에서 옮김 -->
 <meta name="theme-color" content="#0a2455" />
@@ -837,5 +851,18 @@ if (renderer && stage) {
   frame()
 }
 </script>
+
+<dialog id="exitOfferDialog" class="exit-offer" data-lenis-prevent aria-labelledby="exitOfferTitle" aria-describedby="exitOfferCopy">
+  <div class="exit-head"><span class="exit-tag">가시기 전, 잠깐만요</span><button type="button" class="exit-x" data-exit-close aria-label="상담 안내 닫기" autofocus>×</button></div>
+  <h2 id="exitOfferTitle">우리 아이에게 맞는 수학, 먼저 경험해 보세요.</h2>
+  <p id="exitOfferCopy" class="exit-copy">계산은 되는데 문장제가 어렵거나, 풀이를 설명하기 힘들다면 현재 수준부터 살펴보겠습니다. 개별 진도와 설명하는 수학이 아이에게 맞는지 확인해 보세요.</p>
+  <p class="exit-note">바로 등록하지 않으셔도 괜찮습니다. 진단 상담과 1주 체험부터 문의해 주세요.</p>
+  <div class="exit-actions">
+    <a class="btn main" data-exit-consult href="#contact">우리 아이 상담·1주 체험 문의 →</a>
+    <a class="btn kakao" data-exit-chat href="http://pf.kakao.com/_yWFTn/chat" target="_blank" rel="noopener">카카오톡으로 바로 상담하기</a>
+  </div>
+  <button type="button" class="exit-later" data-exit-close>괜찮아요, 더 둘러볼게요</button>
+</dialog>
+<script src="../assets/exit-offer.js" defer></script>
 </body>
 </html>

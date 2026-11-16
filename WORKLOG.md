@@ -364,3 +364,12 @@
 - `tests/site-structure.test.cjs`: 과정 페이지에 `autoCycle`이 있고 `pin: true`가 없는지 검사 추가.
 - 검증: `node --test tests/*.test.cjs` 30/30 PASS, 모양 점검 390·1440px 실패 0, 로컬 브라우저에서 5초 동안 단계가 저절로 넘어가고 스크롤이 막히지 않으며(pin-spacer 없음) 콘솔 오류 없음.
 - 사용자 지시("바로 올려줘")로 main에 push하고 Production 배포.
+
+### 2026-11-17 - 이탈 방지 상담 안내 다시 넣기
+
+- 사용자 요청: 이전 랜딩에 있던 이탈 방지 팝업을 새 페이지에도.
+- `index.html`, `middle/index.html`, `elementary/index.html`: 예전과 같은 문구의 `#exitOfferDialog`를 새 디자인(페이지 색 토큰)으로 넣고 `assets/exit-offer.js`를 연결. 과정 페이지의 첫 버튼은 상담 칸(`#contact`)으로, 고르는 화면은 상담 칸이 없어 전화 버튼. 둘째 버튼은 카카오톡.
+- `assets/exit-offer.js`: 상담 버튼이 자기 href(`#contact` 또는 옛 `#apply`)로 가게 하고, `#contact` 클릭도 상담 중으로 봄. 나머지 동작(8초 뒤, PC는 창 위로 마우스가 나갈 때, 휴대폰은 600px 넘게 읽은 뒤 240px 위로 돌아갈 때, 방문당 한 번, 뒤로가기 가로채지 않음)은 그대로.
+- 검사: `tests/site-structure.test.cjs`에 팝업·스크립트 연결 검사 추가, `tests/browser-exit-check.cjs` 대상을 새 페이지로 바꿈.
+- 검증: `node --test tests/*.test.cjs` 30/30 PASS, 모양 점검 실패 0. 로컬 브라우저: PC에서 8초 전에는 안 뜨고 뒤에는 뜸, 상담 버튼 → `#contact`로 이동 · 닫힘 · 다시 안 뜸, 고르는 화면 표시, 휴대폰(375px)에서 위로 스크롤하면 뜨고 history 변화 없음 · 가로 넘침 없음 · 닫기 동작.
+- 미수행: `tests/browser-exit-check.cjs`(이 PC에 Playwright 없음).

@@ -42,7 +42,7 @@
     if (!link) return;
     pauseUntil = Date.now() + 1500;
     var href = link.getAttribute('href');
-    if (href === '#apply' || href.indexOf('tel:') === 0 || href.indexOf('pf.kakao.com/') !== -1) consulting = true;
+    if (href === '#apply' || href === '#contact' || href.indexOf('tel:') === 0 || href.indexOf('pf.kakao.com/') !== -1) consulting = true;
   }, true);
 
   var form = document.getElementById('consultForm');
@@ -66,7 +66,8 @@
       consulting = true;
       previousFocus = null;
       dialog.close();
-      window.location.hash = '#apply';
+      // 옛 페이지는 #apply(상담 폼), 새 페이지는 #contact(상담 칸) — 버튼의 href를 따른다
+      window.location.hash = link.getAttribute('href') || '#apply';
       var field = document.querySelector('#consultForm [name="student"]');
       if (field) field.focus({ preventScroll: true });
     });
