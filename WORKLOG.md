@@ -330,3 +330,14 @@
 - Production 확인(공개 응답만): 홈 HTML이 로컬 `index.html`과 동일(줄바꿈 제외 해시 일치), `elementary.html`·`secondary.html` HTTP 200, 홈의 두 상세 링크 존재, `elementary-site/` 404.
 - 미수행: 모바일 표시, 상담 복사, FAQ, 뒤로가기 등 브라우저 검수. Vercel deployment ID는 확인하지 않았습니다.
 - 변경 파일: `WORKLOG.md`(이 기록). 남은 작업: 필요 시 브라우저 검수.
+
+## 2026-11-16 - 쿡북 랜딩 3페이지로 교체 (브랜치 feat/cookbook-landing-2026-11-16)
+
+- 사용자 요청으로 academy-landing-cookbook에서 만든 진접 묶음 사이트를 넣었습니다. 원장님이 2026-11-16 완성본을 승인했습니다.
+- 새 파일: `index.html`(초등·중고등 고르는 화면), `middle/`(수학의 기준 진접본원), `elementary/`(딱풀리는수학 진접점), `assets/ddak-logo.png`, `assets/gijun-logo.jpg`.
+- `elementary.html`·`secondary.html`은 새 주소(`elementary/`·`middle/`)로 바로 넘기는 이동 페이지로 바꿨습니다. 옛 주소 링크는 계속 작동합니다.
+- 옛 페이지의 검색·공유 정보(구글·네이버 사이트 인증, og/twitter, canonical, 학원 구조화 데이터)를 새 페이지로 옮기고 주소를 새 경로로 고쳤습니다. FAQ 구조화 데이터는 새 페이지에 보이는 질문으로 다시 만들었고, FAQ가 없는 고르는 화면에서는 뺐습니다.
+- `sitemap.xml`, `llms.txt`, 풍양중 School Hub·시험 분석 페이지의 링크를 새 주소로 바꿨습니다. 고르는 화면·중고등 페이지 아래에 풍양중 시험분석 링크를 넣었습니다. `.vercelignore`에 `middle`, `elementary`를 추가했습니다.
+- 원장 관리 화면(/admin, api)은 넣지 않았습니다. 별도 Vercel 프로젝트(jinjeop-landing)용입니다.
+- 검증: 모양 점검(look.mjs) 세 페이지 390·1440px 실패 0. `node --test tests/*.test.cjs`는 18/28 PASS, 10 FAIL입니다. 실패는 옛 페이지 구조를 고정한 검사입니다(상담 문장 복사 폼, 인물 사진 카드, `elementary.html`·`secondary.html` 파일명 기준 메타데이터·앵커, 홈 FAQ). 새 구조에 맞게 검사를 고치는 일이 남았습니다.
+- 미수행: Production 배포, 브라우저에서 이탈 팝업·뒤로가기 검수(새 페이지에는 exit-offer.js가 없습니다).
