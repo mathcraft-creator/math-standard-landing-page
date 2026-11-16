@@ -349,3 +349,10 @@
 - `tests/school-pilot.test.cjs`: 링크 그래프를 `middle/`·`middle/#contact` 기준으로 바꾸고 고르는 화면의 풍양중 링크를 추가.
 - 검증: `node --test tests/*.test.cjs` 30/30 PASS.
 - 남은 일: Production 배포, 브라우저 검수(뒤로가기·이동 페이지).
+
+### 2026-11-17 - Production 배포
+
+- PR #2를 main에 일반 merge(`1048df0`)한 뒤 Vercel CLI(65.16.0)로 기존 프로젝트 `math-standard-landing-page`에 Production 배포했습니다. 배포 주소 `math-standard-landing-page-bl18jbt5m.vercel.app`, 고정 주소 `https://math-standard-landing-page.vercel.app`.
+- `vercel link`가 `.env.local`을 만들고 `.gitignore`에 추가했습니다(.vercelignore로 업로드 제외).
+- Production 확인(공개 응답만): `/`, `/middle/`, `/elementary/`, `/secondary.html`, `/elementary.html`, School Hub, 시험 분석, 사진·로고, `sitemap.xml` 모두 HTTP 200. 홈 제목이 새 고르는 화면이고 네이버 사이트 인증 태그가 있습니다. `secondary.html`은 `middle/`로 넘깁니다. `/.env.local`, `/WORKLOG.md`는 404입니다.
+- 미수행: 실제 브라우저에서 뒤로가기·모바일 표시 검수.
