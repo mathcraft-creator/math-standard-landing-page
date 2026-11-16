@@ -181,20 +181,21 @@ test('exam page displays values from the validated public JSON', () => {
 });
 
 test('pilot pages and discovery files form one internal link graph', () => {
-  const secondary = read('secondary.html');
+  const secondary = read('middle/index.html');
   const hub = read(hubFile);
   const exam = read(examFile);
   const sitemap = read('sitemap.xml');
   const llms = read('llms.txt');
   const vercelIgnore = read('.vercelignore');
 
-  assert.match(secondary, /href="\.\/schools\/pungyang-middle\/"[^>]*>풍양중 수학 시험분석/);
-  assert.match(hub, /href="\.\.\/\.\.\/secondary\.html"/);
+  assert.match(secondary, /href="\.\.\/schools\/pungyang-middle\/"[^>]*>풍양중 수학 시험분석/);
+  assert.match(read('index.html'), /href="\.\/schools\/pungyang-middle\/"[^>]*>풍양중 수학 시험분석/);
+  assert.match(hub, /href="\.\.\/\.\.\/middle\/"/);
   assert.match(hub, /href="\.\.\/\.\.\/exams\/pungyang-middle\/2026-g3-s1-final\/"/);
-  assert.match(hub, /href="\.\.\/\.\.\/secondary\.html#apply"/);
+  assert.match(hub, /href="\.\.\/\.\.\/middle\/#contact"/);
   assert.match(exam, /href="\.\.\/\.\.\/\.\.\/schools\/pungyang-middle\/"/);
-  assert.match(exam, /href="\.\.\/\.\.\/\.\.\/secondary\.html"/);
-  assert.match(exam, /href="\.\.\/\.\.\/\.\.\/secondary\.html#apply"/);
+  assert.match(exam, /href="\.\.\/\.\.\/\.\.\/middle\/"/);
+  assert.match(exam, /href="\.\.\/\.\.\/\.\.\/middle\/#contact"/);
 
   for (const url of [hubUrl, examUrl]) {
     assert.ok(sitemap.includes(`<loc>${url}</loc>`), url);

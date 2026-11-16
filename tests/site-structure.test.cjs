@@ -3,43 +3,63 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', 'elementary.html', 'secondary.html'];
+const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+
+// 2026-11-16 쿡북 판: 고르는 화면(index) + 중·고등(middle/) + 초등(elementary/).
+// 상담은 전화(tel:)와 카카오톡 채널 링크다. 문장 복사 폼은 없다.
+const pages = ['index.html', 'middle/index.html', 'elementary/index.html'];
+const kakao = 'http://pf.kakao.com/_yWFTn/chat';
+
 for (const page of pages) {
   test(`${page}: standalone document, unique anchors and working local resources`, () => {
-    const html = fs.readFileSync(path.join(root, page), 'utf8');
+    const html = read(page);
+    const dir = path.dirname(path.join(root, page));
     assert.equal((html.match(/<div\b/g) || []).length, (html.match(/<\/div>/g) || []).length, 'all layout containers must close');
     assert.match(html, /<html lang="ko">/);
     assert.equal((html.match(/<h1\b/g) || []).length, 1);
-    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+    const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
     assert.equal(new Set(ids).size, ids.length, 'duplicate IDs');
     for (const [, value] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
-      if (/^(?:https?:|tel:|data:)/.test(value)) continue;
+      if (/^(?:https?:|tel:|data:|mailto:)/.test(value)) continue;
       const [file, hash] = value.split('#');
-      const target = path.resolve(root, file || page);
+      let target = file ? path.resolve(dir, file) : path.join(root, page);
       assert.ok(target.startsWith(root + path.sep), value);
       assert.ok(fs.existsSync(target), `${page} missing ${value}`);
+      if (fs.statSync(target).isDirectory()) target = path.join(target, 'index.html');
+      assert.ok(fs.existsSync(target), `${page} missing ${value} (index.html)`);
       if (hash) assert.ok(fs.readFileSync(target, 'utf8').includes(`id="${hash}"`), `missing anchor ${value}`);
     }
-    assert.match(html, /id="consultMessage"[^>]*readonly/);
-    assert.match(html, /id="phoneDialog"/);
-    assert.match(html, /type="submit"\s+disabled/, 'submission must be disabled until the local handler is ready');
-    assert.match(html, /<noscript\b/);
-    assert.match(html, /data-phone-number/);
+    assert.match(html, /href="tel:0315225431"/, 'phone consultation link');
+    assert.ok(html.includes(`href="${kakao}"`), 'kakao consultation link');
+    assert.match(html, /prefers-reduced-motion/, 'motion must stop for reduced-motion users');
   });
 }
-test('home course links contain the correctly assigned portraits', () => {
-  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  for (const name of ['elementary', 'secondary']) {
-    const card = html.match(new RegExp(`<a[^>]*class="course-card ${name}"[\\s\\S]*?</a>`));
-    assert.ok(card, name);
-    assert.ok(card[0].includes(`href="./${name}.html"`));
-    assert.ok(card[0].includes(`src="./assets/${name}-portrait.png"`));
+
+test('course pages put kakao next to phone and link to each other', () => {
+  for (const [page, sibling] of [['middle/index.html', '../elementary/'], ['elementary/index.html', '../middle/']]) {
+    const html = read(page);
+    assert.ok(html.includes(`href="${sibling}"`), `${page} links to ${sibling}`);
+    const dock = html.match(/<div class="dock">[\s\S]*?<\/div>/);
+    assert.ok(dock, `${page}: mobile dock`);
+    assert.match(dock[0], /href="tel:0315225431"/);
+    assert.ok(dock[0].includes(`href="${kakao}"`));
+    assert.ok(dock[0].indexOf('tel:') < dock[0].indexOf(kakao), 'kakao sits after phone');
+  }
+});
+
+test('home chooser links both course pages with their logos', () => {
+  const html = read('index.html');
+  for (const [href, logo] of [['elementary/', 'assets/ddak-logo.png'], ['middle/', 'assets/gijun-logo.jpg']]) {
+    const card = html.match(new RegExp(`<a[^>]*href="${href}"[\\s\\S]*?</a>`));
+    assert.ok(card, href);
+    assert.ok(card[0].includes(`src="${logo}"`), `${href} card shows ${logo}`);
     assert.ok(!card[0].includes('target="_blank"'));
   }
 });
 
 test('home course CTAs have prominent and accessible visual states', () => {
-  const css = fs.readFileSync(path.join(root, 'assets/site.css'), 'utf8');
+  // assets/site.css는 풍양중 School Hub·시험 분석 페이지가 계속 쓴다.
+  const css = read('assets/site.css');
   assert.match(css, /\.course-card\.elementary \.course-button\s*{[^}]*background:\s*#102e69;[^}]*color:\s*#fff;/s);
   assert.match(css, /\.course-card\.secondary \.course-button\s*{[^}]*background:\s*#ffd65a;[^}]*color:\s*#071a3c;/s);
   assert.match(css, /\.course-card:focus-visible\s*{[^}]*outline:/s);
