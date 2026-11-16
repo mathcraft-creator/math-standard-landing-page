@@ -373,3 +373,8 @@
 - 검사: `tests/site-structure.test.cjs`에 팝업·스크립트 연결 검사 추가, `tests/browser-exit-check.cjs` 대상을 새 페이지로 바꿈.
 - 검증: `node --test tests/*.test.cjs` 30/30 PASS, 모양 점검 실패 0. 로컬 브라우저: PC에서 8초 전에는 안 뜨고 뒤에는 뜸, 상담 버튼 → `#contact`로 이동 · 닫힘 · 다시 안 뜸, 고르는 화면 표시, 휴대폰(375px)에서 위로 스크롤하면 뜨고 history 변화 없음 · 가로 넘침 없음 · 닫기 동작.
 - 미수행: `tests/browser-exit-check.cjs`(이 PC에 Playwright 없음).
+
+### 2026-11-17 - 관리 단계 순환 1초로
+
+- 사용자 요청: 관리 단계 칸이 2.4초마다 → 1초마다 다음 단계로. `middle/index.html`, `elementary/index.html`의 `setInterval(tick, 1000)`.
+- 검증: `node --test tests/*.test.cjs` 30/30 PASS, 로컬 브라우저에서 1초마다 1/5 → 5/5 진행. 사용자 지시("바로 올려줘")로 main push · Production 배포.

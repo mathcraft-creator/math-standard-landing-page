@@ -742,11 +742,11 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
     $('#orbitNum').textContent = `${k + 1} / ${N}`
     gsap.to(prog, { strokeDashoffset: circ * (1 - (k + 1) / N), duration: 0.5, ease: 'power2.out' })
   }
-  // 자동 순환(autoCycle) — 칸을 붙잡지 않는다. 칸이 화면에 보이면 2.4초마다 다음 단계로, 끝나면 처음부터.
+  // 자동 순환(autoCycle) — 칸을 붙잡지 않는다. 칸이 화면에 보이면 1초마다 다음 단계로, 끝나면 처음부터.
   // 스크롤은 그대로 내려간다(2026-11-17 원장님: 붙잡으면 처음 온 학부모가 멈춘 줄 안다). 카드를 누르면 그 단계로.
   const autoCycle = { timer: null, on: false }
   const tick = () => show((cur + 1) % N)
-  const play = () => { if (!autoCycle.timer && autoCycle.on) autoCycle.timer = setInterval(tick, 2400) }
+  const play = () => { if (!autoCycle.timer && autoCycle.on) autoCycle.timer = setInterval(tick, 1000) }
   const stop = () => { clearInterval(autoCycle.timer); autoCycle.timer = null }
   ScrollTrigger.create({ trigger: '#system', start: 'top 70%', end: 'bottom 30%', onToggle: (st) => { autoCycle.on = st.isActive; st.isActive ? play() : stop() } })
   steps.forEach((li, k) => { li.style.cursor = 'pointer'; li.addEventListener('click', () => { stop(); show(k); play() }) })
