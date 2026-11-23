@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
-const baseUrl = 'https://math-standard-landing-page.vercel.app';
+const baseUrl = 'https://math-standard.co.kr';
 const hubFile = 'schools/pungyang-middle/index.html';
 const examFile = 'exams/pungyang-middle/2026-g3-s1-final/index.html';
 const hubUrl = `${baseUrl}/schools/pungyang-middle/`;

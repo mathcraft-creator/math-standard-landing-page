@@ -3,5 +3,19 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.math-standard.co.kr" }],
+      "destination": "https://math-standard.co.kr/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "math-standard-landing-page.vercel.app" }],
+      "destination": "https://math-standard.co.kr/:path*",
+      "permanent": true
+    }
+  ]
 }
