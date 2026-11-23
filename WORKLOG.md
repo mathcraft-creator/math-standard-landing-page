@@ -378,3 +378,12 @@
 
 - 사용자 요청: 관리 단계 칸이 2.4초마다 → 1초마다 다음 단계로. `middle/index.html`, `elementary/index.html`의 `setInterval(tick, 1000)`.
 - 검증: `node --test tests/*.test.cjs` 30/30 PASS, 로컬 브라우저에서 1초마다 1/5 → 5/5 진행. 사용자 지시("바로 올려줘")로 main push · Production 배포.
+
+### 2026-11-23 - 새 도메인 math-standard.co.kr 연결
+
+- 가비아에서 산 `math-standard.co.kr`를 Vercel 프로젝트 `math-standard-landing-page`에 연결했습니다(apex + www). 가비아 DNS: A `@` 216.198.79.1, A `@` 64.29.17.1, CNAME `www` d4179e9ad777346d.vercel-dns-017.com. 가비아 DNS 화면은 레코드 입력 후 [저장]을 눌러야 반영됩니다.
+- 운영 파일 13개의 canonical·공유·sitemap·robots·llms 주소를 `https://math-standard.co.kr`로 바꿨습니다. `vercel.json`에서 `www`와 옛 `math-standard-landing-page.vercel.app` 주소를 새 도메인으로 영구 이동(308)합니다. `/:path*` 패턴은 `/`와 슬래시로 끝나는 주소를 놓쳐서 `/(.*)`로 바꿨습니다.
+- 커리큘럼 작업(`feature/curriculum-explorer`)이 커밋되지 않은 상태라, main에서 만든 별도 작업 폴더(`feat/custom-domain`)에서 Production 배포했습니다.
+- 검증: `node --test tests/*.test.cjs` 30/30 PASS. 실제 응답: 새 도메인의 7개 페이지와 sitemap·robots·llms 200, www·vercel.app·http는 새 주소로 308, canonical 새 주소, 메인에 vercel.app 문자열 0개, 두 인증 태그 유지.
+- 실수로 추가한 `math-standard.com` 연결이 Vercel에 남아 있습니다(삭제는 사용자 승인 필요).
+- 남은 일: 구글 서치콘솔·네이버 서치어드바이저에 새 주소 등록·사이트맵 제출(사용자 계정). 커리큘럼 브랜치를 배포할 때 그쪽 주소도 `.co.kr`로 맞춰야 합니다.
