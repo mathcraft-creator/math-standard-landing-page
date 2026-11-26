@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://math-standard-landing-page.vercel.app/data/schemas/public-exam.schema.json",
+  "$id": "https://math-standard.co.kr/data/schemas/public-exam.schema.json",
   "title": "Public exam analysis",
   "type": "object",
   "additionalProperties": false,

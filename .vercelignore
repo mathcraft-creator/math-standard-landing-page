@@ -13,3 +13,9 @@
 !robots.txt
 !sitemap.xml
 !llms.txt
+!curriculum
+curriculum/*
+!curriculum/index.html
+!curriculum/planner
+curriculum/planner/*
+!curriculum/planner/index.html

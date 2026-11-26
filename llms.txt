@@ -4,17 +4,19 @@
 
 ## 주요 페이지
 
-- [메인](https://math-standard-landing-page.vercel.app/): 두 과정의 공통 학습 기준, 과정 선택, 상담, 위치 안내
-- [초등 · 딱풀리는수학 진접점](https://math-standard-landing-page.vercel.app/elementary/): 초3~초6 개별 진도, 홉·스텝·점프, 5단계 학습, C-AT 오답관리, 설명하기, 귀가보고서
-- [중·고등 · 수학의 기준 진접본원](https://math-standard-landing-page.vercel.app/middle/): 플립러닝, 메타인지 오답노트, 재테스트, 학교별 내신 대비, 시험 전후 관리
-- [풍양중 수학 시험·내신 정보](https://math-standard-landing-page.vercel.app/schools/pungyang-middle/): 풍양중 실제 시험 분석과 학교별 수학 내신 대비 방법
-- [2026 풍양중 3학년 1학기 기말고사 수학 분석](https://math-standard-landing-page.vercel.app/exams/pungyang-middle/2026-g3-s1-final/): 21문항의 형식, 단원별 배점과 수학의 기준 자체 난이도 분석
+- [메인](https://math-standard.co.kr/): 두 과정의 공통 학습 기준, 과정 선택, 상담, 위치 안내
+- [초등 · 딱풀리는수학 진접점](https://math-standard.co.kr/elementary/): 초3~초6 개별 진도, 홉·스텝·점프, 5단계 학습, C-AT 오답관리, 설명하기, 귀가보고서
+- [중·고등 · 수학의 기준 진접본원](https://math-standard.co.kr/middle/): 플립러닝, 메타인지 오답노트, 재테스트, 학교별 내신 대비, 시험 전후 관리
+- [풍양중 수학 시험·내신 정보](https://math-standard.co.kr/schools/pungyang-middle/): 풍양중 실제 시험 분석과 학교별 수학 내신 대비 방법
+- [2026 풍양중 3학년 1학기 기말고사 수학 분석](https://math-standard.co.kr/exams/pungyang-middle/2026-g3-s1-final/): 21문항의 형식, 단원별 배점과 수학의 기준 자체 난이도 분석
+- [고교학점제 과목·전공 탐색관](https://math-standard.co.kr/curriculum): 2022 개정 과목·전공·2028 대학 권장과목 참고 자료. 최신 모집요강과 학교 개설 과목 확인 필요.
+- [학교별 6학기 과목 선택 설계](https://math-standard.co.kr/curriculum/planner/): 진접고·오남고·진건고 2027 입학생의 편성 계획과 광동고 나이스 수집 자료 기반 6학기 추정 추천(학점·학교 선택 조건 미확인). 졸업·합격 및 실제 개설을 보장하지 않음.
 
 ## 기본 정보
 
 - 주소: 경기도 남양주시 진접읍 해밀예당1로 40 화성프라자 5층
 - 전화: 031-522-5431
-- 상담: 페이지에서 상담 문장을 만든 뒤 사용자가 직접 복사해 카카오톡으로 전송합니다.
+- 상담: 현재 운영 페이지의 전화 또는 카카오톡 채널 버튼으로 문의합니다. 자동 접수·서버 저장 기능은 없습니다.
 - 체험: 진단과 상담 후 1주일 체험을 문의할 수 있으며 일정과 세부 조건은 상담에서 안내합니다.
 
 ## 공식 소식

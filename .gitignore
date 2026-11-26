@@ -6,3 +6,7 @@ node_modules/
 .vercel
 .look-*
 .env*
+
+# Local NEIS research snapshots (not deployment/source files).
+work/neis/
+__pycache__/

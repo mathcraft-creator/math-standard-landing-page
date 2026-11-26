@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "schools": [
+    {
+      "id": "jinjeop",
+      "name": "진접고",
+      "cohorts": [
+        {
+          "entryYear": 2027,
+          "status": "planned",
+          "path": "schools/jinjeop/2027.json",
+          "version": "4adca67583014dcb37a7c7eb"
+        }
+      ]
+    },
+    {
+      "id": "onam",
+      "name": "오남고",
+      "cohorts": [
+        {
+          "entryYear": 2027,
+          "status": "planned",
+          "path": "schools/onam/2027.json",
+          "version": "288092dfb21112c99035b0df"
+        }
+      ]
+    },
+    {
+      "id": "jingeon",
+      "name": "진건고",
+      "cohorts": [
+        {
+          "entryYear": 2027,
+          "status": "planned",
+          "path": "schools/jingeon/2027.json",
+          "version": "45c87d5568937cb4a106e8ab"
+        }
+      ]
+    },
+    {
+      "id": "kwangdong",
+      "name": "광동고",
+      "cohorts": [
+        {
+          "entryYear": 2027,
+          "status": "projected",
+          "path": "schools/kwangdong/2027.json",
+          "version": "1594dfe8fc92e7e2b533c695"
+        }
+      ]
+    }
+  ],
+  "notice": "편제표의 개설 후보·편성 계획입니다. 실제 개설과 반별 학기 배정은 학교에서 확인하세요."
+}

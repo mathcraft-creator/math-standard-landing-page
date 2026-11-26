@@ -1,0 +1,18 @@
+{
+  "updates": [
+    {
+      "file": "2027 광동고 교육과정 GPT용.xlsx",
+      "beforeSha256": "fefb38eca0b6edf0f64328c2220a80dd3c91cb628f28b9a42cb70afeecf3ba9e",
+      "afterSha256": "81b9943b23291d9151d16adc792b5063bb4d8b334ba82bc512cc8281087d050c",
+      "reason": "사용자 제공 네이버 캡처 4장 반영",
+      "date": "2026-11-23"
+    },
+    {
+      "file": "2027 남양주 4개 고등학교 교육과정 비교.xlsx",
+      "beforeSha256": "688d3007ca647fda8359b588eea69930e0c0cf87a868b4badcd1bc6de5fc4a5f",
+      "afterSha256": "e45510888d493f4064a2e7335754cf109e393b98cc23d0eb53d4149be2d338b9",
+      "reason": "사용자 제공 네이버 캡처 4장 반영",
+      "date": "2026-11-23"
+    }
+  ]
+}

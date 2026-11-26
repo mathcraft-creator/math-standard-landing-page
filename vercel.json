@@ -3,5 +3,44 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.math-standard.co.kr"
+        }
+      ],
+      "destination": "https://math-standard.co.kr/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "math-standard-landing-page.vercel.app"
+        }
+      ],
+      "destination": "https://math-standard.co.kr/$1",
+      "permanent": true
+    },
+    {
+      "source": "/curriculum/planner",
+      "destination": "/curriculum/planner/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/curriculum",
+      "destination": "/curriculum/index.html"
+    },
+    {
+      "source": "/curriculum/",
+      "destination": "/curriculum/index.html"
+    }
+  ]
 }

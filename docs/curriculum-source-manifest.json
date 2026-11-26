@@ -1,0 +1,21 @@
+{
+  "original": "2022개정_과목전공_교차탐색관.html",
+  "originalBytes": 3595960,
+  "originalSha256": "b1f4cbe0581c32f943ce6a3c855d63b0eb53bb48a0d9ce01b1a1fb3cb03392bf",
+  "jsonBytes": 3528623,
+  "jsonSha256": "d325060c7fb21cde5c15afd612d467035a9c47a9f267aabbdb8b28dcad94ee72",
+  "counts": {
+    "S": 290,
+    "U": 1358,
+    "R": 240,
+    "RC": 16,
+    "SR": 19,
+    "M": 119,
+    "DG": 65,
+    "YS": 84,
+    "AREA": 8,
+    "MISC": 7
+  },
+  "universities": 47,
+  "representativeUnits": 16
+}
