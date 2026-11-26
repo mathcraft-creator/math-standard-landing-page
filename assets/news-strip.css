@@ -1,0 +1,15 @@
+/* Upcoming-event strip on the main page. Filled by scripts/build-news.cjs; assets/news.js hides ended items. */
+.news-strip { background: #13233f; color: #fff; }
+.news-strip .in { display: grid; gap: 1px; padding: 0; }
+.news-item { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; min-height: 56px; padding: 10px 0; color: #fff; }
+.news-item .chip { padding: 3px 10px; border-radius: 999px; background: #ffd23f; color: #191600; font-size: 13px; font-weight: 800; }
+.news-item .dday { font-size: 13px; font-weight: 800; color: #9fd0ff; }
+.news-item .dday:empty { display: none; }
+.news-item b { font-size: 16px; font-weight: 800; }
+.news-item .go-more { margin-left: auto; font-size: 14px; font-weight: 700; color: #c9d3e3; text-decoration: underline; text-underline-offset: 4px; }
+.news-item:hover .go-more { color: #fff; }
+.news-item:focus-visible { outline: 3px solid #ffd23f; outline-offset: 2px; }
+@media (max-width: 600px) {
+  .news-item b { font-size: 15px; flex-basis: 100%; order: 3; }
+  .news-item .go-more { order: 2; }
+}

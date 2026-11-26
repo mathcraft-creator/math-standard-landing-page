@@ -212,6 +212,8 @@ html.no-js .hl, .reduce .hl { background-size: 100% 100%; }
 .posts b { font-size: 18px; line-height: 1.5; flex: 1; }
 .posts .meta { display: flex; justify-content: space-between; color: var(--muted); font-size: 14px; }
 @media (max-width: 960px) { .posts { grid-template-columns: 1fr; } }
+.news-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 22px; }
+.news-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; text-decoration: underline; text-underline-offset: 5px; }
 
 /* 상담 */
 #contact .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: start; }
@@ -424,6 +426,7 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
       <a href="#programs">프로그램</a>
       <a href="#start">입학안내</a>
       <a href="#news">학원소식</a>
+      <a href="../blog/">블로그</a>
       <a href="#system">재원생관리</a>
       <a href="../curriculum">고교학점제·진로 탐색</a>
       <a href="../curriculum/planner/">6학기 과목 설계</a>
@@ -619,13 +622,16 @@ footer { padding: 30px 0 110px; color: var(--muted); font-size: 14px; border-top
 
 <section class="part tone" id="news">
   <div class="in">
-    <p class="label" data-rise>BLOG</p>
-    <h2 data-rise>요즘 블로그에 쓴 글</h2>
+    <p class="label" data-rise>NEWS · BLOG</p>
+    <h2 data-rise>학원 소식과 블로그</h2>
     <ul class="posts">
-      <li data-card><a href="https://blog.naver.com/standrad-of-math/224474877665" target="_blank" rel="noopener"><span class="tag">블로그</span><b>수학 실력은 습관에서, 고등학교 준비는 방향에서</b><span class="meta"><time>2026-11-12</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
-      <li data-card><a href="https://blog.naver.com/standrad-of-math" target="_blank" rel="noopener"><span class="tag">블로그</span><b>중간고사 시험지로 기말고사 성적을 바꾸는 법</b><span class="meta"><time>2026-10-23</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
-      <li data-card><a href="https://blog.naver.com/standrad-of-math" target="_blank" rel="noopener"><span class="tag">블로그</span><b>2026 풍양중 3학년 2학기 중간고사 수학 분석</b><span class="meta"><time>2026-10-07</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
+<!-- news:start -->
+      <li data-card data-ends="2026-12-16T11:50:00+09:00"><a href="../news/2026-12-16-pre-middle1-briefing/"><span class="tag">설명회</span><b>12월 16일(수) 오전 11시 예비 중1 학부모 설명회</b><span class="meta"><time datetime="2026-12-16">2026-12-16</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
+      <li data-card><a href="https://blog.naver.com/standrad-of-math/224491570756" target="_blank" rel="noopener"><span class="tag">블로그</span><b>나는 좋은 강사였지만, 좋은 교사였을까?― 《가르칠 수 있는 용기》를 읽고, 수학의 기준을 다시 생각하다</b><span class="meta"><time>2026-11-25</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
+      <li data-card><a href="https://blog.naver.com/standrad-of-math/224474877665" target="_blank" rel="noopener"><span class="tag">블로그</span><b>수학 실력은 습관에서, 고등학교 준비는 방향에서 시작됩니다｜수학의 기준 11월 교육 소식</b><span class="meta"><time>2026-11-12</time><svg class="ico sm"><use href="#i-arrow"/></svg></span></a></li>
+<!-- news:end -->
     </ul>
+    <p class="news-links" data-rise><a href="../news/">학원 소식 전체 보기 →</a><a href="../blog/">블로그 글 모두 보기 →</a></p>
   </div>
 </section>
 
@@ -921,5 +927,6 @@ if (renderer && stage) {
   <button type="button" class="exit-later" data-exit-close>괜찮아요, 더 둘러볼게요</button>
 </dialog>
 <script src="../assets/exit-offer.js" defer></script>
+<script src="../assets/news.js" defer></script>
 </body>
 </html>
