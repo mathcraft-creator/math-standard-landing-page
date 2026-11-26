@@ -495,3 +495,10 @@
 - 최종 검증: Node 47/47 PASS; 로컬 Edge planner 15개 묶음, 기존 탐색관 12개 묶음 PASS. 공통 품질 PASS=58/WARN=2/FAIL=0(상위 GAS 기존 경고). 공개 JSON·JS·HTML 14파일에 실제 NEIS 키 포함 0건. 새 도메인 공개 HTTP 23건 PASS: 8개 HTML 경로/robots/sitemap/llms/광동고 JSON 정상, `.env`·`.env.local`·WORKLOG·수집 원본·실제 엑셀 404, www·옛 주소 루트·슬래시 경로·query 유지 308. 메인 인증 태그 구글2·네이버2 확인.
 - 운영 도메인 실제 Edge에서 주요 4개 페이지와 4개교×6학기 추천, 광동고 추정·2015 교육과정·학점 미확인 표시, 390/1280px 넘침 없음, uncaught 오류 0을 확인했습니다. 이탈 검사 첫 실행은 모바일 스크롤 표시 assertion이 실패했고, 재실행에서 PC 세 페이지·체류/상담/1회 표시와 모바일 스크롤·닫기·history·넘침 검사가 모두 PASS했습니다. 이를 첫 실행부터 PASS로 기록하지 않습니다. 검수 결과와 화면: `output/deployment-20261125/`, 기존 브라우저 보고서 폴더.
 - README·계획서를 현재 운영 상태로 갱신했습니다. Git 커밋·push, DNS 수정, 불필요한 math-standard.com 연결 삭제, 검색엔진 계정 작업은 하지 않았습니다. 기존 원본 엑셀·나이스 키·미커밋 기능은 보존했습니다. 다음 Git 통합 시 새 main의 도메인 설정과 현재 기능을 모두 포함해야 합니다.
+
+### 2026-11-26 - 커리큘럼 기능 Git 반영
+
+- 11-25에 Production에 배포됐지만 커밋되지 않았던 커리큘럼 탐색관·과목 선택 도구를 커밋(`ffccb29`)하고 최신 main(`ec41492`)과 병합해 main에 push했습니다(`d38e3ed`). 사이트 파일·데이터·스크립트·테스트·문서 60개를 포함했습니다.
+- 제외(로컬에만 보관): 원본 `2022개정_과목전공_교차탐색관.html`, `curriculum/*.xlsx` 5개, `output/`, `outputs/kwangdong-20261123/`, `work/backups/`.
+- 충돌 4개(WORKLOG, llms.txt, sitemap.xml, vercel.json)는 이미 main을 통합해 배포한 브랜치 쪽으로 맞췄습니다. 병합 중 index.html에 새 인증 태그가 중복으로 들어가 배포본과 같게 되돌렸습니다.
+- 검증: 비밀값 검색 0건, `node --test tests/*.test.cjs` 47/47 PASS. index.html·sitemap·llms·planner HTML이 운영 응답과 같고, vercel.json은 비공개(404)이며 이동·rewrite 동작은 실제 응답으로 확인했습니다. 운영과 내용이 같아 다시 배포하지 않았습니다.
