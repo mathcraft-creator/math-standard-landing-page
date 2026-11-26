@@ -502,3 +502,10 @@
 - 제외(로컬에만 보관): 원본 `2022개정_과목전공_교차탐색관.html`, `curriculum/*.xlsx` 5개, `output/`, `outputs/kwangdong-20261123/`, `work/backups/`.
 - 충돌 4개(WORKLOG, llms.txt, sitemap.xml, vercel.json)는 이미 main을 통합해 배포한 브랜치 쪽으로 맞췄습니다. 병합 중 index.html에 새 인증 태그가 중복으로 들어가 배포본과 같게 되돌렸습니다.
 - 검증: 비밀값 검색 0건, `node --test tests/*.test.cjs` 47/47 PASS. index.html·sitemap·llms·planner HTML이 운영 응답과 같고, vercel.json은 비공개(404)이며 이동·rewrite 동작은 실제 응답으로 확인했습니다. 운영과 내용이 같아 다시 배포하지 않았습니다.
+
+### 2026-11-26 - 2028 농어촌 전형 탐색기 추가
+
+- 사용자 요청: `새 폴더`의 농어촌 수시·정시 자료를 랜딩페이지에 추가. 단톡방에서 활용하라고 공유된 자료라는 사용자 설명에 따라 원 출처('[모두의 진학] 농어촌학생 요약 - 수시 & 정시 (2028)', 강원사대부고 박상근 선생님)를 화면 상단·하단·이용 안내에 그대로 밝혔습니다.
+- 신규 `scripts/integrate-rural.cjs`: 원본 `새 폴더/2028_농어촌전형_탐색기_by Claude.html`(657,738 bytes, sha256 7278e080…)은 수정하지 않고 `rural/index.html`을 생성합니다. 제목·설명·canonical·OG, 학원 메뉴(홈·탐색관·상담), 자료 이용 안내만 덧붙였고 데이터·기능은 원본 그대로입니다.
+- `.vercelignore`에 `!rural`, sitemap·llms.txt에 `/rural/`, 중고등 페이지 메뉴와 탐색관 안내 영역에 링크 2개를 추가했습니다. PDF·PPTX·원본 HTML은 배포·Git에서 제외합니다.
+- 검증: 신규 `tests/rural.test.cjs` 포함 Node 52/52 PASS. 로컬 Edge 390/1280px에서 가로 넘침 0, 수시·정시 화면 전환, 학원 링크, 중고등 페이지 링크 이동, 스크립트 오류 0(사이트 공통 favicon 404만 있음). 화면: `output/playwright/rural/`.

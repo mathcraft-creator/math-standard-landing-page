@@ -13,6 +13,7 @@
 !robots.txt
 !sitemap.xml
 !llms.txt
+!rural
 !curriculum
 curriculum/*
 !curriculum/index.html
