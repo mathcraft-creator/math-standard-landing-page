@@ -509,3 +509,4 @@
 - 신규 `scripts/integrate-rural.cjs`: 원본 `새 폴더/2028_농어촌전형_탐색기_by Claude.html`(657,738 bytes, sha256 7278e080…)은 수정하지 않고 `rural/index.html`을 생성합니다. 제목·설명·canonical·OG, 학원 메뉴(홈·탐색관·상담), 자료 이용 안내만 덧붙였고 데이터·기능은 원본 그대로입니다.
 - `.vercelignore`에 `!rural`, sitemap·llms.txt에 `/rural/`, 중고등 페이지 메뉴와 탐색관 안내 영역에 링크 2개를 추가했습니다. PDF·PPTX·원본 HTML은 배포·Git에서 제외합니다.
 - 검증: 신규 `tests/rural.test.cjs` 포함 Node 52/52 PASS. 로컬 Edge 390/1280px에서 가로 넘침 0, 수시·정시 화면 전환, 학원 링크, 중고등 페이지 링크 이동, 스크립트 오류 0(사이트 공통 favicon 404만 있음). 화면: `output/playwright/rural/`.
+- 후속 요청: 메인 `index.html` 상단 메뉴("농어촌 전형")와 탐색관 안내 영역("2028 농어촌 전형 수시·정시 찾아보기 →")에도 링크를 추가했습니다. 테스트에 메인 링크 2개 확인을 더해 52/52 PASS, Edge 390/1280px 넘침 0·메뉴 클릭 시 `/rural/` 이동·오류 0.

@@ -46,4 +46,5 @@ test('rural: page is deployed, listed and linked', () => {
   assert.ok(read('sitemap.xml').includes(`<loc>${url}</loc>`));
   assert.ok(read('llms.txt').includes(url));
   assert.equal((read('middle/index.html').match(/href="\.\.\/rural\/"/g) || []).length, 2);
+  assert.equal((read('index.html').match(/href="\.\/rural\/"/g) || []).length, 2);
 });
