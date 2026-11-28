@@ -520,3 +520,11 @@
 - 새 소식 추가: `data/news.json` 수정 → `node scripts/build-news.cjs --sync` → 배포.
 - 검증: Node 58/58 PASS(`tests/news.test.cjs` 6개 추가). Edge 390/1280px `tests/browser-news-check.cjs` 로컬·운영 각각 36/36 PASS(종료 후 상태 포함, 넘침 0, 스크립트 오류 0). 운영 `/api/blog` 200 JSON.
 - 확인 필요: 블로그 원문의 안내 제목이 "12월 1일 예비 중1 학부모 설명회 안내"로 되어 있어 본문 일시(12월 16일)와 다릅니다. 사이트는 12월 16일로 표시합니다.
+
+### 2026-11-28 - 2027 정시 지역별 전형분석 탐색기 추가
+
+- 사용자 요청: `새 폴더`의 `2027정시_지역별전형분석_탐색기.html`을 랜딩페이지에 추가. 농어촌 탐색기(`/rural/`)와 같은 방식으로 `/jungsi/`에 실었습니다.
+- 신규 `scripts/integrate-jungsi.cjs`: 원본(1,448,824 bytes, sha256 cfa3c97c…)은 수정하지 않고 `jungsi/index.html`을 생성합니다. 제목·설명·canonical·OG, 학원 메뉴(홈·탐색관·농어촌 전형·상담), 본문 바로가기, 자료 이용 안내(한국대학교육협의회 자료집 기반·AITAMS 진로진학연구소 제작 출처 명시, 최종 모집요강 확인 안내)만 덧붙였고 데이터·기능은 원본 그대로입니다. 탐색기가 `location.hash`로 화면을 바꾸므로 바로가기 링크는 hash를 바꾸지 않게 처리했습니다.
+- `.vercelignore`에 `!jungsi`, sitemap·llms.txt에 `/jungsi/`, 메인 `index.html`과 중고등 `middle/index.html`의 메뉴("2027 정시")와 탐색관 안내 영역("2027 정시 지역별 전형분석 찾아보기 →")에 링크를 추가했습니다. 사용자 매뉴얼 PDF와 원본 HTML은 배포·Git에서 제외합니다.
+- 검증: 신규 `tests/jungsi.test.cjs` 포함 Node 63/63 PASS. 신규 `tests/browser-jungsi-check.cjs`(Edge 390/1280px) 26/26 PASS: 렌더링, 탭 전환, 검색, 가로 넘침 0, 바로가기 후 경로 유지, 홈·메인·중고등 링크 이동, 스크립트 오류 0. 화면: `output/playwright/jungsi/`.
+- 참고: 탐색기의 Excel·PDF 저장은 원본대로 cdnjs의 xlsx·html2canvas·jspdf를 불러옵니다.
