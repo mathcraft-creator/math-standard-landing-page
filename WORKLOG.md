@@ -528,3 +528,4 @@
 - `.vercelignore`에 `!jungsi`, sitemap·llms.txt에 `/jungsi/`, 메인 `index.html`과 중고등 `middle/index.html`의 메뉴("2027 정시")와 탐색관 안내 영역("2027 정시 지역별 전형분석 찾아보기 →")에 링크를 추가했습니다. 사용자 매뉴얼 PDF와 원본 HTML은 배포·Git에서 제외합니다.
 - 검증: 신규 `tests/jungsi.test.cjs` 포함 Node 63/63 PASS. 신규 `tests/browser-jungsi-check.cjs`(Edge 390/1280px) 26/26 PASS: 렌더링, 탭 전환, 검색, 가로 넘침 0, 바로가기 후 경로 유지, 홈·메인·중고등 링크 이동, 스크립트 오류 0. 화면: `output/playwright/jungsi/`.
 - 참고: 탐색기의 Excel·PDF 저장은 원본대로 cdnjs의 xlsx·html2canvas·jspdf를 불러옵니다.
+- 후속 요청: 커밋(`d58850e`) 후 `npx --yes vercel@59.11.7 deploy --prod --yes`로 Production 배포(dpl_FYkG2CLT1WkE17wKB7oRZBk6aM5Q). 첫 시도는 "Not authorized"로 실패했고, 로그인 토큰이 갱신된 뒤 재시도해 성공했습니다. 운영 `/jungsi/`·메인·중고등·sitemap·llms 200, 원본 HTML·매뉴얼 PDF 404, 운영 대상 `tests/browser-jungsi-check.cjs` 26/26 PASS. 브랜치 push는 하지 않았습니다.
